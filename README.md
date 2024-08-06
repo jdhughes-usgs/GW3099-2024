@@ -1,16 +1,17 @@
-# GW3099-2024
-Repository for the Advanced Modeling of Groundwater Flow training class
+# U.S. Geological Survey Class GW3099
+Advanced Modeling of Groundwater Flow (GW3099)\
+Boise, Idaho\
+September 16 - 20, 2024
 
-Advanced Modeling of Groundwater Flow (GW3099)
-Boise, Idaho
-Septhember 16 - 20, 2024
+
+![image info](./images/ClassLocation.jpg)
 
 ## Location
 * Classroom: USGS Idaho Water Science Center-Newell Building Training Room-Boise, Idaho, USGS Idaho Water Science Center (IDWSC), 230 Collins Road, Boise, Idaho, 83702
 * Hotel Block: Hampton Inn & Suites Boise-Downtown, 495 S Capitol Blvd., Boise, Idaho 83702
 
 ## Course Description
-This class will cover many of the latest developments in groundwater-flow modeling in the following topical areas:  new and enhanced capabilities for modeling groundwater flow with MODFLOW 6; solute transport with MT3D-USGS;  groundwater/watershed interactions with GSFLOW and MODSIM, and parameter estimation and uncertainty analysis using PEST++. Most of the class will be taught using Flopy and Jupyter Notebooks.  In addition to lectures on the latest developments, most sessions will include in-class exercises to give attendees a better understanding of how to use the modeling tools.
+This class will cover many of the advanced MODFLOW 6 capabilities and provide an overview of PEST++ parameter estimation and uncertainty analysis using PEST++. Most of the class will be taught using Flopy and Jupyter Notebooks.  In addition to lectures, most sessions will include in-class exercises to give attendees a better understanding of how to use the modeling tools.
 
 ## Overview
 * Monday: Getting started, Unstructured grids and LGR, XT3D, Advanced packages (LAK, SFR, MAW, UZF, MVR)

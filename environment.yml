@@ -1,0 +1,52 @@
+name: gw3099
+channels:
+  - conda-forge
+dependencies:
+
+  # primary dependencies
+  - python <= 3.12
+  - numpy >=1.15.0,<2.0.0
+  - matplotlib >=1.4.0
+  - pandas >=2.0.0
+  - scipy
+  - flopy >= 3.7.0
+
+  # other class dependencies
+  - pip
+  - git
+  - pywatershed
+  - jupyter
+  - jupytext
+  - jupyterlab
+  - openpyxl
+  - xlrd
+  - netcdf4
+  - pyshp
+  - rasterio
+  - rasterstats
+  - fiona
+  - descartes
+  - pyproj
+  - shapely
+  - geos
+  - geojson
+  - geopandas
+  - xarray
+  - rioxarray
+  - uxarray
+  - xugrid
+  - pyyaml
+  - rtree
+  - pyvista
+  - vtk
+  - imageio
+  - requests
+  - pytest
+  - statsmodels
+  - modflowapi
+  - pymetis
+
+  # visualization
+  - paraview
+  - qgis
+   
