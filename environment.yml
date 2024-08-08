@@ -45,21 +45,12 @@ dependencies:
   - modflowapi
   - pymetis
   - pyemu
-  #- pestpp
+  - pestpp
   - pywatershed [--only-deps]
 
   # visualization
   # - paraview
   - qgis
-
-  # parallel modflow build dependencies
-  - pkg-config
-  - openmpi<5.0.0
-  - gfortran
-  - petsc
-  - netcdf-fortran
-  - meson>=1.1.0
-  - ninja
 
   # pip dependencies
   - pip:
