@@ -1,0 +1,10 @@
+name: gw3099viz
+channels:
+  - conda-forge
+dependencies:
+
+  # primary dependencies
+  - python
+  - paraview
+  - qgis
+   

@@ -48,10 +48,6 @@ dependencies:
   - pestpp
   - pywatershed [--only-deps]
 
-  # visualization
-  # - paraview
-  - qgis
-
   # pip dependencies
   - pip:
     - git+https://github.com/EC-USGS/pywatershed.git@develop
