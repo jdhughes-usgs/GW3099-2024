@@ -5,7 +5,7 @@ dependencies:
 
   # primary dependencies
   - python
-  - numpy
+  - numpy<2.0.0
   - matplotlib
   - pandas
   - scipy
@@ -27,6 +27,7 @@ dependencies:
   - descartes
   - pyproj
   - shapely
+  - filelock
   - geos
   - geojson
   - geopandas
@@ -41,14 +42,19 @@ dependencies:
   - imageio
   - requests
   - pytest
+  - pytest-order
+  - pytest-xdist
   - statsmodels
   - modflowapi
   - pymetis
   - pyemu
   - pestpp
+  - hvplot
   - pywatershed [--only-deps]
 
   # pip dependencies
   - pip:
-    - git+https://github.com/EC-USGS/pywatershed.git@develop
-   
+    - jupyter_black
+    - git+https://github.com/jararias/mpsplines.git
+    - git+https://github.com/paknorton/pyPRMS.git@development
+    - "--editable git+https://github.com/EC-USGS/pywatershed.git@develop#egg=pywatershed"
