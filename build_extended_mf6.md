@@ -53,7 +53,7 @@ Unexpected Pass: 0
 Skipped: 0
 Timeout: 0
  
-Full log written to /home/user/modflow-training-princeton2024/modflow6/builddir/meson-logs/testlog.txt has context menu
+Full log written to /home/user/GW3099-2024/modflow6/builddir/meson-logs/testlog.txt has context menu
 ```
 
 ## Step 4. Make Symbolic Link

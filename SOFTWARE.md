@@ -64,7 +64,7 @@ We will use an environment file to create a containerized version of Python and 
     (gw3099) C:\Users\JaneDoe>
     ```
 
-5. We will be using jupyter notebooks in the class. To test if jupyter is installed and working properly use the following command. After entering this command, the default web browswer should open to a Jupyter Lab page.
+5. We will be using jupyter notebooks in the class. To test if jupyter is installed and working properly use the following command. After entering this command, the default web browser should open to a Jupyter Lab page.
     ```
     jupyter lab
     ```
