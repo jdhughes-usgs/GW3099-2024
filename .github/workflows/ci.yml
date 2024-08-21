@@ -28,8 +28,7 @@ jobs:
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
-        with:
-          path: gw3099
+
       - name: Install python
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -37,6 +36,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
           environment-file: ${{ matrix.python-env.file }}
           activate-environment: ${{ matrix.python-env.name }}
+      
       - name: Conda info
         run: |
           conda info
