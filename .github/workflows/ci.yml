@@ -35,6 +35,7 @@ jobs:
           auto-update-conda: true
           python-version: ${{ matrix.python-version }}
           environment-file: ${{ matrix.python-env.file }}
+          auto-activate-base: false
           activate-environment: ${{ matrix.python-env.name }}
       
       - name: Conda info
