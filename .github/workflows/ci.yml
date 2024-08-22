@@ -1,12 +1,13 @@
 name: GW3099 continuous integration
 on:
   push:
+    branches:
+      - main
     paths-ignore:
       - '**.md'
   pull_request:
     branches:
       - main
-      - develop
     paths-ignore:
       - '**.md'
 concurrency:
@@ -40,3 +41,4 @@ jobs:
       - name: Conda info
         run: |
           conda info
+          conda list
