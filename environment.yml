@@ -5,7 +5,7 @@ dependencies:
 
   # primary dependencies
   - python
-  - numpy<2.0.0
+  - numpy
   - matplotlib
   - pandas
   - scipy
@@ -42,20 +42,10 @@ dependencies:
   - vtk
   - imageio
   - requests
-  - pytest
-  - pytest-order
-  - pytest-xdist
   - statsmodels
   - modflowapi
   - pymetis
   - pyemu>=1.3.7
   - pestpp
   - hvplot
-  - pywatershed [--only-deps]
-
-  # pip dependencies
-  - pip:
-    - jupyter_black
-    - git+https://github.com/jararias/mpsplines.git
-    - git+https://github.com/paknorton/pyPRMS.git@development
-    - "--editable git+https://github.com/EC-USGS/pywatershed.git@develop#egg=pywatershed"
+ 

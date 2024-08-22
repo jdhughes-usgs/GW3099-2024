@@ -1,0 +1,44 @@
+name: GW3099 continuous integration
+on:
+  push:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+  pull_request:
+    branches:
+      - main
+    paths-ignore:
+      - '**.md'
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  install_env:
+    name: Install environments
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        python-version: ["3.9", "3.10", "3.11"]
+        python-env: [{"file": "environment.yml", "name": "gw3099"}, {"file": "environment-viz.yml", "name": "gw3099viz"}]
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install python
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+          environment-file: ${{ matrix.python-env.file }}
+          activate-environment: ${{ matrix.python-env.name }}
+          auto-activate-base: false
+      
+      - name: Conda info
+        run: |
+          conda info
+          conda list
