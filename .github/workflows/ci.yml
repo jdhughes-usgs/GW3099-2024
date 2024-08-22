@@ -24,7 +24,7 @@ jobs:
         python-env: [{"file": "environment.yml", "name": "gw3099"}, {"file": "environment-viz.yml", "name": "gw3099viz"}]
     defaults:
       run:
-        shell: bash
+        shell: bash -el {0}
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
@@ -32,11 +32,10 @@ jobs:
       - name: Install python
         uses: conda-incubator/setup-miniconda@v3
         with:
-          auto-update-conda: true
           python-version: ${{ matrix.python-version }}
           environment-file: ${{ matrix.python-env.file }}
-          auto-activate-base: false
           activate-environment: ${{ matrix.python-env.name }}
+          auto-activate-base: false
       
       - name: Conda info
         run: |
