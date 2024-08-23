@@ -64,11 +64,11 @@ Unexpected Pass: 0
 Skipped: 0
 Timeout: 0
  
-Full log written to /home/user/modflow-training-princeton2024/modflow6/builddir/meson-logs/testlog.txt has context menu
+Full log written to /Users/runner/work/GW3099-2024/GW3099-2024/modflow6/builddir/meson-logs/testlog.txt has context menu
 ```
 
 ## Step 4. Create Symbolic Links
-For convenience you may wish to create a symbolic links to the MODFLOW 6 executable and shared library. This will make the extended version of MODFLOW callable from jupyter notebooks started from the `gw3099` conda environment, for example.
+For convenience you should create symbolic links to the MODFLOW 6 executable and shared library. This will make the extended version of MODFLOW callable from jupyter notebooks started from the `gw3099` conda environment, for example.
 
 The following command, executed from within the modflow6 directory, will add a symbolic link to the extended version of MODFLOW:
 

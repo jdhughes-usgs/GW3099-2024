@@ -18,7 +18,7 @@ concurrency:
   cancel-in-progress: true
 jobs:
   install_env:
-    name: Install environments
+    name: Install gw3099 environment
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -57,7 +57,6 @@ jobs:
           python update_pc_files.py
   
       - name: Clone MODFLOW repo
-        if: runner.os != 'Windows'
         run: |
           git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git 
 
@@ -83,20 +82,21 @@ jobs:
           ln ./bin/mf6 $CONDA_PREFIX/bin/mf6
           ln ./bin/libmf6.dylib $CONDA_PREFIX/bin/libmf6.dylib
 
-      - name: Get MODFLOW on Windows
+      - name: Get and test parallel MODFLOW on Windows
         if: runner.os == 'Windows'
+        working-directory: modflow6/.mf6minsim
         run: |
           get-modflow --repo modflow6-nightly-build --ostag win64par :python
+          mpiexec -n 2 mf6 -p
   
       - name: Test modflow installation
         run: |
           which mf6
           mf6 -v
           mf6 -co
-  
 
   install_vizenv:
-    name: Install viz environments
+    name: Install viz environment
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
