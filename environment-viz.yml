@@ -8,10 +8,8 @@ dependencies:
   - qgis
   - jupyter
   - jupyterlab
-  - jupyterlab_execute_time
   - panoply
-  - pyvista
-
+  
 
 
    

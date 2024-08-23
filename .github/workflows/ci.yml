@@ -31,7 +31,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Update environment file
-        if: (runner.os != 'Windows') && (${{ matrix.python-env.name }} == 'gw3099')
+        if: ${{ matrix.python-env.name }} == 'gw3099'
         working-directory: .scripts
         run: |
           python update_env_file.py
