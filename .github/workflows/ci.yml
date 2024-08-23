@@ -1,5 +1,8 @@
 name: GW3099 continuous integration
 on:
+  # run at 6 AM UTC every day
+  schedule:
+    - cron: '0 6 * * *' 
   push:
     branches:
       - main
@@ -15,14 +18,13 @@ concurrency:
   cancel-in-progress: true
 jobs:
   install_env:
-    name: Install environments
+    name: Install gw3099 environment
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: ["ubuntu-latest", "macos-latest", "windows-latest"]
         python-version: ["3.9", "3.10", "3.11"]
-        python-env: [{"file": "environment.yml", "name": "gw3099"}, {"file": "environment-viz.yml", "name": "gw3099viz"}]
     defaults:
       run:
         shell: bash -el {0}
@@ -30,15 +32,94 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install python
+      - name: Update environment file
+        working-directory: .scripts
+        run: |
+          python update_env_file.py
+
+      - name: Install miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: ${{ matrix.python-version }}
-          environment-file: ${{ matrix.python-env.file }}
-          activate-environment: ${{ matrix.python-env.name }}
+          environment-file: "environment.yml"
+          activate-environment: "gw3099"
           auto-activate-base: false
       
       - name: Conda info
         run: |
           conda info
           conda list
+
+      - name: Update package config files
+        if: (runner.os != 'Windows')
+        working-directory: .scripts
+        run: |
+          python update_pc_files.py
+  
+      - name: Clone MODFLOW repo
+        run: |
+          git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git 
+
+      - name: Build extended version of MODFLOW
+        if: runner.os != 'Windows'
+        working-directory: modflow6
+        run: |
+          meson setup builddir -Ddebug=false -Dextended=true --prefix=$(pwd) --libdir=bin
+          meson install -C builddir
+          meson test --verbose --no-rebuild -C builddir
+
+      - name: Create symbolic links on Linux
+        if: runner.os == 'Linux'
+        working-directory: modflow6
+        run: |
+          ln ./bin/mf6 $CONDA_PREFIX/bin/mf6
+          ln ./bin/libmf6.so $CONDA_PREFIX/bin/libmf6.so
+
+      - name: Create symbolic links on MacOS
+        if: runner.os == 'macOS'
+        working-directory: modflow6
+        run: |
+          ln ./bin/mf6 $CONDA_PREFIX/bin/mf6
+          ln ./bin/libmf6.dylib $CONDA_PREFIX/bin/libmf6.dylib
+
+      - name: Get and test parallel MODFLOW on Windows
+        if: runner.os == 'Windows'
+        working-directory: modflow6/.mf6minsim
+        run: |
+          get-modflow --repo modflow6-nightly-build --ostag win64par :python
+          mpiexec -n 2 mf6 -p
+  
+      - name: Test modflow installation
+        run: |
+          which mf6
+          mf6 -v
+          mf6 -co
+
+  install_vizenv:
+    name: Install viz environment
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        python-version: ["3.9", "3.10", "3.11"]
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+          environment-file: 'environment-viz.yml'
+          activate-environment: 'gw3099viz'
+          auto-activate-base: false
+      
+      - name: Conda info
+        run: |
+          conda info
+          conda list
+
