@@ -30,7 +30,13 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Install python
+      - name: Update environment file
+        if: (runner.os != 'Windows') && (${{ matrix.python-env.name }} == 'gw3099')
+        working-directory: .scripts
+        run: |
+          python update_env_file.py
+
+      - name: Install miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
           python-version: ${{ matrix.python-version }}

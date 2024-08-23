@@ -3,8 +3,15 @@ channels:
   - conda-forge
 dependencies:
 
-  # primary dependencies
   - python
   - paraview
   - qgis
+  - jupyter
+  - jupyterlab
+  - jupyterlab_execute_time
+  - panoply
+  - pyvista
+
+
+
    

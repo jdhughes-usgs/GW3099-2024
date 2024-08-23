@@ -12,7 +12,7 @@ conda activate gwf3099
 
 ## Step 2. Update the `gw3099` environment
 
-Using a text editor, create a file called `update_pc_files.py`. It should contain the information in [this python script file](./update_pc_files.py). Save this file to your hard drive in the directory where you activated the `gw3099` environment in the previous step.
+Using a text editor, create a file called `update_pc_files.py`. It should contain the information in [this python script file](.scripts/update_pc_files.py). Save this file to your hard drive in the directory where you activated the `gw3099` environment in the previous step.
 
 Run the python script using:
 
