@@ -1,5 +1,8 @@
 name: GW3099 continuous integration
 on:
+  # run at 6 AM UTC every day
+  schedule:
+    - cron: '0 6 * * *' 
   push:
     branches:
       - main
