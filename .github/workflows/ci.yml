@@ -51,7 +51,7 @@ jobs:
         if: (runner.os != 'Windows')
         working-directory: .scripts
         run: |
-          python update_env_file.py
+          python update_pc_files.py
   
       - name: Clone MODFLOW repo
         if: runner.os != 'Windows'
@@ -78,7 +78,7 @@ jobs:
         working-directory: modflow6
         run: |
           ln ./bin/mf6 $CONDA_PREFIX/bin/mf6
-          ln ./bin/libmf6.so $CONDA_PREFIX/bin/libmf6.dylib
+          ln ./bin/libmf6.dylib $CONDA_PREFIX/bin/libmf6.dylib
 
       - name: Get MODFLOW on Windows
         if: runner.os == 'Windows'
@@ -93,7 +93,7 @@ jobs:
   
 
   install_vizenv:
-    name: Install environments
+    name: Install viz environments
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false

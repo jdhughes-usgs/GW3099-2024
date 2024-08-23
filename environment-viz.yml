@@ -9,7 +9,7 @@ dependencies:
   - jupyter
   - jupyterlab
   - panoply
-  
+  - pyvista
 
 
    
