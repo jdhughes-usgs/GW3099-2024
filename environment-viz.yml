@@ -4,12 +4,11 @@ channels:
 dependencies:
 
   - python
-  - paraview
-  - qgis
   - jupyter
   - jupyterlab
   - panoply
-  #- pyvista #pyvista and paraview are incompatible in the same environment
+  - paraview
+  - qgis
 
 
    

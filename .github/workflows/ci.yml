@@ -87,6 +87,7 @@ jobs:
         working-directory: modflow6/.mf6minsim
         run: |
           get-modflow --repo modflow6-nightly-build --ostag win64par :python
+          mpiexec -n 1 mf6 -p
           mpiexec -n 2 mf6 -p
   
       - name: Test modflow installation
