@@ -164,3 +164,9 @@ cython_debug/
 
 # modflow6 repo
 modflow6/
+
+
+exercises-completed/parallel/base/
+exercises-completed/parallel/parallel/
+exercises/parallel/base/
+exercises/parallel/parallel/
