@@ -213,6 +213,7 @@ def string2geom(
         res.append((x, y))
     return res
 
+
 def set_structured_idomain(
     modelgrid: flopy.discretization.StructuredGrid,
     boundary: List[tuple],
@@ -253,6 +254,7 @@ def set_structured_idomain(
     # set modelgrid idomain
     modelgrid.idomain = idomain
     return
+
 
 def intersect_segments(
     modelgrid: Union[
