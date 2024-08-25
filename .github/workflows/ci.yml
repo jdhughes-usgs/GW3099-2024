@@ -17,8 +17,35 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Install miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: "3.10"
+          environment-file: "environment.yml"
+          activate-environment: "gw3099"
+          auto-activate-base: false
+
+      - name: Lint
+        run: ruff check .
+  
+      - name: Check format
+        run: ruff format . --check
+  
+
+
   install_env:
     name: Install gw3099 environment
+    needs: lint
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -104,6 +131,7 @@ jobs:
 
   install_vizenv:
     name: Install viz environment
+    needs: lint
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
