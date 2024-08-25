@@ -95,6 +95,12 @@ jobs:
           which mf6
           mf6 -v
           mf6 -co
+      
+      - name: Test notebooks
+        working-directory: .scripts
+        run: |
+          python test_notebooks.py
+
 
   install_vizenv:
     name: Install viz environment
