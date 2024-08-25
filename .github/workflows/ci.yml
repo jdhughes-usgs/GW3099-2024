@@ -17,8 +17,34 @@ concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.10' 
+      
+      - name: Install ruff
+        run: pip install ruff
+
+      - name: Lint
+        run: ruff check .
+  
+      - name: Check format
+        run: ruff format . --check
+
+
   install_env:
     name: Install gw3099 environment
+    needs: lint
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -104,6 +130,7 @@ jobs:
 
   install_vizenv:
     name: Install viz environment
+    needs: lint
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false

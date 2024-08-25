@@ -1,10 +1,8 @@
-import os
 import pathlib as pl
 from typing import List, Tuple, Union
 
 import flopy
 import numpy as np
-import shapely
 from flopy.utils.gridintersect import GridIntersect
 from shapely.geometry import LineString, Polygon
 
@@ -297,7 +295,7 @@ def intersect_segments(
 def cell_areas(
     modelgrid: Union[
         flopy.discretization.StructuredGrid, flopy.discretization.VertexGrid
-    ]
+    ],
 ) -> np.ndarray:
     """
     Calculate cell areas
