@@ -126,12 +126,16 @@ jobs:
       - name: Update flopy mf6 classes
         run: |
           python -m flopy.mf6.utils.generate_classes --ref 'develop'
-      
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        
       - name: Test notebooks
         working-directory: .scripts
         run: |
           python test_notebooks.py
-
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
 
   install_vizenv:
     name: Install viz environment
