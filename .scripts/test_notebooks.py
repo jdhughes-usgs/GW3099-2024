@@ -1,17 +1,34 @@
 import os
 import pathlib as pl
 import subprocess
+import sys
 
 ROOT_DIR = pl.Path(os.getcwd()).resolve()
 DIRS = (
     pl.Path("../exercises-completed/flopy/").resolve(),
     pl.Path("../base/watershed/").resolve(),
+    pl.Path("../exercises-completed/netcdf/").resolve(),
     pl.Path("../exercises-completed/parallel/").resolve(),
 )
+SKIP_NOTEBOOKS = {
+    "step0_netcdf_output": ("win32",),
+    "mf6minsim-plot": ("win32", "darwin", "linux"),
+}
 
 
 def get_notebook_paths(dir_path):
-    return sorted(f.name for f in dir_path.glob("*.ipynb"))
+    names = sorted(f"{f.name}" for f in dir_path.glob("*.ipynb"))
+    select_names = []
+    os_name = sys.platform.lower()
+    for name in names:
+        add_name = True
+        for key, values in SKIP_NOTEBOOKS.items():
+            if key == pl.Path(name).stem and os_name in values:
+                add_name = False
+                break
+        if add_name:
+            select_names.append(name)
+    return tuple(select_names)
 
 
 def run_cmd(cmd):
