@@ -165,7 +165,8 @@ cython_debug/
 # modflow6 repo
 modflow6/
 
-
+# exclude model results
+temp/
 exercises-completed/parallel/base/
 exercises-completed/parallel/parallel/
 exercises/parallel/base/

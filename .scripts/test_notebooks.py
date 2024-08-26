@@ -4,6 +4,7 @@ import subprocess
 
 ROOT_DIR = pl.Path(os.getcwd()).resolve()
 DIRS = (
+    pl.Path("../exercises-completed/flopy/").resolve(),
     pl.Path("../base/watershed/").resolve(),
     pl.Path("../exercises-completed/parallel/").resolve(),
 )
