@@ -108,6 +108,13 @@ jobs:
           ln ./bin/mf6 $CONDA_PREFIX/bin/mf6
           ln ./bin/libmf6.dylib $CONDA_PREFIX/bin/libmf6.dylib
 
+      - name: Test modflow installation
+        if: runner.os != 'Windows'
+        run: |
+          which mf6
+          mf6 -v
+          mf6 -co
+  
       - name: Get and test parallel MODFLOW on Windows
         if: runner.os == 'Windows'
         working-directory: modflow6/.mf6minsim
@@ -115,12 +122,10 @@ jobs:
           get-modflow --repo modflow6-nightly-build --ostag win64par :python
           mpiexec -n 1 mf6 -p
           mpiexec -n 2 mf6 -p
-  
-      - name: Test modflow installation
+ 
+      - name: Update flopy mf6 classes
         run: |
-          which mf6
-          mf6 -v
-          mf6 -co
+          python -m flopy.mf6.utils.generate_classes --ref 'develop'
       
       - name: Test notebooks
         working-directory: .scripts
