@@ -70,7 +70,6 @@ jobs:
           environment-file: "environment.yml"
           activate-environment: "gw3099"
           auto-activate-base: false
-      
  
       - name: Update flopy mf6 classes
         run: |
