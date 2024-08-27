@@ -1,0 +1,849 @@
+                                   MODFLOW 6
+                U.S. GEOLOGICAL SURVEY MODULAR HYDROLOGIC MODEL
+                          GROUNDWATER FLOW MODEL (GWF)
+                            VERSION 6.4.2 06/28/2023
+
+   MODFLOW 6 compiled Jul 05 2023 20:29:14 with Intel(R) Fortran Intel(R) 64
+   Compiler Classic for applications running on Intel(R) 64, Version 2021.7.0
+                             Build 20220726_000000
+
+This software has been approved for release by the U.S. Geological 
+Survey (USGS). Although the software has been subjected to rigorous 
+review, the USGS reserves the right to update the software as needed 
+pursuant to further analysis and review. No warranty, expressed or 
+implied, is made by the USGS or the U.S. Government as to the 
+functionality of the software and related material nor shall the 
+fact of release constitute any such warranty. Furthermore, the 
+software is released on condition that neither the USGS nor the U.S. 
+Government shall be held liable for any damages resulting from its 
+authorized or unauthorized use. Also refer to the USGS Water 
+Resources Software User Rights Notice for complete use, copyright, 
+and distribution information.
+
+
+As a work of the United States Government, this USGS product is 
+in the public domain within the United States. You can copy, 
+modify, distribute, and perform the work, even for commercial 
+purposes, all without asking permission. Additionally, USGS 
+waives copyright and related rights in the work worldwide 
+through CC0 1.0 Universal Public Domain Dedication 
+(https://creativecommons.org/publicdomain/zero/1.0/).
+
+The following GNU Lesser General Public License (LGPL) libraries
+are used in this USGS product:
+
+    SPARSKIT version 2.0
+      ilut, luson, and qsplit 
+      (https://www-users.cse.umn.edu/~saad/software/SPARSKIT/)
+
+    RCM - Reverse Cuthill McKee Ordering
+      (https://people.math.sc.edu/Burkardt/f_src/rcm/rcm.html)
+
+    BLAS - Basic Linear Algebra Subprograms Level 1
+      (https://people.math.sc.edu/Burkardt/f_src/blas1_d/blas1_d.html)
+
+    SPARSEKIT - Sparse Matrix Utility Package
+      amux, dperm, dvperm, rperm, and cperm
+      (https://people.sc.fsu.edu/~jburkardt/f77_src/sparsekit/sparsekit.html)
+
+The following BSD-3 License libraries are used in this USGS product:
+
+    Modern Fortran DAG Library
+      Copyright (c) 2018, Jacob Williams
+      All rights reserved.
+      (https://github.com/jacobwilliams/daglib)
+
+MODFLOW 6 compiler options: -Imac/obj_mf6 -O2 -no-heap-arrays -fpe0
+-traceback -fpp -module mac/mod_mf6/ -c -o mac/obj_mf6/compilerversion.o
+
+System command used to initiate simulation:
+/Users/mnfienen/.local/share/flopy/bin/mf6
+
+MODFLOW was compiled using uniform precision.
+
+Real Variables
+  KIND: 8
+  TINY (smallest non-zero value):    2.225074-308
+  HUGE (largest value):    1.797693+308
+  PRECISION: 15
+  SIZE IN BITS: 64
+
+Integer Variables
+  KIND: 4
+  HUGE (largest value): 2147483647
+  SIZE IN BITS: 32
+
+Long Integer Variables
+  KIND: 8
+  HUGE (largest value): 9223372036854775807
+  SIZE IN BITS: 64
+
+Logical Variables
+  KIND: 4
+  SIZE IN BITS: 32
+ 
+ NAMEFILE OPTIONS:
+ END NAMEFILE OPTIONS:
+
+ DIS -- STRUCTURED GRID DISCRETIZATION PACKAGE, VERSION 2 : 3/27/2014 - INPUT READ FROM MEMPATH: __INPUT__/AT/DIS                                  
+
+
+ NPF -- NODE PROPERTY FLOW PACKAGE, VERSION 1, 3/30/2015 INPUT READ FROM MEMPATH: __INPUT__/AT/NPF                                  
+
+ Setting Discretization Options
+    Model length unit [0=UND, 1=FEET, 2=METERS, 3=CENTIMETERS] set as 1
+    XORIGIN = .000000000000000
+    YORIGIN = .000000000000000
+    ANGROT = .000000000000000
+ End Setting Discretization Options
+
+ Setting Discretization Dimensions
+    NLAY = 5
+    NROW = 40
+    NCOL = 25
+ End Setting Discretization Dimensions
+
+ Setting Discretization Griddata
+    DELR set from input file
+    DELC set from input file
+    TOP set from input file
+    BOTM set from input file
+    IDOMAIN set from input file
+ End Setting Discretization Griddata
+
+
+ The specified IDOMAIN results in a reduced number of cells.
+ Number of user nodes: 5000
+ Number of nodes in solution: 4376
+
+
+ Setting NPF Options
+    Cell-by-cell flow information will be saved to binary file whenever ICBCFL is not zero.
+ End Setting NPF Options
+
+ Setting NPF Griddata
+    ICELLTYPE set from input file
+    K set from input file
+    K33 set from input file
+    K22 not provided.  Setting K22 = K.
+ End Setting NPF Griddata
+
+
+ WEL   -- WEL PACKAGE, VERSION 8, 2/22/2014 INPUT READ FROM UNIT 1008
+
+ PROCESSING WEL OPTIONS
+    LISTS OF WEL CELLS WILL BE PRINTED.
+    WEL FLOWS WILL BE PRINTED TO LISTING FILE.
+    FLOWS WILL BE SAVED TO BUDGET FILE SPECIFIED IN OUTPUT CONTROL
+ END OF WEL OPTIONS
+
+ PROCESSING WEL DIMENSIONS
+    MAXBOUND =       3
+ END OF WEL DIMENSIONS
+
+ RIV   -- RIV PACKAGE, VERSION 8, 2/22/2014 INPUT READ FROM UNIT 1009
+
+ PROCESSING RIV OPTIONS
+    LISTS OF RIV CELLS WILL BE PRINTED.
+    RIV FLOWS WILL BE PRINTED TO LISTING FILE.
+    FLOWS WILL BE SAVED TO BUDGET FILE SPECIFIED IN OUTPUT CONTROL
+    RIV BOUNDARIES HAVE NAMES IN LAST COLUMN.
+
+ OPENED riv.obs
+ FILE TYPE:OBS   UNIT 1027   STATUS:OLD                 
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+ ACTION:READ                
+
+ END OF RIV OPTIONS
+
+ PROCESSING RIV DIMENSIONS
+    MAXBOUND =      18
+ END OF RIV DIMENSIONS
+
+ RCH   -- RCH PACKAGE, VERSION 8, 2/22/2014 INPUT READ FROM UNIT 1010
+
+ PROCESSING RCH OPTIONS
+    FLOWS WILL BE SAVED TO BUDGET FILE SPECIFIED IN OUTPUT CONTROL
+    RECHARGE INPUT WILL BE READ AS ARRAY(S).
+ END OF RCHA OPTIONS
+
+ CHD   -- CHD PACKAGE, VERSION 8, 2/22/2014 INPUT READ FROM UNIT 1011
+
+ PROCESSING CHD OPTIONS
+    CHD BOUNDARIES HAVE NAMES IN LAST COLUMN.
+    LISTS OF CHD CELLS WILL BE PRINTED.
+    CHD FLOWS WILL BE PRINTED TO LISTING FILE.
+    FLOWS WILL BE SAVED TO BUDGET FILE SPECIFIED IN OUTPUT CONTROL
+
+ OPENED chd.obs
+ FILE TYPE:OBS   UNIT 1028   STATUS:OLD                 
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+ ACTION:READ                
+
+ END OF CHD OPTIONS
+
+ PROCESSING CHD DIMENSIONS
+    MAXBOUND =      65
+ END OF CHD DIMENSIONS
+
+ IC -- INITIAL CONDITIONS PACKAGE, VERSION 8, 3/28/2015 INPUT READ FROM UNIT 1005
+ PROCESSING IC OPTIONS
+ END OF IC OPTIONS
+ PROCESSING GRIDDATA
+
+     INITIAL HEAD =   11.00000     FOR LAYER 1
+
+     INITIAL HEAD =   11.00000     FOR LAYER 2
+
+     INITIAL HEAD =   11.00000     FOR LAYER 3
+
+     INITIAL HEAD =   11.00000     FOR LAYER 4
+
+     INITIAL HEAD =   11.00000     FOR LAYER 5
+ END PROCESSING GRIDDATA
+
+The observation utility is active for "AT"
+
+Processing observation options:
+
+Text output number of digits of precision set to: 16
+The PRINT_INPUT option has been specified.
+
+
+ OBSERVATIONS READ FROM FILE "at.obs"
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NAME                                     TYPE                                       TIME         LOCATION DATA                              OUTPUT FILENAME                                                                 
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ W01                                      CONTINUOUS  HEAD                           ALL TIMES    "  5  3 18"                                at.csv                                                                          
+ W02                                      CONTINUOUS  HEAD                           ALL TIMES    "  4  4 11"                                at.csv                                                                          
+ W03                                      CONTINUOUS  HEAD                           ALL TIMES    "  4  7 21"                                at.csv                                                                          
+ W04                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 13 23"                                at.csv                                                                          
+ W05                                      CONTINUOUS  HEAD                           ALL TIMES    "  5 15 12"                                at.csv                                                                          
+ W06                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 17 19"                                at.csv                                                                          
+ W07                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 18  2"                                at.csv                                                                          
+ W08                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 19  7"                                at.csv                                                                          
+ W09                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 20 12"                                at.csv                                                                          
+ W10                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 19 23"                                at.csv                                                                          
+ W11                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 27  6"                                at.csv                                                                          
+ W12                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 28 12"                                at.csv                                                                          
+ W13                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 29 24"                                at.csv                                                                          
+ W14                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 31  7"                                at.csv                                                                          
+ W15                                      CONTINUOUS  HEAD                           ALL TIMES    "  5 34 15"                                at.csv                                                                          
+ W16                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 37  2"                                at.csv                                                                          
+ W17                                      CONTINUOUS  HEAD                           ALL TIMES    "  4 38 23"                                at.csv                                                                          
+ U01                                      CONTINUOUS  HEAD                           ALL TIMES    "  1  3 18"                                at.wt.csv                                                                       
+ U02                                      CONTINUOUS  HEAD                           ALL TIMES    "  1  4 11"                                at.wt.csv                                                                       
+ U03                                      CONTINUOUS  HEAD                           ALL TIMES    "  1  7 21"                                at.wt.csv                                                                       
+ U04                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 13 23"                                at.wt.csv                                                                       
+ U05                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 15 12"                                at.wt.csv                                                                       
+ U06                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 17 19"                                at.wt.csv                                                                       
+ U07                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 18  2"                                at.wt.csv                                                                       
+ U08                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 19  7"                                at.wt.csv                                                                       
+ U09                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 20 12"                                at.wt.csv                                                                       
+ U10                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 19 23"                                at.wt.csv                                                                       
+ U11                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 27  6"                                at.wt.csv                                                                       
+ U12                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 28 12"                                at.wt.csv                                                                       
+ U13                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 29 24"                                at.wt.csv                                                                       
+ U14                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 31  7"                                at.wt.csv                                                                       
+ U15                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 34 15"                                at.wt.csv                                                                       
+ U16                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 37  2"                                at.wt.csv                                                                       
+ U17                                      CONTINUOUS  HEAD                           ALL TIMES    "  1 38 23"                                at.wt.csv                                                                       
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+    BINARY GRID INFORMATION WILL BE WRITTEN TO:
+      UNIT NUMBER: 1031
+      FILE NAME: at.dis.grb
+
+ OPENED at.dis.grb
+ FILE TYPE:DATA(BINARY)   UNIT 1031   STATUS:REPLACE             
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+ ACTION:READWRITE           
+
+      THE LAST TIME STEP WILL BE PRINTED
+      THE LAST TIME STEP WILL BE PRINTED
+
+ PROCESSING OC OPTIONS
+
+    HEAD INFORMATION WILL BE WRITTEN TO:
+      UNIT NUMBER: 1032
+      FILE NAME: at.hds
+
+ OPENED at.hds
+ FILE TYPE:DATA(BINARY)   UNIT 1032   STATUS:REPLACE             
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+ ACTION:READWRITE           
+
+    BUDGET INFORMATION WILL BE WRITTEN TO:
+      UNIT NUMBER: 1033
+      FILE NAME: at.cbc
+
+ OPENED at.cbc
+ FILE TYPE:DATA(BINARY)   UNIT 1033   STATUS:REPLACE             
+ FORMAT:UNFORMATTED            ACCESS:STREAM              
+ ACTION:READWRITE           
+
+
+ OPENED at.budget.csv
+ FILE TYPE:CSV   UNIT 1034   STATUS:REPLACE             
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+ ACTION:READWRITE           
+
+ END OF OC OPTIONS
+
+The observation utility is active for "RIV-1"
+
+Processing observation options:
+
+Text output number of digits of precision set to: 16
+The PRINT_INPUT option has been specified.
+
+
+ OBSERVATIONS READ FROM FILE "riv.obs"
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NAME                                     TYPE                                       TIME         LOCATION DATA                              OUTPUT FILENAME                                                                 
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ PF                                       CONTINUOUS  RIV                            ALL TIMES    "  pf"                                     riv.csv                                                                         
+ DS                                       CONTINUOUS  RIV                            ALL TIMES    " ds"                                      riv.csv                                                                         
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+The observation utility is active for "CHD-1"
+
+Processing observation options:
+
+Text output number of digits of precision set to: 16
+The PRINT_INPUT option has been specified.
+
+
+ OBSERVATIONS READ FROM FILE "chd.obs"
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ NAME                                     TYPE                                       TIME         LOCATION DATA                              OUTPUT FILENAME                                                                 
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+ CHDFLOW                                  CONTINUOUS  CHD                            ALL TIMES    "  lake"                                   chd.csv                                                                         
+ ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+start timestep kper="1" kstp="1" mode="normal"
+
+
+ BEGIN READING OUTPUT CONTROL FOR STRESS PERIOD 1
+      THE LAST TIME STEP WILL BE SAVED
+      THE LAST TIME STEP WILL BE PRINTED
+      THE LAST TIME STEP WILL BE SAVED
+      THE LAST TIME STEP WILL BE PRINTED
+
+ END READING OUTPUT CONTROL FOR STRESS PERIOD 1
+ ---------------------------------------------------
+  WEL NO.    LAYER    ROW     COL     STRESS RATE   
+ ---------------------------------------------------
+     1         5       6      15     0.00000000     
+     2         5      35      16     0.00000000     
+     3         5      33       6     0.00000000     
+ ---------------------------------------------------
+
+
+
+ OPENED riv.ref
+ FILE TYPE:OPEN/CLOSE   UNIT 1037   STATUS:OLD                 
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+ ACTION:READ                
+
+ ------------------------------------------------------------------------------------------------------------------------------
+  RIV NO.    LAYER    ROW     COL        STAGE         CONDUCTANCE       BOTTOM EL.    BOUNDNAME                               
+ ------------------------------------------------------------------------------------------------------------------------------
+     1         1      23       9     1.75000000       100000.000      -2.00000000      PF                                      
+     2         1      24       9     1.65000000       100000.000      -2.00000000      PF                                      
+     3         1      25       9     1.55000000       100000.000      -2.00000000      DS                                      
+     4         1      26       9     1.45000000       100000.000      -2.00000000      DS                                      
+     5         1      27       9     1.35000000       100000.000      -2.00000000      DS                                      
+     6         1      28       9     1.25000000       100000.000      -2.00000000      DS                                      
+     7         1      29       9     1.15000000       100000.000      -2.00000000      DS                                      
+     8         1      30       9     1.05000000       100000.000      -2.00000000      DS                                      
+     9         1      31       9     0.950000000      100000.000      -2.00000000      DS                                      
+     10        1      32       9     0.850000000      100000.000      -2.00000000      DS                                      
+     11        1      33       9     0.750000000      100000.000      -2.00000000      DS                                      
+     12        1      34       9     0.650000000      100000.000      -2.00000000      DS                                      
+     13        1      35       9     0.550000000      100000.000      -2.00000000      DS                                      
+     14        1      36       9     0.450000000      100000.000      -2.00000000      DS                                      
+     15        1      37       9     0.350000000      100000.000      -2.00000000      DS                                      
+     16        1      38       9     0.250000000      100000.000      -2.00000000      DS                                      
+     17        1      39       9     0.150000000      100000.000      -2.00000000      DS                                      
+     18        1      40       9     5.000000000E-02  100000.000      -2.00000000      DS                                      
+ ------------------------------------------------------------------------------------------------------------------------------
+
+
+
+                 RECHARGE =  0.3641000E-02
+
+ OPENED chd.ref
+ FILE TYPE:OPEN/CLOSE   UNIT 1038   STATUS:OLD                 
+ FORMAT:FORMATTED              ACCESS:SEQUENTIAL          
+ ACTION:READ                
+
+ --------------------------------------------------------------------------------------------
+  CHD NO.    LAYER    ROW     COL         HEAD       BOUNDNAME                               
+ --------------------------------------------------------------------------------------------
+     1         1       4       4     11.0000000      LAKE                                    
+     2         1       4       5     11.0000000      LAKE                                    
+     3         1       4       6     11.0000000      LAKE                                    
+     4         1       4       7     11.0000000      LAKE                                    
+     5         1       5       3     11.0000000      LAKE                                    
+     6         1       5       4     11.0000000      LAKE                                    
+     7         1       5       5     11.0000000      LAKE                                    
+     8         1       5       6     11.0000000      LAKE                                    
+     9         1       5       7     11.0000000      LAKE                                    
+     10        1       6       3     11.0000000      LAKE                                    
+     11        1       6       4     11.0000000      LAKE                                    
+     12        1       6       5     11.0000000      LAKE                                    
+     13        1       6       6     11.0000000      LAKE                                    
+     14        1       6       7     11.0000000      LAKE                                    
+     15        1       7       3     11.0000000      LAKE                                    
+     16        1       7       4     11.0000000      LAKE                                    
+     17        1       7       5     11.0000000      LAKE                                    
+     18        1       7       6     11.0000000      LAKE                                    
+     19        1       7       7     11.0000000      LAKE                                    
+     20        1       8       3     11.0000000      LAKE                                    
+     21        1       8       4     11.0000000      LAKE                                    
+     22        1       8       5     11.0000000      LAKE                                    
+     23        1       8       6     11.0000000      LAKE                                    
+     24        1       8       7     11.0000000      LAKE                                    
+     25        1       9       3     11.0000000      LAKE                                    
+     26        1       9       4     11.0000000      LAKE                                    
+     27        1       9       5     11.0000000      LAKE                                    
+     28        1       9       6     11.0000000      LAKE                                    
+     29        1       9       7     11.0000000      LAKE                                    
+     30        1      10       3     11.0000000      LAKE                                    
+     31        1      10       4     11.0000000      LAKE                                    
+     32        1      10       5     11.0000000      LAKE                                    
+     33        1      10       6     11.0000000      LAKE                                    
+     34        1      10       7     11.0000000      LAKE                                    
+     35        1      10       8     11.0000000      LAKE                                    
+     36        1      11       4     11.0000000      LAKE                                    
+     37        1      11       5     11.0000000      LAKE                                    
+     38        1      11       6     11.0000000      LAKE                                    
+     39        1      11       7     11.0000000      LAKE                                    
+     40        1      11       8     11.0000000      LAKE                                    
+     41        1      12       4     11.0000000      LAKE                                    
+     42        1      12       5     11.0000000      LAKE                                    
+     43        1      12       6     11.0000000      LAKE                                    
+     44        1      12       7     11.0000000      LAKE                                    
+     45        1      12       8     11.0000000      LAKE                                    
+     46        1      12       9     11.0000000      LAKE                                    
+     47        1      13       5     11.0000000      LAKE                                    
+     48        1      13       6     11.0000000      LAKE                                    
+     49        1      13       7     11.0000000      LAKE                                    
+     50        1      13       8     11.0000000      LAKE                                    
+     51        1      13       9     11.0000000      LAKE                                    
+     52        1      14       5     11.0000000      LAKE                                    
+     53        1      14       6     11.0000000      LAKE                                    
+     54        1      14       7     11.0000000      LAKE                                    
+     55        1      14       8     11.0000000      LAKE                                    
+     56        1      14       9     11.0000000      LAKE                                    
+     57        1      15       5     11.0000000      LAKE                                    
+     58        1      15       6     11.0000000      LAKE                                    
+     59        1      15       7     11.0000000      LAKE                                    
+     60        1      15       8     11.0000000      LAKE                                    
+     61        1      15       9     11.0000000      LAKE                                    
+     62        1      16       6     11.0000000      LAKE                                    
+     63        1      16       7     11.0000000      LAKE                                    
+     64        1      16       8     11.0000000      LAKE                                    
+     65        1      16       9     11.0000000      LAKE                                    
+ --------------------------------------------------------------------------------------------
+
+
+ UBDSV1 SAVING     FLOW-JA-FACE ON UNIT   1033 AT TIME STEP      1, STRESS PERIOD      1
+ UBDSV06 SAVING              WEL IN MODEL AT               PACKAGE AT              CONNECTED TO MODEL AT               PACKAGE WEL-1            ON UNIT   1033 AT TIME STEP      1, STRESS PERIOD      1
+ UBDSV06 SAVING              RIV IN MODEL AT               PACKAGE AT              CONNECTED TO MODEL AT               PACKAGE RIV-1            ON UNIT   1033 AT TIME STEP      1, STRESS PERIOD      1
+ UBDSV06 SAVING             RCHA IN MODEL AT               PACKAGE AT              CONNECTED TO MODEL AT               PACKAGE RCH-1            ON UNIT   1033 AT TIME STEP      1, STRESS PERIOD      1
+ UBDSV06 SAVING              CHD IN MODEL AT               PACKAGE AT              CONNECTED TO MODEL AT               PACKAGE CHD-1            ON UNIT   1033 AT TIME STEP      1, STRESS PERIOD      1
+
+ WEL PACKAGE (WEL-1) FLOW RATES   PERIOD      1   STEP        1
+ -----------------------------------------------
+   NUMBER   CELLID                    RATE      
+ -----------------------------------------------
+     1      (5,6,15)              0.0000000     
+     2      (5,35,16)             0.0000000     
+     3      (5,33,6)              0.0000000     
+ -----------------------------------------------
+
+
+
+
+ RIV PACKAGE (RIV-1) FLOW RATES   PERIOD      1   STEP        1
+ ----------------------------------------------------------------------------------------
+   NUMBER   CELLID                    RATE       NAME                                    
+ ----------------------------------------------------------------------------------------
+     1      (1,23,9)             -28221.521      PF                                      
+     2      (1,24,9)             -67118.118      PF                                      
+     3      (1,25,9)             -63760.521      DS                                      
+     4      (1,26,9)             -60008.650      DS                                      
+     5      (1,27,9)             -56601.885      DS                                      
+     6      (1,28,9)             -53646.534      DS                                      
+     7      (1,29,9)             -51119.966      DS                                      
+     8      (1,30,9)             -48955.442      DS                                      
+     9      (1,31,9)             -47094.301      DS                                      
+     10     (1,32,9)             -45593.879      DS                                      
+     11     (1,33,9)             -44450.284      DS                                      
+     12     (1,34,9)             -43672.440      DS                                      
+     13     (1,35,9)             -43274.045      DS                                      
+     14     (1,36,9)             -43276.938      DS                                      
+     15     (1,37,9)             -43721.800      DS                                      
+     16     (1,38,9)             -44688.809      DS                                      
+     17     (1,39,9)             -46352.815      DS                                      
+     18     (1,40,9)             -49227.011      DS                                      
+ ----------------------------------------------------------------------------------------
+
+
+
+
+ CHD PACKAGE (CHD-1) FLOW RATES   PERIOD      1   STEP        1
+ ----------------------------------------------------------------------------------------
+   NUMBER   CELLID                    RATE       NAME                                    
+ ----------------------------------------------------------------------------------------
+     1      (1,4,4)              -16313.974      LAKE                                    
+     2      (1,4,5)              -254.84484      LAKE                                    
+     3      (1,4,6)              -368.23694      LAKE                                    
+     4      (1,4,7)              -742.70813      LAKE                                    
+     5      (1,5,3)              -9502.0509      LAKE                                    
+     6      (1,5,4)              -4762.1313      LAKE                                    
+     7      (1,5,5)              -83.921826      LAKE                                    
+     8      (1,5,6)              -218.69538      LAKE                                    
+     9      (1,5,7)              -886.63760      LAKE                                    
+     10     (1,6,3)              -4417.6636      LAKE                                    
+     11     (1,6,4)              -2223.9514      LAKE                                    
+     12     (1,6,5)              -57.715483      LAKE                                    
+     13     (1,6,6)              -220.76934      LAKE                                    
+     14     (1,6,7)              -1044.5607      LAKE                                    
+     15     (1,7,3)              -2726.2372      LAKE                                    
+     16     (1,7,4)              -1160.1702      LAKE                                    
+     17     (1,7,5)              -39.030461      LAKE                                    
+     18     (1,7,6)              -215.44192      LAKE                                    
+     19     (1,7,7)              -1096.8793      LAKE                                    
+     20     (1,8,3)              -1663.0644      LAKE                                    
+     21     (1,8,4)              -537.97714      LAKE                                    
+     22     (1,8,5)              -284.81876      LAKE                                    
+     23     (1,8,6)              -162.95060      LAKE                                    
+     24     (1,8,7)              -1023.5081      LAKE                                    
+     25     (1,9,3)              -746.07363      LAKE                                    
+     26     (1,9,4)              -150.77690      LAKE                                    
+     27     (1,9,5)              -99.798109      LAKE                                    
+     28     (1,9,6)              -118.70095      LAKE                                    
+     29     (1,9,7)              -794.50923      LAKE                                    
+     30     (1,10,3)              622.99792      LAKE                                    
+     31     (1,10,4)              325.36278      LAKE                                    
+     32     (1,10,5)              173.63309      LAKE                                    
+     33     (1,10,6)             -49.603698      LAKE                                    
+     34     (1,10,7)             -284.27550      LAKE                                    
+     35     (1,10,8)             -1338.7924      LAKE                                    
+     36     (1,11,4)              1367.7387      LAKE                                    
+     37     (1,11,5)              572.06874      LAKE                                    
+     38     (1,11,6)              325.44246      LAKE                                    
+     39     (1,11,7)             -103.19513      LAKE                                    
+     40     (1,11,8)             -550.56328      LAKE                                    
+     41     (1,12,4)              4087.5684      LAKE                                    
+     42     (1,12,5)              1316.4099      LAKE                                    
+     43     (1,12,6)              665.45466      LAKE                                    
+     44     (1,12,7)             -21.318813      LAKE                                    
+     45     (1,12,8)             -92.875971      LAKE                                    
+     46     (1,12,9)             -360.25162      LAKE                                    
+     47     (1,13,5)              3393.8152      LAKE                                    
+     48     (1,13,6)              1192.4538      LAKE                                    
+     49     (1,13,7)              543.86608      LAKE                                    
+     50     (1,13,8)             -112.91358      LAKE                                    
+     51     (1,13,9)             -3675.6897      LAKE                                    
+     52     (1,14,5)              6227.9816      LAKE                                    
+     53     (1,14,6)              2249.8737      LAKE                                    
+     54     (1,14,7)              1191.5735      LAKE                                    
+     55     (1,14,8)              656.55809      LAKE                                    
+     56     (1,14,9)             -73.830355      LAKE                                    
+     57     (1,15,5)              12930.951      LAKE                                    
+     58     (1,15,6)              4475.2471      LAKE                                    
+     59     (1,15,7)              2724.7137      LAKE                                    
+     60     (1,15,8)              2176.7968      LAKE                                    
+     61     (1,15,9)              2878.8317      LAKE                                    
+     62     (1,16,6)              13186.168      LAKE                                    
+     63     (1,16,7)              8205.1714      LAKE                                    
+     64     (1,16,8)              7262.9475      LAKE                                    
+     65     (1,16,9)              9528.1734      LAKE                                    
+ ----------------------------------------------------------------------------------------
+
+
+
+1
+  HEAD IN LAYER   1 AT END OF TIME STEP   1 IN STRESS PERIOD    1
+  ---------------------------------------------------------------------------
+
+           1       2       3       4       5       6       7       8       9      10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25
+ ...........................................................................................................................................................................................................
+   1    11.38   11.40   11.43   11.49   11.57   11.64   11.70   11.74   11.77   11.79   11.81   11.82   11.83   11.84   11.84   11.85   11.86   11.86   11.88   11.90   11.92   11.94   11.96   11.97   11.98
+   2    11.36   11.37   11.40   11.46   11.56   11.64   11.69   11.73   11.77   11.79   11.81   11.82   11.83   11.83   11.83   11.84   11.85   11.86   11.87   11.88   11.90   11.92   11.94   11.96   11.96
+   3    11.30   11.31   11.32   11.35   11.54   11.63   11.69   11.73   11.77   11.80   11.81   11.82   11.82   11.82   11.82   11.82   11.83   11.84   11.85   11.86   11.87   11.89   11.91   11.93   11.94
+   4    11.24   11.22   11.18   11.00   11.00   11.00   11.00   13.42   13.88   13.49   11.83   11.81   11.80   11.79   11.79   11.80   11.80   11.81   11.82   11.83   11.84   11.85   11.87   11.89   11.90
+   5    11.18   11.14   11.00   11.00   11.00   11.00   11.00   14.59   15.65   15.49   13.78   11.81   11.77   11.76   11.76   11.76   11.77   11.78   11.79   11.80   11.81   11.82   11.83   11.84   11.86
+   6    11.13   11.10   11.00   11.00   11.00   11.00   11.00   15.19   16.64   16.80   15.68   13.53   11.72   11.71   11.71   11.72   11.72   11.74   11.75   11.76   11.77   11.78   11.79   11.79   11.81
+   7    11.09   11.07   11.00   11.00   11.00   11.00   11.00   15.39   17.03   17.35   16.38   14.11   11.66   11.65   11.65   11.66   11.67   11.68   11.70   11.71   11.72   11.73   11.75   11.75   11.77
+   8    11.06   11.05   11.00   11.00   11.00   11.00   11.00   15.20   16.85   17.21   16.26   14.02   11.58   11.58   11.58   11.59   11.61   11.62   11.64   11.65   11.67   11.68   11.70   11.71   11.72
+   9    11.04   11.03   11.00   11.00   11.00   11.00   11.00   14.41   16.08   16.38   15.34   13.22   11.49   11.49   11.50   11.52   11.53   11.55   11.57   11.59   11.60   11.62   11.64   11.66   11.67
+  10    11.01   11.01   11.00   11.00   11.00   11.00   11.00   11.00   14.67   14.86   13.26   11.32   11.37   11.40   11.42   11.43   11.45   11.47   11.49   11.51   11.53   11.55   11.57   11.59   11.60
+  11    10.97   10.97   10.98   11.00   11.00   11.00   11.00   11.00   13.35   12.86   11.20   11.24   11.28   11.30   11.32   11.34   11.36   11.39   11.41   11.43   11.46   11.48   11.49   11.51   11.52
+  12    10.91   10.91   10.94   11.00   11.00   11.00   11.00   11.00   11.00   11.11   11.14   11.17   11.19   11.21   11.22   11.24   11.26   11.29   11.32   11.34   11.37   11.40   11.42   11.43   11.43
+  13    10.81   10.83   10.87   10.93   11.00   11.00   11.00   11.00   11.00   11.06   11.08   11.09   11.09   11.11   11.12   11.14   11.16   11.19   11.21   11.24   11.28   11.31   11.32   11.32   11.32
+  14    10.67   10.71   10.78   10.87   11.00   11.00   11.00   11.00   11.00   11.02   11.02   11.00   10.99   11.00   11.00   11.02   11.04   11.07   11.10   11.13   11.17   11.19   11.19   11.19   11.19
+  15    10.47   10.53   10.65   10.78   11.00   11.00   11.00   11.00   11.00   10.95   10.93   10.90   10.87   10.87   10.88   10.89   10.92   10.95   10.98   11.01   11.03   11.03   11.03   11.04   11.05
+  16    10.18   10.27   10.45   10.63   10.79   11.00   11.00   11.00   11.00   10.87   10.80   10.75   10.73   10.73   10.74   10.76   10.78   10.81   10.83   10.85   10.84   10.84   10.85   10.87   10.87
+  17     9.79    9.91   10.23   10.46   10.63   10.76   10.82   10.83   10.82   10.75   10.65   10.48   10.46   10.46   10.48   10.51   10.55   10.58   10.61   10.61   10.62   10.64   10.65   10.66   10.66
+  18     9.27    9.33    9.71   10.00   10.18   10.29   10.36   10.39   10.39   10.36   10.25   10.05   10.05   10.07   10.10   10.14   10.20   10.26   10.31   10.34   10.36   10.39   10.40   10.41   10.41
+  19     8.67    8.70    8.94    9.16    9.29    9.37    9.41    9.45    9.50    9.54    9.56    9.50    9.53    9.57    9.63    9.70    9.79    9.88    9.95   10.01   10.06   10.09   10.11   10.13   10.14
+  20     8.03    8.04    8.18    8.29    8.34    8.36    8.37    8.40    8.48    8.63    8.80    8.84    8.90    8.98    9.08    9.19    9.31    9.44    9.54    9.64    9.71    9.77    9.81    9.84    9.85
+  21     7.35    7.34    7.40    7.38    7.33    7.27    7.21    7.18    7.26    7.57    7.95    8.12    8.22    8.35    8.50    8.64    8.82    8.98    9.13    9.25    9.35    9.43    9.49    9.53    9.55
+  22     6.65    6.63    6.55    6.38    6.22    6.06    5.91    5.76    5.67    6.28    7.01    7.40    7.58    7.77    7.96    8.13    8.33    8.53    8.70    8.86    8.99    9.09    9.17    9.22    9.24
+  23     5.96    5.90    5.59    5.25    4.99    4.75    4.48    4.08    2.03    4.70    5.87    6.69    6.97    7.25    7.49    7.70    7.91    8.12    8.31    8.47    8.62    8.75    8.84    8.91    8.94
+  24     5.32    5.18    4.77    4.46    4.18    3.90    3.60    3.24    2.32    3.85    4.89    5.85    6.36    6.73    7.04    7.29    7.54    7.78    7.98    8.14    8.28    8.41    8.52    8.60    8.64
+  25     4.81    4.69    4.46    4.21    3.95    3.68    3.39    3.05    2.19    3.61    4.55    5.33    5.86    6.28    6.62    6.91    7.19    7.45    7.67    7.85    8.00    8.12    8.22    8.30    8.35
+  26     4.40    4.31    4.15    3.95    3.72    3.46    3.19    2.86    2.05    3.38    4.24    4.93    5.45    5.89    6.25    6.56    6.86    7.14    7.38    7.57    7.74    7.86    7.95    8.02    8.08
+  27     4.06    3.99    3.86    3.69    3.49    3.26    2.99    2.69    1.92    3.16    3.96    4.61    5.11    5.55    5.92    6.24    6.55    6.85    7.10    7.31    7.49    7.62    7.72    7.78    7.83
+  28     3.77    3.71    3.61    3.46    3.27    3.06    2.81    2.52    1.79    2.97    3.72    4.34    4.83    5.26    5.63    5.96    6.28    6.59    6.85    7.07    7.25    7.39    7.50    7.57    7.61
+  29     3.52    3.47    3.38    3.24    3.07    2.87    2.64    2.36    1.66    2.79    3.51    4.11    4.58    5.01    5.38    5.71    6.03    6.35    6.62    6.85    7.04    7.19    7.30    7.37    7.41
+  30     3.30    3.25    3.17    3.05    2.89    2.70    2.48    2.21    1.54    2.62    3.31    3.91    4.37    4.79    5.16    5.48    5.82    6.14    6.41    6.65    6.84    7.00    7.11    7.18    7.23
+  31     3.10    3.06    2.99    2.87    2.72    2.54    2.33    2.07    1.42    2.46    3.11    3.71    4.20    4.60    4.96    5.29    5.62    5.95    6.23    6.47    6.67    6.82    6.94    7.02    7.06
+  32     2.93    2.90    2.82    2.71    2.57    2.39    2.19    1.94    1.31    2.30    2.94    3.53    4.03    4.44    4.80    5.12    5.45    5.78    6.07    6.31    6.51    6.67    6.79    6.88    6.92
+  33     2.78    2.75    2.68    2.57    2.43    2.26    2.06    1.82    1.19    2.17    2.78    3.35    3.87    4.30    4.66    4.98    5.31    5.63    5.92    6.17    6.38    6.54    6.67    6.75    6.79
+  34     2.66    2.62    2.55    2.45    2.31    2.14    1.94    1.70    1.09    2.04    2.64    3.19    3.70    4.16    4.54    4.85    5.18    5.51    5.80    6.06    6.26    6.43    6.55    6.64    6.68
+  35     2.54    2.51    2.44    2.34    2.20    2.04    1.84    1.60    0.98    1.92    2.51    3.05    3.55    4.00    4.41    4.74    5.07    5.39    5.69    5.95    6.17    6.33    6.45    6.54    6.58
+  36     2.45    2.42    2.35    2.25    2.11    1.95    1.75    1.50    0.88    1.82    2.40    2.94    3.43    3.87    4.27    4.63    4.97    5.31    5.60    5.86    6.08    6.25    6.37    6.45    6.50
+  37     2.38    2.35    2.28    2.17    2.04    1.87    1.67    1.42    0.79    1.73    2.31    2.84    3.33    3.77    4.17    4.52    4.88    5.23    5.53    5.79    6.00    6.17    6.30    6.39    6.43
+  38     2.32    2.29    2.22    2.12    1.98    1.81    1.60    1.35    0.70    1.65    2.23    2.77    3.25    3.70    4.10    4.45    4.81    5.16    5.47    5.73    5.95    6.12    6.25    6.34    6.38
+  39     2.29    2.25    2.18    2.08    1.94    1.77    1.56    1.29    0.61    1.59    2.18    2.72    3.21    3.65    4.05    4.40    4.77    5.12    5.43    5.69    5.91    6.09    6.22    6.30    6.34
+  40     2.27    2.23    2.17    2.06    1.92    1.75    1.53    1.26    0.54    1.56    2.15    2.69    3.18    3.62    4.02    4.38    4.74    5.10    5.41    5.68    5.89    6.07    6.20    6.28    6.33
+1
+  HEAD IN LAYER   2 AT END OF TIME STEP   1 IN STRESS PERIOD    1
+  ---------------------------------------------------------------------------
+
+           1       2       3       4       5       6       7       8       9      10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25
+ ...........................................................................................................................................................................................................
+   1    11.38   11.39   11.43   11.49   11.56   11.64   11.70   11.74   11.76   11.79   11.81   11.82   11.83   11.83   11.84   11.85   11.85   11.86   11.88   11.90   11.92   11.94   11.95   11.97   11.97
+   2    11.35   11.36   11.39   11.45   11.56   11.64   11.69   11.73   11.76   11.79   11.81   11.82   11.82   11.83   11.83   11.84   11.85   11.85   11.86   11.88   11.90   11.92   11.94   11.95   11.96
+   3    11.30   11.30   11.31   11.35   11.53   11.63   11.68   11.73   11.77   11.79   11.81   11.82   11.82   11.82   11.82   11.82   11.83   11.84   11.85   11.86   11.87   11.89   11.91   11.93   11.93
+   4    11.24   11.22   11.18   11.06   11.13   11.19   11.35   12.98   13.43   13.06   11.82   11.81   11.80   11.79   11.79   11.80   11.80   11.81   11.82   11.83   11.84   11.85   11.87   11.89   11.90
+   5    11.17   11.14   11.03   11.02   11.05   11.13   11.43   14.13   15.18   15.01   13.35   11.80   11.77   11.76   11.76   11.76   11.77   11.78   11.79   11.80   11.81   11.82   11.82   11.84   11.85
+   6    11.12   11.10   11.02   11.01   11.03   11.13   11.51   14.73   16.17   16.32   15.21   13.10   11.72   11.71   11.71   11.71   11.72   11.73   11.75   11.76   11.77   11.78   11.79   11.79   11.81
+   7    11.09   11.07   11.01   11.00   11.02   11.12   11.54   14.93   16.56   16.88   15.90   13.66   11.65   11.65   11.65   11.66   11.67   11.68   11.69   11.71   11.72   11.73   11.74   11.75   11.76
+   8    11.06   11.05   11.01   11.00   11.00   11.09   11.50   14.74   16.38   16.74   15.79   13.57   11.58   11.58   11.58   11.59   11.60   11.62   11.64   11.65   11.67   11.68   11.69   11.71   11.72
+   9    11.03   11.03   11.00   11.00   11.00   11.07   11.39   13.97   15.61   15.91   14.87   12.79   11.48   11.49   11.50   11.51   11.53   11.55   11.57   11.59   11.60   11.62   11.64   11.66   11.66
+  10    11.00   11.00   11.00   11.00   11.00   11.03   11.16   11.62   14.22   14.39   12.83   11.32   11.37   11.40   11.41   11.43   11.45   11.47   11.49   11.51   11.53   11.55   11.57   11.59   11.60
+  11    10.96   10.97   10.98   10.99   11.00   11.00   11.06   11.27   12.90   12.43   11.20   11.24   11.28   11.30   11.32   11.34   11.36   11.38   11.41   11.43   11.45   11.48   11.49   11.51   11.52
+  12    10.90   10.91   10.94   10.99   10.99   11.00   11.01   11.05   11.15   11.11   11.14   11.16   11.19   11.21   11.22   11.24   11.26   11.29   11.31   11.34   11.37   11.39   11.42   11.42   11.43
+  13    10.80   10.83   10.87   10.92   10.99   11.00   11.00   11.00   11.01   11.06   11.08   11.08   11.09   11.10   11.12   11.13   11.16   11.18   11.21   11.24   11.27   11.31   11.32   11.32   11.32
+  14    10.66   10.71   10.78   10.86   10.98   10.99   11.00   11.00   11.00   11.01   11.01   11.00   10.99   10.99   11.00   11.02   11.04   11.07   11.10   11.13   11.17   11.19   11.19   11.19   11.19
+  15    10.46   10.53   10.64   10.77   10.95   10.98   10.99   10.99   10.99   10.95   10.93   10.90   10.87   10.87   10.88   10.89   10.92   10.94   10.97   11.01   11.03   11.03   11.03   11.04   11.05
+  16    10.18   10.27   10.44   10.63   10.79   10.95   10.97   10.97   10.97   10.87   10.80   10.74   10.73   10.73   10.74   10.75   10.78   10.81   10.83   10.84   10.84   10.84   10.85   10.86   10.87
+  17     9.79    9.90   10.22   10.45   10.63   10.75   10.81   10.83   10.81   10.75   10.65   10.48   10.46   10.46   10.48   10.51   10.54   10.58   10.61   10.60   10.61   10.63   10.65   10.65   10.65
+  18     9.27    9.33    9.68    9.97   10.15   10.26   10.33   10.36   10.36   10.33   10.23   10.05   10.04   10.06   10.10   10.14   10.20   10.25   10.30   10.33   10.36   10.38   10.40   10.40   10.40
+  19     8.67    8.70    8.91    9.13    9.26    9.33    9.38    9.42    9.47    9.51    9.53    9.50    9.52    9.57    9.63    9.70    9.79    9.87    9.95   10.01   10.06   10.08   10.11   10.13   10.13
+  20     8.02    8.03    8.15    8.26    8.31    8.33    8.34    8.36    8.44    8.60    8.77    8.83    8.89    8.98    9.07    9.18    9.31    9.43    9.54    9.63    9.71    9.76    9.80    9.83    9.85
+  21     7.34    7.34    7.37    7.35    7.30    7.24    7.18    7.15    7.23    7.53    7.92    8.11    8.22    8.35    8.49    8.64    8.81    8.98    9.12    9.24    9.35    9.43    9.49    9.53    9.55
+  22     6.65    6.62    6.53    6.35    6.19    6.03    5.87    5.72    5.64    6.25    6.98    7.40    7.57    7.77    7.96    8.13    8.33    8.52    8.69    8.85    8.98    9.08    9.16    9.21    9.24
+  23     5.96    5.89    5.56    5.22    4.96    4.72    4.44    4.05    2.88    4.68    5.84    6.68    6.97    7.24    7.49    7.70    7.91    8.12    8.30    8.47    8.61    8.74    8.84    8.90    8.93
+  24     5.32    5.17    4.77    4.45    4.17    3.89    3.59    3.24    2.65    3.85    4.88    5.85    6.35    6.73    7.03    7.29    7.54    7.77    7.97    8.14    8.28    8.41    8.52    8.60    8.63
+  25     4.81    4.69    4.45    4.20    3.94    3.67    3.38    3.05    2.50    3.61    4.55    5.32    5.85    6.28    6.62    6.90    7.18    7.44    7.66    7.85    8.00    8.11    8.21    8.30    8.34
+  26     4.39    4.31    4.14    3.94    3.71    3.46    3.18    2.86    2.35    3.38    4.23    4.93    5.45    5.88    6.25    6.55    6.85    7.13    7.37    7.57    7.73    7.86    7.94    8.02    8.07
+  27     4.05    3.99    3.86    3.69    3.48    3.25    2.99    2.69    2.19    3.16    3.96    4.61    5.11    5.55    5.92    6.24    6.55    6.85    7.10    7.31    7.48    7.62    7.71    7.78    7.82
+  28     3.76    3.71    3.60    3.45    3.27    3.05    2.81    2.52    2.05    2.97    3.72    4.34    4.82    5.25    5.63    5.95    6.27    6.58    6.85    7.07    7.25    7.39    7.49    7.56    7.60
+  29     3.51    3.46    3.37    3.24    3.07    2.87    2.64    2.36    1.91    2.78    3.51    4.10    4.58    5.00    5.37    5.70    6.03    6.35    6.62    6.85    7.03    7.18    7.29    7.36    7.40
+  30     3.29    3.25    3.16    3.04    2.88    2.69    2.47    2.21    1.78    2.62    3.31    3.90    4.37    4.78    5.15    5.48    5.81    6.13    6.41    6.65    6.84    6.99    7.11    7.18    7.22
+  31     3.10    3.06    2.98    2.87    2.72    2.54    2.32    2.07    1.65    2.45    3.11    3.71    4.20    4.60    4.96    5.29    5.62    5.94    6.23    6.47    6.66    6.82    6.94    7.02    7.06
+  32     2.93    2.89    2.82    2.71    2.56    2.39    2.18    1.94    1.53    2.30    2.94    3.53    4.03    4.43    4.79    5.12    5.45    5.78    6.06    6.31    6.51    6.67    6.79    6.87    6.91
+  33     2.78    2.74    2.67    2.57    2.43    2.26    2.06    1.81    1.41    2.16    2.78    3.34    3.86    4.30    4.65    4.97    5.30    5.63    5.92    6.17    6.37    6.54    6.66    6.75    6.79
+  34     2.65    2.62    2.55    2.44    2.31    2.14    1.94    1.70    1.30    2.03    2.63    3.18    3.69    4.15    4.53    4.85    5.18    5.50    5.80    6.05    6.26    6.42    6.55    6.63    6.67
+  35     2.54    2.51    2.44    2.33    2.20    2.03    1.83    1.59    1.20    1.92    2.50    3.05    3.54    4.00    4.40    4.74    5.07    5.39    5.68    5.95    6.16    6.33    6.45    6.53    6.57
+  36     2.45    2.41    2.35    2.24    2.11    1.94    1.74    1.50    1.10    1.81    2.39    2.93    3.42    3.87    4.27    4.62    4.97    5.30    5.60    5.86    6.07    6.24    6.37    6.45    6.49
+  37     2.38    2.34    2.27    2.17    2.03    1.86    1.66    1.41    1.00    1.72    2.30    2.84    3.32    3.77    4.17    4.52    4.88    5.22    5.52    5.78    6.00    6.17    6.30    6.38    6.42
+  38     2.32    2.29    2.22    2.11    1.98    1.80    1.60    1.34    0.92    1.65    2.23    2.76    3.25    3.69    4.09    4.45    4.81    5.16    5.47    5.73    5.94    6.12    6.25    6.33    6.37
+  39     2.28    2.25    2.18    2.08    1.94    1.76    1.55    1.29    0.84    1.59    2.18    2.71    3.20    3.64    4.04    4.40    4.76    5.12    5.43    5.69    5.91    6.08    6.21    6.30    6.34
+  40     2.26    2.23    2.16    2.06    1.92    1.74    1.53    1.26    0.79    1.55    2.15    2.69    3.18    3.62    4.02    4.37    4.74    5.10    5.41    5.67    5.89    6.06    6.19    6.28    6.32
+1
+  HEAD IN LAYER   3 AT END OF TIME STEP   1 IN STRESS PERIOD    1
+  ---------------------------------------------------------------------------
+
+           1       2       3       4       5       6       7       8       9      10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25
+ ...........................................................................................................................................................................................................
+   1    11.38   11.39   11.43   11.48   11.56   11.63   11.69   11.73   11.76   11.79   11.81   11.82   11.83   11.83   11.84   11.84   11.85   11.86   11.88   11.90 ******* ******* ******* ******* *******
+   2    11.35   11.36   11.39   11.45   11.56   11.63   11.68   11.73   11.76   11.79   11.81   11.82   11.82   11.83   11.83   11.84   11.84   11.85   11.86   11.88   11.90   11.92   11.94   11.95 *******
+   3    11.30   11.30   11.31   11.35   11.53   11.63   11.68   11.73   11.76   11.79   11.81   11.81   11.81   11.81   11.81   11.82   11.83   11.84   11.85   11.86   11.87   11.89   11.91   11.92 *******
+   4    11.23   11.22   11.18   11.09   11.15   11.23   11.42   12.89   13.33   12.97   11.82   11.81   11.80   11.79   11.79   11.79   11.80   11.81   11.82   11.83   11.84   11.85   11.87   11.89 *******
+   5    11.17   11.14   11.05   11.04   11.06   11.16   11.53   14.03   15.07   14.90   13.26   11.80   11.77   11.76   11.75   11.76   11.77   11.78   11.79   11.80   11.81   11.82   11.82   11.84 *******
+   6    11.12   11.09   11.03   11.02   11.04   11.16   11.62   14.62   16.05   16.21   15.10   13.01   11.71   11.71   11.71   11.71   11.72   11.73   11.74   11.76   11.77   11.78   11.79   11.79 *******
+   7    11.09   11.06   11.02   11.01   11.03   11.16   11.65   14.82   16.44   16.77   15.79   13.57   11.65   11.65   11.65   11.66   11.67   11.68   11.69   11.71   11.72   11.73   11.74 ******* *******
+   8    11.06   11.04   11.01   11.00   11.00   11.12   11.60   14.63   16.27   16.63   15.68   13.47   11.58   11.57   11.58   11.59   11.60   11.62   11.63   11.65   11.66   11.68   11.69 ******* *******
+   9    11.03   11.02   11.00   11.00   11.00   11.09   11.47   13.87   15.49   15.80   14.76   12.70   11.48   11.49   11.50   11.51   11.53   11.55   11.57   11.58   11.60   11.62 ******* ******* *******
+  10    11.00   11.00   11.00   11.00   11.00   11.04   11.21   11.74   14.12   14.28   12.74   11.32   11.37   11.39   11.41   11.43   11.45   11.47   11.49   11.51   11.53   11.55 ******* ******* *******
+  11    10.96   10.96   10.97   10.99   11.00   11.00   11.07   11.32   12.81   12.34   11.20   11.24   11.27   11.30   11.32   11.34   11.36   11.38   11.41   11.43   11.45   11.47 ******* ******* *******
+  12    10.90   10.91   10.93   10.98   10.99   10.99   11.02   11.07   11.18   11.10   11.14   11.16   11.18   11.20   11.22   11.24   11.26   11.29   11.31   11.34   11.37   11.39 ******* ******* *******
+  13  *******   10.82   10.87   10.92   10.98   10.99   11.00   11.00   11.01   11.06   11.07   11.08   11.09   11.10   11.12   11.13   11.16   11.18   11.21   11.24   11.27   11.31 ******* ******* *******
+  14  *******   10.71   10.77   10.86   10.96   10.98   10.99   10.99   11.00   11.01   11.01   11.00   10.99   10.99   11.00   11.02   11.04   11.07   11.10   11.13   11.17   11.19 ******* ******* *******
+  15  ******* *******   10.64   10.77   10.93   10.97   10.98   10.98   10.98   10.95   10.92   10.90   10.87   10.87   10.87   10.89   10.91   10.94   10.97   11.01   11.03 ******* ******* ******* *******
+  16  ******* *******   10.44   10.62   10.78   10.92   10.95   10.95   10.95   10.86   10.80   10.74   10.72   10.72   10.73   10.75   10.78   10.81   10.83   10.84 ******* ******* ******* ******* *******
+  17  ******* ******* *******   10.45   10.62   10.75   10.81   10.82   10.81   10.75   10.65   10.48   10.46   10.46   10.48   10.50   10.54 ******* ******* ******* ******* ******* ******* ******* *******
+  18  ******* ******* ******* ******* ******* *******   10.32   10.35   10.36   10.32   10.22   10.05   10.04   10.06   10.09 ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  19  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  20  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  21  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  22  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  23  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  24  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  25  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  26  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  27  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  28  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  29  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  30  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  31  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  32  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  33  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  34  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  35  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  36  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  37  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  38  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  39  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+  40  ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* ******* *******
+1
+  HEAD IN LAYER   4 AT END OF TIME STEP   1 IN STRESS PERIOD    1
+  ---------------------------------------------------------------------------
+
+           1       2       3       4       5       6       7       8       9      10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25
+ ...........................................................................................................................................................................................................
+   1    11.37   11.39   11.42   11.48   11.56   11.63   11.69   11.73   11.76   11.79   11.81   11.82   11.83   11.83   11.84   11.84   11.85   11.86   11.87   11.90   11.92   11.93   11.95   11.96   11.97
+   2    11.35   11.36   11.39   11.45   11.55   11.63   11.68   11.72   11.76   11.79   11.81   11.82   11.82   11.82   11.83   11.83   11.84   11.85   11.86   11.88   11.90   11.92   11.94   11.95   11.96
+   3    11.30   11.30   11.31   11.35   11.53   11.63   11.68   11.72   11.76   11.79   11.81   11.81   11.81   11.81   11.81   11.82   11.82   11.83   11.84   11.85   11.86   11.88   11.91   11.92   11.93
+   4    11.23   11.22   11.18   11.13   11.18   11.27   11.50   12.79   13.22   12.87   11.82   11.81   11.80   11.79   11.79   11.79   11.80   11.81   11.82   11.83   11.84   11.85   11.86   11.88   11.90
+   5    11.17   11.14   11.07   11.05   11.08   11.20   11.63   13.91   14.94   14.79   13.17   11.80   11.77   11.76   11.75   11.76   11.76   11.77   11.78   11.80   11.81   11.81   11.82   11.84   11.85
+   6    11.12   11.09   11.04   11.03   11.05   11.20   11.74   14.51   15.93   16.09   14.98   12.91   11.71   11.71   11.71   11.71   11.72   11.73   11.74   11.75   11.77   11.78   11.78   11.79   11.81
+   7    11.08   11.06   11.02   11.01   11.04   11.19   11.78   14.71   16.32   16.65   15.67   13.46   11.65   11.65   11.65   11.65   11.66   11.68   11.69   11.70   11.72   11.73   11.74   11.75   11.76
+   8    11.06   11.04   11.01   11.01   11.00   11.15   11.72   14.52   16.14   16.51   15.56   13.36   11.57   11.57   11.58   11.59   11.60   11.62   11.63   11.65   11.66   11.68   11.69   11.70   11.71
+   9    11.03   11.02   11.01   11.00   11.00   11.11   11.56   13.77   15.37   15.68   14.64   12.60   11.48   11.49   11.50   11.51   11.53   11.55   11.56   11.58   11.60   11.62   11.64   11.66   11.66
+  10    11.00   11.00   10.99   11.00   11.00   11.04   11.25   11.87   14.01   14.16   12.64   11.31   11.37   11.39   11.41   11.43   11.45   11.47   11.49   11.51   11.53   11.55   11.57   11.59   11.60
+  11    10.96   10.96   10.97   10.99   10.99   11.00   11.09   11.38   12.71   12.25   11.20   11.24   11.27   11.30   11.32   11.33   11.36   11.38   11.40   11.43   11.45   11.47   11.49   11.51   11.52
+  12    10.90   10.91   10.93   10.97   10.99   10.99   11.02   11.08   11.21   11.10   11.13   11.16   11.18   11.20   11.22   11.24   11.26   11.28   11.31   11.34   11.36   11.39   11.42   11.42   11.42
+  13    10.80   10.82   10.86   10.92   10.97   10.99   10.99   11.00   11.02   11.06   11.07   11.08   11.09   11.10   11.11   11.13   11.15   11.18   11.21   11.24   11.27   11.30   11.32   11.31   11.32
+  14    10.66   10.70   10.77   10.85   10.94   10.97   10.99   10.99   11.00   11.01   11.01   10.99   10.99   10.99   11.00   11.01   11.04   11.07   11.10   11.13   11.17   11.18   11.18   11.19   11.19
+  15    10.46   10.53   10.64   10.76   10.90   10.95   10.97   10.98   10.97   10.94   10.92   10.90   10.87   10.86   10.87   10.89   10.91   10.94   10.97   11.01   11.02   11.02   11.03   11.03   11.04
+  16    10.18   10.26   10.44   10.62   10.77   10.89   10.93   10.94   10.93   10.86   10.79   10.74   10.72   10.72   10.73   10.75   10.78   10.81   10.83   10.84   10.83   10.84   10.85   10.86   10.87
+  17     9.79    9.90   10.22   10.45   10.62   10.74   10.80   10.82   10.80   10.74   10.64   10.47   10.45   10.46   10.47   10.50   10.54   10.58   10.60   10.60   10.61   10.63   10.65   10.65   10.65
+  18     9.26    9.32    9.67    9.96   10.13   10.25   10.31   10.34   10.35   10.32   10.21   10.04   10.04   10.06   10.09   10.14   10.20   10.25   10.30   10.33   10.36   10.38   10.40   10.40   10.40
+  19     8.66    8.70    8.90    9.11    9.24    9.32    9.37    9.40    9.45    9.50    9.52    9.50    9.52    9.56    9.63    9.70    9.78    9.87    9.95   10.01   10.05   10.08   10.11   10.12   10.13
+  20     8.02    8.03    8.14    8.25    8.30    8.32    8.33    8.35    8.43    8.58    8.76    8.83    8.89    8.97    9.07    9.18    9.30    9.43    9.54    9.63    9.70    9.76    9.80    9.83    9.84
+  21     7.34    7.34    7.35    7.33    7.28    7.22    7.16    7.14    7.21    7.52    7.91    8.11    8.21    8.35    8.49    8.63    8.81    8.98    9.12    9.24    9.34    9.42    9.48    9.52    9.54
+  22     6.64    6.62    6.51    6.33    6.17    6.02    5.86    5.71    5.64    6.24    6.96    7.40    7.57    7.76    7.95    8.13    8.32    8.52    8.69    8.85    8.98    9.08    9.16    9.21    9.24
+  23     5.95    5.89    5.54    5.21    4.95    4.70    4.43    4.06    3.24    4.68    5.83    6.68    6.96    7.24    7.48    7.70    7.90    8.12    8.30    8.47    8.61    8.74    8.84    8.90    8.93
+  24     5.31    5.17    4.77    4.45    4.17    3.89    3.59    3.25    2.80    3.85    4.88    5.84    6.35    6.73    7.03    7.29    7.53    7.77    7.97    8.14    8.28    8.41    8.52    8.59    8.63
+  25     4.80    4.69    4.45    4.20    3.94    3.67    3.38    3.05    2.64    3.62    4.54    5.32    5.85    6.27    6.62    6.90    7.18    7.44    7.66    7.85    8.00    8.11    8.21    8.30    8.34
+  26     4.39    4.30    4.14    3.94    3.71    3.46    3.18    2.87    2.48    3.38    4.23    4.93    5.45    5.88    6.24    6.55    6.85    7.13    7.37    7.57    7.73    7.85    7.94    8.02    8.07
+  27     4.05    3.98    3.86    3.69    3.48    3.25    2.99    2.69    2.32    3.17    3.96    4.61    5.11    5.54    5.91    6.23    6.55    6.84    7.10    7.31    7.48    7.61    7.71    7.77    7.82
+  28     3.76    3.71    3.60    3.45    3.27    3.05    2.81    2.53    2.17    2.97    3.72    4.34    4.82    5.25    5.63    5.95    6.27    6.58    6.85    7.07    7.25    7.39    7.49    7.56    7.60
+  29     3.51    3.46    3.37    3.24    3.07    2.87    2.63    2.37    2.03    2.79    3.50    4.10    4.58    5.00    5.37    5.70    6.03    6.34    6.62    6.85    7.03    7.18    7.29    7.36    7.40
+  30     3.29    3.25    3.16    3.04    2.88    2.69    2.47    2.22    1.89    2.62    3.31    3.90    4.37    4.78    5.15    5.48    5.81    6.13    6.41    6.64    6.84    6.99    7.10    7.18    7.22
+  31     3.10    3.06    2.98    2.86    2.71    2.53    2.32    2.08    1.76    2.46    3.11    3.71    4.19    4.60    4.96    5.28    5.62    5.94    6.22    6.46    6.66    6.82    6.94    7.01    7.06
+  32     2.93    2.89    2.81    2.70    2.56    2.39    2.18    1.94    1.63    2.30    2.93    3.52    4.03    4.43    4.79    5.11    5.45    5.78    6.06    6.31    6.51    6.67    6.79    6.87    6.91
+  33     2.78    2.74    2.67    2.56    2.42    2.25    2.05    1.82    1.51    2.17    2.77    3.34    3.86    4.29    4.65    4.97    5.30    5.63    5.92    6.17    6.37    6.54    6.66    6.74    6.78
+  34     2.65    2.61    2.54    2.44    2.30    2.14    1.94    1.70    1.40    2.04    2.63    3.18    3.69    4.15    4.53    4.84    5.17    5.50    5.80    6.05    6.26    6.42    6.55    6.63    6.67
+  35     2.54    2.50    2.43    2.33    2.20    2.03    1.83    1.60    1.29    1.92    2.50    3.04    3.54    3.99    4.40    4.74    5.06    5.39    5.68    5.95    6.16    6.33    6.45    6.53    6.57
+  36     2.45    2.41    2.34    2.24    2.11    1.94    1.74    1.50    1.19    1.82    2.39    2.93    3.42    3.87    4.27    4.62    4.96    5.30    5.60    5.86    6.07    6.24    6.36    6.45    6.49
+  37     2.37    2.34    2.27    2.17    2.03    1.86    1.66    1.42    1.10    1.73    2.30    2.83    3.32    3.77    4.16    4.51    4.87    5.22    5.52    5.78    6.00    6.17    6.30    6.38    6.42
+  38     2.32    2.28    2.21    2.11    1.97    1.80    1.60    1.35    1.02    1.65    2.23    2.76    3.25    3.69    4.09    4.44    4.80    5.16    5.46    5.73    5.94    6.11    6.24    6.33    6.37
+  39     2.28    2.25    2.18    2.07    1.93    1.76    1.55    1.29    0.95    1.59    2.17    2.71    3.20    3.64    4.04    4.39    4.76    5.12    5.42    5.69    5.91    6.08    6.21    6.29    6.34
+  40     2.26    2.23    2.16    2.05    1.91    1.74    1.52    1.26    0.90    1.56    2.15    2.68    3.17    3.62    4.01    4.37    4.74    5.09    5.40    5.67    5.89    6.06    6.19    6.28    6.32
+1
+  HEAD IN LAYER   5 AT END OF TIME STEP   1 IN STRESS PERIOD    1
+  ---------------------------------------------------------------------------
+
+           1       2       3       4       5       6       7       8       9      10      11      12      13      14      15      16      17      18      19      20      21      22      23      24      25
+ ...........................................................................................................................................................................................................
+   1    11.37   11.39   11.42   11.48   11.56   11.63   11.69   11.73   11.76   11.79   11.80   11.82   11.82   11.83   11.83   11.84   11.85   11.86   11.87   11.89   11.91   11.93   11.95   11.96   11.97
+   2    11.34   11.36   11.38   11.44   11.55   11.63   11.68   11.72   11.76   11.79   11.81   11.82   11.82   11.82   11.83   11.83   11.84   11.85   11.86   11.88   11.89   11.92   11.93   11.95   11.96
+   3    11.29   11.30   11.31   11.36   11.53   11.63   11.68   11.72   11.76   11.79   11.81   11.81   11.81   11.81   11.81   11.82   11.82   11.83   11.84   11.85   11.86   11.88   11.91   11.92   11.93
+   4    11.23   11.21   11.19   11.16   11.26   11.40   11.68   12.54   13.02   12.70   11.82   11.81   11.80   11.79   11.79   11.79   11.80   11.81   11.82   11.83   11.84   11.85   11.86   11.88   11.90
+   5    11.16   11.14   11.09   11.07   11.12   11.31   11.89   13.60   14.69   14.55   13.00   11.80   11.77   11.75   11.75   11.75   11.76   11.77   11.78   11.79   11.81   11.81   11.82   11.83   11.85
+   6    11.12   11.09   11.05   11.03   11.09   11.32   12.05   14.19   15.67   15.85   14.75   12.74   11.71   11.71   11.70   11.71   11.72   11.73   11.74   11.75   11.76   11.78   11.78   11.79   11.81
+   7    11.08   11.06   11.03   11.02   11.06   11.31   12.10   14.39   16.06   16.41   15.44   13.26   11.65   11.64   11.65   11.65   11.66   11.68   11.69   11.70   11.72   11.73   11.74   11.75   11.76
+   8    11.05   11.04   11.02   11.01   11.00   11.23   12.02   14.20   15.88   16.27   15.32   13.17   11.57   11.57   11.58   11.59   11.60   11.62   11.63   11.65   11.66   11.68   11.69   11.70   11.71
+   9    11.03   11.02   11.01   11.00   11.00   11.17   11.78   13.51   15.11   15.44   14.41   12.43   11.48   11.49   11.50   11.51   11.53   11.55   11.56   11.58   11.60   11.62   11.63   11.66   11.66
+  10    11.00   10.99   10.99   11.00   11.00   11.07   11.39   12.17   13.80   13.93   12.47   11.31   11.36   11.39   11.41   11.42   11.45   11.47   11.49   11.51   11.53   11.55   11.57   11.59   11.59
+  11    10.96   10.96   10.97   10.98   10.99   10.99   11.15   11.53   12.52   12.08   11.20   11.24   11.27   11.30   11.32   11.33   11.36   11.38   11.40   11.43   11.45   11.47   11.49   11.51   11.51
+  12    10.89   10.90   10.93   10.96   10.98   10.99   11.03   11.12   11.25   11.10   11.13   11.16   11.18   11.20   11.22   11.24   11.26   11.28   11.31   11.34   11.36   11.39   11.42   11.42   11.42
+  13    10.80   10.82   10.86   10.91   10.96   10.98   10.99   11.00   11.02   11.05   11.07   11.08   11.09   11.10   11.11   11.13   11.15   11.18   11.21   11.24   11.27   11.30   11.32   11.31   11.31
+  14    10.66   10.70   10.77   10.85   10.93   10.97   10.98   10.99   11.00   11.01   11.01   10.99   10.99   10.99   11.00   11.01   11.04   11.07   11.10   11.13   11.17   11.18   11.18   11.18   11.19
+  15    10.46   10.52   10.63   10.76   10.87   10.93   10.96   10.97   10.97   10.94   10.92   10.89   10.87   10.86   10.87   10.89   10.91   10.94   10.97   11.01   11.02   11.02   11.03   11.03   11.04
+  16    10.17   10.26   10.43   10.61   10.76   10.87   10.91   10.92   10.91   10.85   10.79   10.74   10.72   10.72   10.73   10.75   10.78   10.80   10.83   10.84   10.83   10.84   10.85   10.86   10.87
+  17     9.78    9.90   10.21   10.44   10.61   10.73   10.79   10.81   10.80   10.74   10.64   10.47   10.45   10.45   10.47   10.50   10.54   10.58   10.60   10.60   10.61   10.63   10.64   10.65   10.65
+  18     9.26    9.32    9.65    9.94   10.11   10.22   10.29   10.32   10.33   10.30   10.20   10.04   10.04   10.05   10.09   10.13   10.19   10.25   10.30   10.33   10.36   10.38   10.40   10.40   10.40
+  19     8.66    8.69    8.87    9.09    9.22    9.29    9.34    9.38    9.43    9.48    9.51    9.49    9.52    9.56    9.62    9.69    9.78    9.87    9.95   10.01   10.05   10.08   10.11   10.12   10.13
+  20     8.01    8.03    8.12    8.22    8.27    8.29    8.30    8.32    8.41    8.57    8.74    8.83    8.89    8.97    9.07    9.17    9.30    9.43    9.54    9.63    9.70    9.76    9.80    9.83    9.84
+  21     7.33    7.33    7.33    7.31    7.26    7.20    7.14    7.11    7.20    7.50    7.89    8.10    8.21    8.35    8.49    8.63    8.81    8.98    9.12    9.24    9.34    9.42    9.48    9.52    9.54
+  22     6.64    6.61    6.49    6.31    6.15    5.99    5.83    5.69    5.65    6.23    6.95    7.40    7.57    7.76    7.95    8.12    8.32    8.52    8.69    8.85    8.98    9.08    9.16    9.21    9.24
+  23     5.95    5.88    5.53    5.19    4.93    4.68    4.41    4.08    3.57    4.69    5.82    6.68    6.96    7.24    7.48    7.69    7.90    8.12    8.30    8.47    8.61    8.74    8.84    8.90    8.93
+  24     5.31    5.16    4.76    4.45    4.16    3.88    3.59    3.27    2.95    3.86    4.88    5.84    6.35    6.73    7.03    7.28    7.53    7.77    7.97    8.14    8.28    8.40    8.52    8.59    8.63
+  25     4.80    4.68    4.45    4.20    3.94    3.67    3.38    3.07    2.78    3.62    4.54    5.32    5.85    6.27    6.61    6.89    7.18    7.44    7.66    7.85    8.00    8.11    8.21    8.30    8.34
+  26     4.39    4.30    4.14    3.93    3.70    3.45    3.18    2.89    2.61    3.39    4.23    4.93    5.44    5.88    6.24    6.54    6.84    7.13    7.37    7.57    7.73    7.85    7.94    8.02    8.07
+  27     4.05    3.98    3.85    3.68    3.48    3.24    2.99    2.71    2.44    3.17    3.95    4.60    5.11    5.54    5.91    6.22    6.54    6.84    7.10    7.31    7.48    7.61    7.71    7.77    7.82
+  28     3.76    3.70    3.60    3.45    3.26    3.05    2.80    2.54    2.29    2.98    3.71    4.33    4.82    5.25    5.62    5.94    6.27    6.58    6.85    7.07    7.25    7.39    7.49    7.56    7.60
+  29     3.51    3.46    3.36    3.23    3.06    2.86    2.63    2.38    2.14    2.80    3.50    4.10    4.57    5.00    5.37    5.69    6.02    6.34    6.62    6.84    7.03    7.18    7.29    7.36    7.40
+  30     3.29    3.24    3.16    3.04    2.88    2.69    2.47    2.23    2.00    2.63    3.30    3.90    4.37    4.78    5.15    5.47    5.80    6.13    6.41    6.64    6.84    6.99    7.10    7.18    7.22
+  31     3.09    3.05    2.97    2.86    2.71    2.53    2.32    2.09    1.86    2.46    3.10    3.70    4.19    4.59    4.96    5.27    5.61    5.94    6.22    6.46    6.66    6.82    6.94    7.01    7.05
+  32     2.92    2.88    2.81    2.70    2.56    2.38    2.18    1.96    1.73    2.31    2.93    3.52    4.03    4.43    4.79    5.11    5.44    5.77    6.06    6.30    6.51    6.67    6.79    6.87    6.91
+  33     2.77    2.74    2.67    2.56    2.42    2.25    2.05    1.83    1.61    2.17    2.77    3.34    3.86    4.29    4.65    4.96    5.30    5.63    5.92    6.17    6.37    6.53    6.66    6.74    6.78
+  34     2.64    2.61    2.54    2.44    2.30    2.13    1.93    1.72    1.50    2.04    2.63    3.18    3.69    4.15    4.53    4.84    5.17    5.50    5.80    6.05    6.26    6.42    6.54    6.63    6.67
+  35     2.53    2.50    2.43    2.33    2.19    2.03    1.83    1.61    1.39    1.93    2.50    3.04    3.54    3.99    4.40    4.73    5.06    5.39    5.68    5.95    6.16    6.33    6.45    6.53    6.57
+  36     2.44    2.41    2.34    2.24    2.10    1.93    1.74    1.51    1.29    1.82    2.39    2.93    3.42    3.86    4.26    4.61    4.96    5.30    5.60    5.85    6.07    6.24    6.36    6.45    6.49
+  37     2.37    2.33    2.27    2.16    2.03    1.86    1.66    1.43    1.20    1.73    2.30    2.83    3.32    3.76    4.16    4.51    4.87    5.22    5.52    5.78    6.00    6.17    6.29    6.38    6.42
+  38     2.31    2.28    2.21    2.11    1.97    1.80    1.59    1.36    1.12    1.65    2.22    2.76    3.25    3.69    4.09    4.43    4.80    5.16    5.46    5.72    5.94    6.11    6.24    6.33    6.37
+  39     2.28    2.24    2.17    2.07    1.93    1.76    1.55    1.31    1.05    1.60    2.17    2.71    3.20    3.64    4.04    4.38    4.75    5.11    5.42    5.69    5.90    6.08    6.21    6.29    6.34
+  40     2.26    2.22    2.15    2.05    1.91    1.74    1.52    1.28    1.01    1.56    2.14    2.68    3.17    3.61    4.01    4.36    4.73    5.09    5.40    5.67    5.89    6.06    6.19    6.28    6.32
+
+ HEAD WILL BE SAVED ON UNIT 1032 AT END OF TIME STEP    1, STRESS PERIOD    1
+
+
+  VOLUME BUDGET FOR ENTIRE MODEL AT END OF TIME STEP    1, STRESS PERIOD   1
+  ---------------------------------------------------------------------------------------------------
+
+     CUMULATIVE VOLUME      L**3       RATES FOR THIS TIME STEP      L**3/T          PACKAGE NAME    
+     ------------------                 ------------------------                     ----------------
+
+           IN:                                      IN:
+           ---                                      ---
+                 WEL =           0.0000                   WEL =           0.0000     WEL-1                            
+                 RIV =           0.0000                   RIV =           0.0000     RIV-1                            
+                RCHA =      851083.7500                  RCHA =      851083.7500     RCH-1                            
+                 CHD =       88315.7340                   CHD =       88315.7340     CHD-1                            
+
+            TOTAL IN =      939399.4840              TOTAL IN =      939399.4840
+
+          OUT:                                     OUT:
+          ----                                     ----
+                 WEL =           0.0000                   WEL =           0.0000     WEL-1                            
+                 RIV =      880784.9575                   RIV =      880784.9575     RIV-1                            
+                RCHA =           0.0000                  RCHA =           0.0000     RCH-1                            
+                 CHD =       58615.0435                   CHD =       58615.0435     CHD-1                            
+
+           TOTAL OUT =      939400.0011             TOTAL OUT =      939400.0011
+
+            IN - OUT =          -0.5171              IN - OUT =          -0.5171
+
+ PERCENT DISCREPANCY =          -0.00     PERCENT DISCREPANCY =          -0.00
+
+
+
+
+         TIME SUMMARY AT END OF TIME STEP    1 IN STRESS PERIOD    1
+                    SECONDS     MINUTES      HOURS       DAYS        YEARS
+                    -----------------------------------------------------------
+   TIME STEP LENGTH  86400.      1440.0      24.000      1.0000     2.73785E-03
+ STRESS PERIOD TIME  86400.      1440.0      24.000      1.0000     2.73785E-03
+         TOTAL TIME  86400.      1440.0      24.000      1.0000     2.73785E-03
+
+
+end timestep
+
