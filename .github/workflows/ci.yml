@@ -58,8 +58,14 @@ jobs:
 
       - name: apt install
         run: |
-          sudo apt-get install -y pkg-config petsc netcdf-fortran
+          sudo apt-get install -y pkg-config petsc-dev libnetcdf-dev
 
+      - name: list installed packages
+        run: |
+          pkg-config --list-all | grep petsc
+          pkg-config --list-all | grep netcdf
+          pkg-config --list-all | grep hdf
+  
       - name: Install miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -103,7 +109,7 @@ jobs:
       - name: Test notebooks
         working-directory: .scripts
         run: |
-          python test_notebooks.py
+          python test_notebooks.py --script
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       

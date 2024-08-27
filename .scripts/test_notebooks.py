@@ -1,3 +1,4 @@
+import argparse
 import os
 import pathlib as pl
 import subprocess
@@ -38,6 +39,11 @@ def run_cmd(cmd):
 
 
 def run_notebook(nb_name):
+    cmd = ("jupytext", "--execute", f"{nb_name}")
+    run_cmd(cmd)
+
+
+def run_script(nb_name):
     py_script = "test.py"
     cmd = ("jupytext", "--output", f"{py_script}", f"{nb_name}")
     run_cmd(cmd)
@@ -49,9 +55,23 @@ def run_notebook(nb_name):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(
+        description="Test gw3099 completed notebooks."
+    )
+    parser.add_argument(
+        "-s",
+        "--script",
+        action="store_false",
+        help="Convert notebooks to scripts",
+    )
+    args = parser.parse_args()
+
     for idx, dir_path in enumerate(DIRS):
         nb_paths = get_notebook_paths(dir_path)
         os.chdir(dir_path)
         for p in nb_paths:
-            success = run_notebook(p)
+            if args.script:
+                run_script(p)
+            else:
+                run_notebook(p)
         os.chdir(ROOT_DIR)
