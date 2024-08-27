@@ -38,8 +38,14 @@ def run_cmd(cmd):
 
 
 def run_notebook(nb_name):
-    cmd = ("jupytext", "--execute", f"{nb_name}")
+    py_script = "test.py"
+    cmd = ("jupytext", "--output", f"{py_script}", f"{nb_name}")
     run_cmd(cmd)
+
+    cmd = ("python", f"{py_script}")
+    run_cmd(cmd)
+
+    pl.Path(py_script).unlink()
 
 
 if __name__ == "__main__":
