@@ -4,10 +4,10 @@ import sys
 
 parser = argparse.ArgumentParser(description="Update conda environment file.")
 parser.add_argument(
-    "-a",
-    "--apt",
+    "-c",
+    "--conda",
     action="store_false",
-    help="Using apt to install packages",
+    help="Conda MODFLOW library dependencies",
 )
 args = parser.parse_args()
 
@@ -33,7 +33,7 @@ else:
             f.write("\n  # MODFLOW build dependencies\n")
             f.write("  - meson>=1.1.0\n")
             f.write("  - ninja\n")
-            if not args.apt:
+            if not args.conda:
                 f.write("  - pkg-config\n")
                 if sys.platform.lower() == "darwin":
                     f.write("  - openmpi<5.0.0\n")
@@ -41,6 +41,7 @@ else:
                     f.write("  - openmpi\n")
                 f.write("  - gfortran\n")
                 f.write("  - petsc\n")
+                f.write("  - libnetcdf\n")
                 f.write("  - netcdf-fortran\n")
     else:
         print(f"No need to update...{file_path}")

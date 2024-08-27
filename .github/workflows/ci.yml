@@ -67,10 +67,17 @@ jobs:
           pkg-config --list-all | grep netcdf
           pkg-config --list-all | grep hdf
   
+      - name: Update package config files
+        if: (runner.os != 'Windows')
+        working-directory: .scripts
+        run: |
+          python update_pc_files.py
+  
       - name: Update environment file
         working-directory: .scripts
         run: |
-          python update_env_file.py --apt
+          python update_env_file.py
+          cat ../environment.yml
   
       - name: Install miniconda
         uses: conda-incubator/setup-miniconda@v3
@@ -139,7 +146,8 @@ jobs:
       - name: Update environment file
         working-directory: .scripts
         run: |
-          python update_env_file.py
+          python update_env_file.py --conda
+          cat ../environment.yml
 
       - name: Install miniconda
         uses: conda-incubator/setup-miniconda@v3
@@ -168,7 +176,7 @@ jobs:
         if: (runner.os != 'Windows')
         working-directory: .scripts
         run: |
-          python update_pc_files.py
+          python update_pc_files.py --conda
   
       - name: Clone MODFLOW repo
         run: |

@@ -61,7 +61,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "-s",
         "--script",
-        action="store_false",
+        action="store_true",
         help="Convert notebooks to scripts",
     )
     args = parser.parse_args()

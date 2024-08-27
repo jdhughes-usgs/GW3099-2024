@@ -1,10 +1,37 @@
+import argparse
 import os
 import pathlib as pl
+import subprocess
 
-conda_path = os.environ.get("CONDA_PREFIX", None)
-if conda_path is not None:
-    conda_path = pl.Path(conda_path)
-    netcdf_path = conda_path / "lib/pkgconfig/netcdf-fortran.pc"
+parser = argparse.ArgumentParser(
+    description="Update netcdf-fortran package config file."
+)
+parser.add_argument(
+    "-c",
+    "--conda",
+    action="store_true",
+    help="Conda MODFLOW library dependencies",
+)
+args = parser.parse_args()
+
+lib_path = None
+
+if args.conda:
+    lib_path = os.environ.get("CONDA_PREFIX", None)
+    if lib_path is not None:
+        lib_path = f"{lib_path}/lib"
+else:
+    pkgconfig_str = subprocess.check_output(
+        ("pkg-config", "--libs", "netcdf-fortran")
+    ).decode()
+    print(f"{pkgconfig_str}")
+    if len(pkgconfig_str) > 0:
+        lib_path = pkgconfig_str.split()[0].replace("-L", "")
+lib_path = pl.Path(lib_path)
+print(f"netcdf-fortran lib path: {lib_path}")
+
+if lib_path is not None:
+    netcdf_path = lib_path / "pkgconfig/netcdf-fortran.pc"
     if netcdf_path.is_file():
         with open(netcdf_path, "r") as f:
             lines = f.readlines()
@@ -16,7 +43,7 @@ if conda_path is not None:
                 if test == tag:
                     update = True
                     lines[idx] = line.replace(
-                        tag, f"{tag}{conda_path / 'include'}"
+                        tag, f"{tag}{lib_path.parent / 'include'}"
                     )
                 break
         if update:
