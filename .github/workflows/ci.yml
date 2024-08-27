@@ -70,7 +70,13 @@ jobs:
           environment-file: "environment.yml"
           activate-environment: "gw3099"
           auto-activate-base: false
- 
+
+      - name: List netcdf version
+        if: runner.os != 'Windows'
+        run: |
+          which nc-config
+          nc-config --version
+   
       - name: Update flopy mf6 classes
         run: |
           conda env list
