@@ -58,7 +58,7 @@ jobs:
 
       - name: apt install
         run: |
-          sudo apt-get install -y pkg-config petsc-dev libnetcdff-dev
+          sudo apt-get install -y petsc-dev libnetcdff-dev
 
       - name: List apt installed packages
         run: |
