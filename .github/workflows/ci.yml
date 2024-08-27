@@ -76,6 +76,8 @@ jobs:
         run: |
           which nc-config
           nc-config --version
+          pkg-config --libs netcdf
+          pkg-config --libs netcdf-fortran
    
       - name: Update flopy mf6 classes
         run: |

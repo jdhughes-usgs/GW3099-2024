@@ -28,6 +28,7 @@ else:
                 f.write("  - openmpi\n")
             f.write("  - gfortran\n")
             f.write("  - petsc\n")
+            f.write("  - libnetcdf\n")
             f.write("  - netcdf-fortran\n")
             f.write("  - meson>=1.1.0\n")
             f.write("  - ninja\n")
