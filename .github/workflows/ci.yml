@@ -71,6 +71,7 @@ jobs:
         if: (runner.os != 'Windows')
         working-directory: .scripts
         run: |
+          pkg-config --libs netcdf-fortran
           python update_pc_files.py
   
       - name: Update environment file
