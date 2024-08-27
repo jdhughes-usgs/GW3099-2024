@@ -71,10 +71,13 @@ jobs:
           activate-environment: "gw3099"
           auto-activate-base: false
       
-      - name: Conda info
+ 
+      - name: Update flopy mf6 classes
         run: |
-          conda info
-          conda list
+          conda env list
+          python -m flopy.mf6.utils.generate_classes --ref 'develop'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update package config files
         if: (runner.os != 'Windows')
@@ -122,12 +125,6 @@ jobs:
           get-modflow --repo modflow6-nightly-build --ostag win64par :python
           mpiexec -n 1 mf6 -p
           mpiexec -n 2 mf6 -p
- 
-      - name: Update flopy mf6 classes
-        run: |
-          python -m flopy.mf6.utils.generate_classes --ref 'develop'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Test notebooks
         working-directory: .scripts
