@@ -104,7 +104,7 @@ jobs:
         if: runner.os != 'Windows'
         working-directory: modflow6
         run: |
-          meson setup builddir -Ddebug=false -Dextended=true --prefix=$(pwd) --libdir=bin
+          FC=mpifort CC=mpicc setup builddir -Ddebug=false -Dextended=true --prefix=$(pwd) --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
 
