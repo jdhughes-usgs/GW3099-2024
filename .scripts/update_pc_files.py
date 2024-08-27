@@ -26,7 +26,10 @@ else:
     ).decode()
     print(f"{pkgconfig_str}")
     if len(pkgconfig_str) > 0:
-        lib_path = pkgconfig_str.split()[0].replace("-L", "")
+        if pkgconfig_str == "-lnetcdff":
+            lib_path = "/usr/lib"
+        else:
+            lib_path = pkgconfig_str.split()[0].replace("-L", "")
 lib_path = pl.Path(lib_path)
 print(f"netcdf-fortran lib path: {lib_path}")
 

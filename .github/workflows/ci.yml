@@ -58,7 +58,7 @@ jobs:
 
       - name: apt install
         run: |
-          sudo apt-get install -y petsc-dev libnetcdff-dev libopenmpi-dev
+          sudo apt-get install -y petsc-dev libnetcdff-dev libopenmpi-dev mpi-default-dev
 
       - name: List apt installed packages
         run: |
