@@ -6,7 +6,7 @@ parser = argparse.ArgumentParser(description="Update conda environment file.")
 parser.add_argument(
     "-c",
     "--conda",
-    action="store_false",
+    action="store_true",
     help="Conda MODFLOW library dependencies",
 )
 args = parser.parse_args()

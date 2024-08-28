@@ -21,16 +21,9 @@ if args.conda:
     if lib_path is not None:
         lib_path = f"{lib_path}/lib"
 else:
-    pkgconfig_str = subprocess.check_output(
-        ("pkg-config", "--libs", "netcdf-fortran")
-    ).decode()
-    print(f"{pkgconfig_str}")
-    if len(pkgconfig_str) > 0:
-        split_path = pkgconfig_str.split()
-        if len(split_path) < 2:
-            lib_path = "/usr/lib"
-        else:
-            lib_path = split_path.replace("-L", "")
+    ncconfig_str = subprocess.check_output(("which", "nc-config")).decode()
+    if len(ncconfig_str) > 0:
+        lib_path = str(pl.Path(ncconfig_str).parent.parent / "lib")
 lib_path = pl.Path(lib_path)
 print(f"netcdf-fortran lib path: {lib_path}")
 
