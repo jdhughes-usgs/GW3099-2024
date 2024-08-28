@@ -33,7 +33,7 @@ else:
             f.write("\n  # MODFLOW build dependencies\n")
             f.write("  - meson>=1.1.0\n")
             f.write("  - ninja\n")
-            if not args.conda:
+            if args.conda:
                 f.write("  - pkg-config\n")
                 if sys.platform.lower() == "darwin":
                     f.write("  - openmpi<5.0.0\n")
