@@ -1,5 +1,5 @@
-import numpy as np
 import flopy
+import numpy as np
 
 
 def get_ex1_sim(workspace, dx=10.0, dt=20.0, advscheme="upstream"):
