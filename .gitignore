@@ -167,6 +167,7 @@ modflow6/
 
 # exclude model results
 temp/
+exercises-completed/gwt/ex1/
 exercises-completed/parallel/base/
 exercises-completed/parallel/parallel/
 exercises/parallel/base/

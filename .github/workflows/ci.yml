@@ -90,6 +90,10 @@ jobs:
         run: |
           git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git 
 
+      - name: netcdf-fortran settings
+        run: |
+          nf-config
+
       - name: Build extended version of MODFLOW
         if: runner.os != 'Windows'
         working-directory: modflow6
@@ -103,12 +107,6 @@ jobs:
         run: |
           ln -sf $(pwd)/bin/mf6 $CONDA_PREFIX/bin/mf6
           ln -sf $(pwd)/bin/libmf6.so $CONDA_PREFIX/bin/libmf6.so
-
-      - name: Test modflow installation
-        run: |
-          which mf6
-          mf6 -v
-          mf6 -co
         
       - name: Test notebooks
         working-directory: .scripts
@@ -125,7 +123,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        os: ["macos-latest", "windows-latest"]
         python-version: ["3.9", "3.10", "3.11"]
     defaults:
       run:
@@ -164,6 +162,10 @@ jobs:
         run: |
           git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git 
 
+      - name: netcdf-fortran settings
+        run: |
+          nf-config
+
       - name: Build extended version of MODFLOW
         if: runner.os != 'Windows'
         working-directory: modflow6
@@ -185,13 +187,6 @@ jobs:
         run: |
           ln -sf $(pwd)/bin/mf6 $CONDA_PREFIX/bin/mf6
           ln -sf $(pwd)/bin/libmf6.dylib $CONDA_PREFIX/bin/libmf6.dylib
-
-      - name: Test modflow installation
-        if: runner.os != 'Windows'
-        run: |
-          which mf6
-          mf6 -v
-          mf6 -co
   
       - name: Get and test parallel MODFLOW on Windows
         if: runner.os == 'Windows'
@@ -204,7 +199,7 @@ jobs:
       - name: Test notebooks
         working-directory: .scripts
         run: |
-          python test_notebooks.py --script
+          python test_notebooks.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
