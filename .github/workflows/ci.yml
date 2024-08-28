@@ -204,7 +204,7 @@ jobs:
       - name: Test notebooks
         working-directory: .scripts
         run: |
-          python test_notebooks.py
+          python test_notebooks.py --script
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
