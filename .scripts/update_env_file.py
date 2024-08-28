@@ -1,5 +1,15 @@
+import argparse
 import pathlib as pl
 import sys
+
+parser = argparse.ArgumentParser(description="Update conda environment file.")
+parser.add_argument(
+    "-c",
+    "--conda",
+    action="store_true",
+    help="Conda MODFLOW library dependencies",
+)
+args = parser.parse_args()
 
 file_path = pl.Path("../environment.yml")
 
@@ -9,7 +19,7 @@ else:
     with open(file_path, "r") as f:
         lines = f.readlines()
 
-    tags = ("openmpi", "gfortran", "petsc", "netcdf-fortran")
+    tags = ("openmpi", "gfortran", "petsc", "netcdf-fortran", "meson", "ninja")
     update_file = True
     for line in lines:
         for tag in tags:
@@ -21,15 +31,17 @@ else:
         print(f"Updating...{file_path}")
         with open(file_path, "a") as f:
             f.write("\n  # MODFLOW build dependencies\n")
-            f.write("  - pkg-config\n")
-            if sys.platform.lower() == "darwin":
-                f.write("  - openmpi<5.0.0\n")
-            else:
-                f.write("  - openmpi\n")
-            f.write("  - gfortran\n")
-            f.write("  - petsc\n")
-            f.write("  - netcdf-fortran\n")
             f.write("  - meson>=1.1.0\n")
             f.write("  - ninja\n")
+            if args.conda:
+                f.write("  - pkg-config\n")
+                if sys.platform.lower() == "darwin":
+                    f.write("  - openmpi<5.0.0\n")
+                else:
+                    f.write("  - openmpi\n")
+                f.write("  - gfortran\n")
+                f.write("  - petsc\n")
+                f.write("  - libnetcdf\n")
+                f.write("  - netcdf-fortran\n")
     else:
         print(f"No need to update...{file_path}")

@@ -41,6 +41,82 @@ jobs:
       - name: Check format
         run: ruff format . --check
 
+  install_env_linux:
+    name: Install gw3099 environment on linux
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.10", "3.11"]
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: apt install
+        run: |
+          sudo apt install build-essential
+          sudo apt-get install -y petsc-dev netcdf-bin libnetcdff-dev openmpi-bin libopenmpi-dev
+  
+      - name: Update package config files
+        working-directory: .scripts
+        run: |
+          python update_pc_files.py
+  
+      - name: Update environment file
+        working-directory: .scripts
+        run: |
+          python update_env_file.py
+          cat ../environment.yml
+  
+      - name: Install miniconda
+        uses: conda-incubator/setup-miniconda@v3
+        with:
+          python-version: ${{ matrix.python-version }}
+          environment-file: "environment.yml"
+          activate-environment: "gw3099"
+          auto-activate-base: false
+
+      - name: Update flopy mf6 classes
+        run: |
+          python -m flopy.mf6.utils.generate_classes --ref 'develop'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
+      - name: Clone MODFLOW repo
+        run: |
+          git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git 
+
+      - name: Build extended version of MODFLOW
+        if: runner.os != 'Windows'
+        working-directory: modflow6
+        run: |
+          FC=mpifort CC=mpicc meson setup builddir -Ddebug=true -Doptimization=0 -Dextended=true --prefix=$(pwd) --libdir=bin
+          meson install -C builddir
+          meson test --verbose --no-rebuild -C builddir
+
+      - name: Create symbolic links on Linux
+        working-directory: modflow6
+        run: |
+          ln -sf $(pwd)/bin/mf6 $CONDA_PREFIX/bin/mf6
+          ln -sf $(pwd)/bin/libmf6.so $CONDA_PREFIX/bin/libmf6.so
+
+      - name: Test modflow installation
+        run: |
+          which mf6
+          mf6 -v
+          mf6 -co
+        
+      - name: Test notebooks
+        working-directory: .scripts
+        run: |
+          python test_notebooks.py --script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
 
   install_env:
     name: Install gw3099 environment
@@ -61,7 +137,8 @@ jobs:
       - name: Update environment file
         working-directory: .scripts
         run: |
-          python update_env_file.py
+          python update_env_file.py --conda
+          cat ../environment.yml
 
       - name: Install miniconda
         uses: conda-incubator/setup-miniconda@v3
@@ -70,11 +147,12 @@ jobs:
           environment-file: "environment.yml"
           activate-environment: "gw3099"
           auto-activate-base: false
-      
-      - name: Conda info
+   
+      - name: Update flopy mf6 classes
         run: |
-          conda info
-          conda list
+          python -m flopy.mf6.utils.generate_classes --ref 'develop'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Update package config files
         if: (runner.os != 'Windows')
@@ -90,7 +168,7 @@ jobs:
         if: runner.os != 'Windows'
         working-directory: modflow6
         run: |
-          meson setup builddir -Ddebug=false -Dextended=true --prefix=$(pwd) --libdir=bin
+          meson setup builddir -Ddebug=true -Doptimization=0 -Dextended=true --prefix=$(pwd) --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
 
@@ -98,16 +176,23 @@ jobs:
         if: runner.os == 'Linux'
         working-directory: modflow6
         run: |
-          ln ./bin/mf6 $CONDA_PREFIX/bin/mf6
-          ln ./bin/libmf6.so $CONDA_PREFIX/bin/libmf6.so
+          ln -sf $(pwd)/bin/mf6 $CONDA_PREFIX/bin/mf6
+          ln -sf $(pwd)/bin/libmf6.so $CONDA_PREFIX/bin/libmf6.so
 
       - name: Create symbolic links on MacOS
         if: runner.os == 'macOS'
         working-directory: modflow6
         run: |
-          ln ./bin/mf6 $CONDA_PREFIX/bin/mf6
-          ln ./bin/libmf6.dylib $CONDA_PREFIX/bin/libmf6.dylib
+          ln -sf $(pwd)/bin/mf6 $CONDA_PREFIX/bin/mf6
+          ln -sf $(pwd)/bin/libmf6.dylib $CONDA_PREFIX/bin/libmf6.dylib
 
+      - name: Test modflow installation
+        if: runner.os != 'Windows'
+        run: |
+          which mf6
+          mf6 -v
+          mf6 -co
+  
       - name: Get and test parallel MODFLOW on Windows
         if: runner.os == 'Windows'
         working-directory: modflow6/.mf6minsim
@@ -115,18 +200,14 @@ jobs:
           get-modflow --repo modflow6-nightly-build --ostag win64par :python
           mpiexec -n 1 mf6 -p
           mpiexec -n 2 mf6 -p
-  
-      - name: Test modflow installation
-        run: |
-          which mf6
-          mf6 -v
-          mf6 -co
-      
+        
       - name: Test notebooks
         working-directory: .scripts
         run: |
-          python test_notebooks.py
-
+          python test_notebooks.py --script
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  
 
   install_vizenv:
     name: Install viz environment
