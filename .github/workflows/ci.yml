@@ -68,6 +68,8 @@ jobs:
 
       - name: netcdf-fortran settings
         run: |
+          pkg-config --libs-only-L netcdf-fortran
+          pkg-config --cflags-only-I netcdf-fortran
           nf-config --all
 
       - name: Update environment file
@@ -155,8 +157,10 @@ jobs:
       - name: netcdf-fortran settings
         if: runner.os != 'Windows'
         run: |
-            nf-config --help
-  
+          pkg-config --libs-only-L netcdf-fortran
+          pkg-config --cflags-only-I netcdf-fortran
+          nf-config --help
+
       - name: Update package config files
         if: (runner.os != 'Windows')
         working-directory: .scripts
