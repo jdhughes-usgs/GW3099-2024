@@ -92,7 +92,7 @@ jobs:
 
       - name: netcdf-fortran settings
         run: |
-          nf-config --help
+          nf-config --all
 
       - name: Build extended version of MODFLOW
         if: runner.os != 'Windows'
