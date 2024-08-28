@@ -3,11 +3,13 @@ import pathlib as pl
 import subprocess
 
 nc_includepath = pl.Path(
-    subprocess.check_output(("nf-config", "--includedir")).decode()
+    subprocess.check_output(("nf-config", "--includedir")).decode().strip()
 )
 nc_libpath = nc_includepath.parent / "lib"
-print(f"netcdf-fortran include path: {nc_includepath}")
-print(f"netcdf-fortran lib path:     {nc_libpath}")
+print(
+    f"netcdf-fortran include path: {nc_includepath}\n"
+    + f"netcdf-fortran lib path:     {nc_libpath}"
+)
 
 nc_pcpath = nc_libpath / "pkgconfig/netcdf-fortran.pc"
 if nc_pcpath.is_file():
