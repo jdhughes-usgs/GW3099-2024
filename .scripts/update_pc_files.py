@@ -2,7 +2,9 @@ import os
 import pathlib as pl
 import subprocess
 
-nc_includepath = pl.Path(subprocess.check_output(("nf-config", "--includedir")).decode())
+nc_includepath = pl.Path(
+    subprocess.check_output(("nf-config", "--includedir")).decode()
+)
 nc_libpath = nc_includepath.parent / "lib"
 print(f"netcdf-fortran include path: {nc_includepath}")
 print(f"netcdf-fortran lib path:     {nc_libpath}")
@@ -18,9 +20,7 @@ if nc_pcpath.is_file():
             test = line.strip()
             if test == tag:
                 update = True
-                lines[idx] = line.replace(
-                    tag, f"{tag}{nc_includepath}"
-                )
+                lines[idx] = line.replace(tag, f"{tag}{nc_includepath}")
             break
     if update:
         print(f"Updating {tag} with the include path.")
