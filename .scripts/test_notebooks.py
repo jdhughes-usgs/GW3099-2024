@@ -8,8 +8,8 @@ ROOT_DIR = pl.Path(os.getcwd()).resolve()
 DIRS = (
     pl.Path("../exercises-completed/flopy/").resolve(),
     pl.Path("../base/watershed/").resolve(),
-    pl.Path("../exercises-completed/netcdf/").resolve(),
     pl.Path("../exercises-completed/parallel/").resolve(),
+    pl.Path("../exercises-completed/netcdf/").resolve(),
 )
 SKIP_NOTEBOOKS = {
     "step0_netcdf_output": ("win32",),

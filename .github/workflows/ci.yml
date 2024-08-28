@@ -60,13 +60,6 @@ jobs:
         run: |
           sudo apt install build-essential
           sudo apt-get install -y petsc-dev netcdf-bin libnetcdff-dev openmpi-bin libopenmpi-dev
-
-      - name: List apt installed packages
-        run: |
-          pkg-config --list-all | grep mpi
-          pkg-config --list-all | grep petsc
-          pkg-config --list-all | grep netcdf
-          pkg-config --list-all | grep hdf
   
       - name: Update package config files
         working-directory: .scripts
@@ -89,7 +82,6 @@ jobs:
 
       - name: Update flopy mf6 classes
         run: |
-          conda env list
           python -m flopy.mf6.utils.generate_classes --ref 'develop'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -133,7 +125,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["macos-latest", "windows-latest"]
+        os: ["linux-latest", "macos-latest", "windows-latest"]
         python-version: ["3.9", "3.10", "3.11"]
     defaults:
       run:
@@ -155,18 +147,9 @@ jobs:
           environment-file: "environment.yml"
           activate-environment: "gw3099"
           auto-activate-base: false
-
-      - name: List netcdf version
-        if: runner.os != 'Windows'
-        run: |
-          which nc-config
-          nc-config --version
-          pkg-config --libs netcdf
-          pkg-config --libs netcdf-fortran
    
       - name: Update flopy mf6 classes
         run: |
-          conda env list
           python -m flopy.mf6.utils.generate_classes --ref 'develop'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -175,7 +158,7 @@ jobs:
         if: (runner.os != 'Windows')
         working-directory: .scripts
         run: |
-          python update_pc_files.py --conda
+          python update_pc_files.py
   
       - name: Clone MODFLOW repo
         run: |
@@ -185,7 +168,7 @@ jobs:
         if: runner.os != 'Windows'
         working-directory: modflow6
         run: |
-          meson setup builddir -Ddebug=false -Dextended=true --prefix=$(pwd) --libdir=bin
+          meson setup builddir -Ddebug=true -Doptimization=0 -Dextended=true --prefix=$(pwd) --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
 
