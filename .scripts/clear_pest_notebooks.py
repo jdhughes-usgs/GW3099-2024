@@ -1,5 +1,5 @@
-import subprocess
 import pathlib as pl
+import subprocess
 
 pestdir = pl.Path("../exercises/PEST/notebooks")
 nbs = pestdir.glob("*.ipynb")
