@@ -125,7 +125,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["macos-latest", "windows-latest"]
+        os: ["macos-latest", "windows-latest", "ubuntu-latest"]
         python-version: ["3.9", "3.10", "3.11"]
     defaults:
       run:
@@ -169,7 +169,7 @@ jobs:
   
       - name: Clone MODFLOW repo
         run: |
-          git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git 
+          git clone --depth 1  --branch meson_linux https://github.com/mjreno/modflow6.git 
 
       - name: Build extended version of MODFLOW
         if: runner.os != 'Windows'
@@ -204,7 +204,7 @@ jobs:
       - name: Test notebooks
         working-directory: .scripts
         run: |
-          python test_notebooks.py
+          python test_notebooks.py --script
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
