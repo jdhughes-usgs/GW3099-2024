@@ -39,7 +39,7 @@ cd modflow6
 ```
 
 ```
-meson setup builddir -Ddebug=false -Dextended=true --prefix=$(pwd) --libdir=bin
+meson setup builddir -Ddebug=false -Dextended=true --prefix=$CONDA_PREFIX --libdir=bin
 ```
 
 ```
@@ -66,27 +66,3 @@ Timeout: 0
  
 Full log written to /Users/runner/work/GW3099-2024/GW3099-2024/modflow6/builddir/meson-logs/testlog.txt has context menu
 ```
-
-## Step 4. Create Symbolic Links
-For convenience you should create symbolic links to the MODFLOW 6 executable and shared library. This will make the extended version of MODFLOW callable from jupyter notebooks started from the `gw3099` conda environment, for example.
-
-The following command, executed from within the modflow6 directory, will add a symbolic link to the extended version of MODFLOW:
-
-```
-ln ./bin/mf6 $CONDA_PREFIX/bin/mf6
-```
-
-and a symbolic link to the MODFLOW shared library (`libmf6`):
-
-_On Linux_
-
-```
-ln ./bin/libmf6.so $CONDA_PREFIX/bin/libmf6.so
-```
-
-_On MacOS_
-
-```
-ln ./bin/libmf6.dylib $CONDA_PREFIX/bin/libmf6.dylib
-```
-
