@@ -79,7 +79,7 @@ if __name__ == "__main__":
             else:
                 run_notebook(p)
         os.chdir(ROOT_DIR)
-        
+
     reset_path = pl.Path("../data/watershed")
     cmd = ("git", "restore", f"{reset_path}/*")
     run_cmd(cmd)
