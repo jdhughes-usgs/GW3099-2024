@@ -9,6 +9,7 @@ DIRS = (
     pl.Path("../exercises-completed/flopy/").resolve(),
     pl.Path("../base/watershed/").resolve(),
     pl.Path("../exercises-completed/gwt/").resolve(),
+    pl.Path("../exercises-completed/modflowapi/").resolve(),
     pl.Path("../exercises-completed/parallel/").resolve(),
     pl.Path("../exercises-completed/netcdf/").resolve(),
 )
