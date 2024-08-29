@@ -13,12 +13,18 @@ DIRS = (
     pl.Path("../exercises-completed/modflowapi/").resolve(),
     pl.Path("../exercises-completed/parallel/").resolve(),
     pl.Path("../exercises-completed/netcdf/").resolve(),
+    pl.Path("../exercises/PEST/notebooks").resolve(),
 )
 SKIP_NOTEBOOKS = {
     "step0_netcdf_output": ("win32",),
     "netcdf_input": ("win32",),
     "mf6minsim-plot": ("win32", "darwin", "linux"),
 }
+
+GIT_RESET_DIRS = (
+    pl.Path("../data/watershed/").resolve(),
+    pl.Path("../exercises/PEST/pest_background_files/").resolve(),
+)
 
 
 def get_notebook_paths(dir_path):
@@ -80,6 +86,6 @@ if __name__ == "__main__":
                 run_notebook(p)
         os.chdir(ROOT_DIR)
 
-    reset_path = pl.Path("../data/watershed")
-    cmd = ("git", "restore", f"{reset_path}/*")
-    run_cmd(cmd)
+    for dir_path in GIT_RESET_DIRS:
+        cmd = ("git", "restore", f"{dir_path}/*")
+        run_cmd(cmd)

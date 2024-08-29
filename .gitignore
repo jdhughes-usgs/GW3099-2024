@@ -167,6 +167,11 @@ modflow6/
 
 # exclude model results
 temp/
+exercises/PEST/scratch/
+exercises/PEST/tmprun/
+exercises/PEST/pest_ies_setup/
+exercises/PEST/pest_background_files/
+exercises/PEST/notebooks/*.pdf
 exercises-completed/gwt/ex1/
 exercises-completed/parallel/base/
 exercises-completed/parallel/parallel/
