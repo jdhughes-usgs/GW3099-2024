@@ -100,7 +100,7 @@ jobs:
         if: runner.os != 'Windows'
         working-directory: modflow6
         run: |
-          FC=mpifort CC=mpicc meson setup builddir -Ddebug=true -Doptimization=0 -Dextended=true --prefix=$CONDA_PREFIX --libdir=bin
+          FC=mpifort CC=mpicc meson setup builddir -Ddebug=false -Dextended=true --prefix=$CONDA_PREFIX --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
         
@@ -119,7 +119,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: ["macos-latest", "windows-latest"]
+        os: ["macos-latest", "windows-latest", "ubuntu-latest"]
         python-version: ["3.9", "3.10", "3.11"]
     defaults:
       run:
@@ -169,7 +169,7 @@ jobs:
         if: runner.os != 'Windows'
         working-directory: modflow6
         run: |
-          meson setup builddir -Ddebug=true -Doptimization=0 -Dextended=true --prefix=$CONDA_PREFIX --libdir=bin
+          meson setup builddir -Ddebug=false -Dextended=true --prefix=$CONDA_PREFIX --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
   
@@ -184,7 +184,7 @@ jobs:
       - name: Test notebooks
         working-directory: .scripts
         run: |
-          python test_notebooks.py --script
+          python test_notebooks.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   
