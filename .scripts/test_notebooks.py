@@ -52,6 +52,17 @@ def run_notebook(nb_name):
     cmd = ("jupytext", "--execute", f"{nb_name}")
     run_cmd(cmd)
 
+    cmd = (
+        "jupyter",
+        "nbconvert",
+        "--ClearOutputPreprocessor.enabled=True",
+        "--ClearMetadataPreprocessor.enabled=True",
+        "--ClearMetadataPreprocessor.preserve_nb_metadata_mask={('kernelspec')}",
+        "--inplace",
+        f"{nb_name}",
+    )
+    run_cmd(cmd)
+
 
 def run_script(nb_name):
     py_script = "test.py"

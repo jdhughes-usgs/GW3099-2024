@@ -10,6 +10,7 @@ for nb in nbs:
         "nbconvert",
         "--ClearOutputPreprocessor.enabled=True",
         "--ClearMetadataPreprocessor.enabled=True",
+        "--ClearMetadataPreprocessor.preserve_nb_metadata_mask={('kernelspec')}",
         "--inplace",
         nb,
     )
