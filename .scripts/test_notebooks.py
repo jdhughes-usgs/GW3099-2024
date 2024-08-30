@@ -18,7 +18,9 @@ DIRS = (
 )
 SKIP_NOTEBOOKS = {
     "step0_netcdf_output": ("win32",),
-    "netcdf_input": ("win32",),
+    "step1_netcdf_input": ("win32",),
+    "step2_netcdf_ncf": ("win32",),
+    "step3_netcdf_ncf": ("win32",),
     "mf6minsim-plot": ("win32", "darwin", "linux"),
 }
 
