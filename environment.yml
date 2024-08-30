@@ -32,6 +32,7 @@ dependencies:
   - netcdf4
   - numpy
   - pandas
+  - pooch
   - openpyxl
   - pyshp
   - pestpp
