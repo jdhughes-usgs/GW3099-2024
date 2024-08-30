@@ -10,6 +10,7 @@ DIRS = (
     pl.Path("../base/watershed/").resolve(),
     pl.Path("../exercises-completed/gwf_advanced/").resolve(),
     pl.Path("../exercises-completed/gwt/").resolve(),
+    pl.Path("../exercises-completed/csub/").resolve(),
     pl.Path("../exercises-completed/modflowapi/").resolve(),
     pl.Path("../exercises-completed/parallel/").resolve(),
     pl.Path("../exercises-completed/netcdf/").resolve(),
@@ -57,7 +58,8 @@ def run_notebook(nb_name):
         "nbconvert",
         "--ClearOutputPreprocessor.enabled=True",
         "--ClearMetadataPreprocessor.enabled=True",
-        "--ClearMetadataPreprocessor.preserve_nb_metadata_mask={('kernelspec')}",
+        "--ClearMetadataPreprocessor."
+        + "preserve_nb_metadata_mask={('kernelspec')}",
         "--inplace",
         f"{nb_name}",
     )
@@ -85,9 +87,32 @@ if __name__ == "__main__":
         action="store_true",
         help="Convert notebooks to scripts",
     )
+    parser.add_argument(
+        "-d",
+        "--dir",
+        nargs="?",
+        type=str,
+        default=None,
+        help="Run notebooks in a select subdirectories. "
+        + "Use a comma separated string for multiple "
+        + "subdirectories (--dir dirA,dirB).",
+    )
     args = parser.parse_args()
 
+    selection = None
+    if args.dir is not None:
+        selection = args.dir.split(",")
+
     for idx, dir_path in enumerate(DIRS):
+        if selection is not None:
+            skip_dir = True
+            for value in selection:
+                if value in str(dir_path):
+                    skip_dir = False
+                    break
+            if skip_dir:
+                continue
+
         nb_paths = get_notebook_paths(dir_path)
         os.chdir(dir_path)
         for p in nb_paths:
