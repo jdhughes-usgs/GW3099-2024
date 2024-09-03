@@ -2,6 +2,12 @@ import flopy
 import numpy as np
 
 
+def block_wave_constant(x, t, v):
+    x_wave_start = 0
+    x_wave_end = x_wave_start + v * t
+    return np.where((x < x_wave_start) | (x > x_wave_end), 0, 1)
+
+
 def get_ex1_sim(workspace, dx=10.0, dt=20.0, advscheme="upstream"):
     # validate
     advscheme = advscheme.lower()
@@ -15,7 +21,7 @@ def get_ex1_sim(workspace, dx=10.0, dt=20.0, advscheme="upstream"):
     # spatial dimensions
     delr = dx  # Column width ($m$)
     Lx = 1000.0  # Length of domain
-    ncol = int(Lx / delr) + 1  # Number of columns
+    ncol = int(Lx / delr)  # Number of columns
     nlay = 1  # Number of layers
     nrow = 1  # Number of rows
     delc = 1.0  # Row width ($m$)
@@ -51,7 +57,7 @@ def get_ex1_sim(workspace, dx=10.0, dt=20.0, advscheme="upstream"):
 
     # Well on left, constant head on right
     chdspd = [[(0, 0, ncol - 1), 0.0]]
-    welspd = [[(0, 0, 0), Q]]
+    welspd = [[(0, 0, 0), Q, 1.0]]
 
     # Constant concentration on left side of model
     cncspd = [[(0, 0, 0), 1.0]]
@@ -133,6 +139,7 @@ def get_ex1_sim(workspace, dx=10.0, dt=20.0, advscheme="upstream"):
         maxbound=len(welspd),
         stress_period_data=welspd,
         save_flows=False,
+        auxiliary=["concentration"],
         pname="WEL-1",
     )
 
@@ -196,17 +203,13 @@ def get_ex1_sim(workspace, dx=10.0, dt=20.0, advscheme="upstream"):
         porosity=porosity,
     )
 
-    # Transport constant concentration package
-    flopy.mf6.ModflowGwtcnc(
-        gwt,
-        maxbound=len(cncspd),
-        stress_period_data=cncspd,
-        save_flows=False,
-        pname="CNC-1",
-    )
-
     # Transport source-sink mixing package
-    flopy.mf6.ModflowGwtssm(gwt, sources=[[]])
+    sourcerecarray = [("WEL-1", "AUX", "CONCENTRATION")]
+    ssm = flopy.mf6.ModflowGwtssm(
+        gwt,
+        print_flows=True,
+        sources=sourcerecarray,
+    )
 
     # Transport output control package
     flopy.mf6.ModflowGwtoc(
