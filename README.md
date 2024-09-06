@@ -8,7 +8,12 @@ September 16 - 20, 2024
 
 ## Location
 * Classroom: USGS Idaho Water Science Center-Newell Building Training Room-Boise, Idaho, USGS Idaho Water Science Center (IDWSC), 230 Collins Road, Boise, Idaho, 83702
+
 * Hotel Block: Hampton Inn & Suites Boise-Downtown, 495 S Capitol Blvd., Boise, Idaho 83702
+
+The hotel is 1.2 miles from the Idaho Water Science Center.
+
+![image info](./images/Hotel2Class.jpg)
 
 ## Course Description
 This class will cover many of the advanced MODFLOW 6 capabilities and provide an overview of PEST++ parameter estimation and uncertainty analysis using PEST++. Most of the class will be taught using Flopy and Jupyter Notebooks.  In addition to lectures, most sessions will include in-class exercises to give attendees a better understanding of how to use the modeling tools.
@@ -33,7 +38,7 @@ This class will cover many of the advanced MODFLOW 6 capabilities and provide an
 
 ## Software
 
-Software installation instruction are provided in [SOFTWARE.md](./SOFTWARE.md). Contact jdhughes@usgs.gov if you have any problems installing the class software.
+We will be using python during the class to build model datasets, run models, and post-process model results. The software has been installed on the USGS Hovenweep Supercomputer but it would be good to install the software The python on your laptop before the class. Software installation instructions for local installations are provided in [SOFTWARE.md](./SOFTWARE.md). Contact jdhughes@usgs.gov if you have any problems installing the class software.
 
 ## Agenda
 
