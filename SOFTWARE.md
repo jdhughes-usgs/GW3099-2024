@@ -73,7 +73,7 @@ For most users, the setup is complete at this point. For those working on a MacO
 
 ## Part 4. Create the `gw3099viz` environment (OPTIONAL)
 
-On Friday there will be an Advanced Visualization session this will cover use of Paraview, QGIS, Panolopy, and PyVista. Paraview, QGIS, and Panaolopy are not included in the `gw3099` class environment. If you would like to run these programs on your laptop you will have to install a second environment.
+On Friday there will be an Advanced Visualization session that will cover use of Paraview, QGIS, Panolopy, and PyVista. Paraview, QGIS, and Panaolopy are not included in the `gw3099` class environment. If you would like to run these programs on your laptop you will have to install a second environment.
 
 1. Using a text editor, such as Notepad or Notepad++, create a file called `environment-viz.yml`. It should contain the information in [this environment file](./environment-viz.yml). Save this file to your hard drive, preferably in your user home folder so that it can be easily accessed in the next step. (Caution!  Notepad will automatically append a .txt suffix to your file name; you don't want this to happen.)
 
