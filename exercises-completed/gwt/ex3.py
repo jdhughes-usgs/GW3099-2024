@@ -17,7 +17,6 @@ from matplotlib import colors
 from modflow_devtools.misc import get_env, timed
 from shapely.geometry import LineString, Polygon
 
-
 geometries = {
     "sv_boundary": """0.0 0.0
     0.0 20000.0
@@ -71,7 +70,9 @@ def densify_geometry(line, step, keep_internal_nodes=True):
     lines_strings = []
     if keep_internal_nodes:
         for idx in range(1, len(line)):
-            lines_strings.append(shapely.geometry.LineString(line[idx - 1 : idx + 1]))
+            lines_strings.append(
+                shapely.geometry.LineString(line[idx - 1 : idx + 1])
+            )
     else:
         lines_strings = [shapely.geometry.LineString(line)]
 
@@ -172,18 +173,18 @@ wp = np.array(well_points)
 temp_path = workspace / "_triangle"
 temp_path.mkdir(parents=True, exist_ok=True)
 tri = Triangle(
-angle=30,
-nodes=sg_densify,
-model_ws=temp_path,
+    angle=30,
+    nodes=sg_densify,
+    model_ws=temp_path,
 )
 tri.add_polygon(bp_densify)
 tri.add_polygon(rb_densify)
 tri.add_polygon(lp_densify)
 tri.add_region((10, 10), attribute=10, maximum_area=max_boundary_area)
 tri.add_region(
-(3050.0, 3050.0),
-attribute=10,
-maximum_area=max_boundary_area,
+    (3050.0, 3050.0),
+    attribute=10,
+    maximum_area=max_boundary_area,
 )
 tri.add_region((900.0, 4600.0), attribute=11, maximum_area=max_lake_area)
 tri.add_region((1200.0, 150.0), attribute=10, maximum_area=max_river_area)
@@ -223,7 +224,7 @@ top_range = (0, 20)
 top_levels = np.arange(0, 25, 5)
 head_range = (-1, 5)
 head_levels = np.arange(1, head_range[1] + 1, 1)
-extent = voronoi_grid.extent    
+extent = voronoi_grid.extent
 
 # intersect the rasters with the vertex grid
 top_vg = top_base.resample_to_grid(
@@ -273,7 +274,7 @@ bot_l4 = bot_vg + 0.5 * (bot_l3 - bot_vg)
 # set the bottom of the 3rd layer in areas where the confining unit exists
 # bot_l2[idomain_2] = -50.0 * ft2m
 # create a list with bottom data
-botm = [-5.0 * ft2m, -50.0 * ft2m, bot_l2, -100.0 * ft2m, bot_l4, bot_vg]    
+botm = [-5.0 * ft2m, -50.0 * ft2m, bot_l2, -100.0 * ft2m, bot_l4, bot_vg]
 
 # create a modelgrid for the lake
 lake_grid_top = np.full((vor.ncpl), 50.0, dtype=float)
@@ -301,7 +302,9 @@ sfr_slope = -0.0002
 cum_dist = np.zeros(sfr_nodes.shape, dtype=float)
 cum_dist[0] = 0.5 * sfr_lengths[0]
 for idx in range(1, sfr_nodes.shape[0]):
-    cum_dist[idx] = cum_dist[idx - 1] + 0.5 * (sfr_lengths[idx - 1] + sfr_lengths[idx])
+    cum_dist[idx] = cum_dist[idx - 1] + 0.5 * (
+        sfr_lengths[idx - 1] + sfr_lengths[idx]
+    )
 sfr_bot = b0 + sfr_slope * cum_dist
 sfr_conn = []
 for idx, node in enumerate(sfr_nodes):
@@ -314,7 +317,9 @@ for idx, node in enumerate(sfr_nodes):
 
 # <rno> <cellid(ncelldim)> <rlen> <rwid> <rgrd> <rtp> <rbth> <rhk> <man> <ncon> <ustrf> <ndv>
 sfrpak_data = []
-for idx, (cellid, rlen, rtp) in enumerate(zip(gwf_nodes, sfr_lengths, sfr_bot)):
+for idx, (cellid, rlen, rtp) in enumerate(
+    zip(gwf_nodes, sfr_lengths, sfr_bot)
+):
     sfr_plt_array[cellid] = 1
     sfrpak_data.append(
         (
@@ -387,7 +392,7 @@ welspd = [
 ]
 
 
-def get_mf6gwf_sim(lake_concentration=1.0, recharge_concentration=0.):
+def get_mf6gwf_sim(lake_concentration=1.0, recharge_concentration=0.0):
     name = "flow"
     print(f"Building mf6gwf model...{name}")
     sim_ws = workspace / name
@@ -397,7 +402,9 @@ def get_mf6gwf_sim(lake_concentration=1.0, recharge_concentration=0.):
         exe_name="mf6",
         continue_=True,
     )
-    tdis = flopy.mf6.ModflowTdis(sim, time_units="days", perioddata=((pertim, 1, 1.0),))
+    tdis = flopy.mf6.ModflowTdis(
+        sim, time_units="days", perioddata=((pertim, 1, 1.0),)
+    )
     ims = flopy.mf6.ModflowIms(
         sim,
         print_option="all",
@@ -442,14 +449,18 @@ def get_mf6gwf_sim(lake_concentration=1.0, recharge_concentration=0.):
     auxiliary = [("concentration")]
     aux = {0: [recharge_concentration]}
     rch = flopy.mf6.ModflowGwfrcha(
-        gwf, 
+        gwf,
         recharge=rainfall,
         auxiliary=auxiliary,
         aux=aux,
         pname="RCH-1",
-        )
-    evt = flopy.mf6.ModflowGwfevta(gwf, surface=top_vg, rate=evaporation, depth=1.0)
-    wel = flopy.mf6.ModflowGwfwel(gwf, stress_period_data=welspd, boundnames=True)
+    )
+    evt = flopy.mf6.ModflowGwfevta(
+        gwf, surface=top_vg, rate=evaporation, depth=1.0
+    )
+    wel = flopy.mf6.ModflowGwfwel(
+        gwf, stress_period_data=welspd, boundnames=True
+    )
     drn = flopy.mf6.ModflowGwfdrn(
         gwf,
         auxiliary=["depth"],
@@ -497,7 +508,7 @@ def get_mf6gwf_sim(lake_concentration=1.0, recharge_concentration=0.):
     return sim
 
 
-def get_mf6gwt_sim(initial_concentration=0.):
+def get_mf6gwt_sim(initial_concentration=0.0):
     name = "trans"
     print(f"Building mf6gwt model...{name}")
     sim_ws = workspace / name
@@ -1117,7 +1128,9 @@ def plot_conc_results(sim_mf6gwt):
         )
         ax.axhline(xy0[0], color="cyan", lw=0.5, label="Lake")
         ax.axhline(xy0[0], **river_dict, label="River")
-        ax.axhline(xy0[0], **contour_gwt_label_dict, label="Concentration (mg/L)")
+        ax.axhline(
+            xy0[0], **contour_gwt_label_dict, label="Concentration (mg/L)"
+        )
         ax.plot(
             xy0,
             xy0,
