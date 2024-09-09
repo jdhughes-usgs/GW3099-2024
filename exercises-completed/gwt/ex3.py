@@ -102,7 +102,7 @@ def circle_function(center=(0, 0), radius=1.0, dtheta=10.0):
 sim_name = "ex3"
 workspace = pl.Path(f"./{sim_name}")
 workspace.mkdir(parents=True, exist_ok=True)
-data_path = pl.Path(f"../../data/gwt")
+data_path = pl.Path("../../data/gwt")
 
 # Conversion factors
 ft2m = 1.0 / 3.28081
