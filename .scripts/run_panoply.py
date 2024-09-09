@@ -1,8 +1,8 @@
 #! /usr/bin/env python
 
-import sys
 import pathlib as pl
-from subprocess import run, Popen
+import sys
+from subprocess import Popen, run
 
 # run this script in anaconda shell with "gw3099viz" environment activated
 # this script runs the following command:
@@ -25,14 +25,13 @@ for p in paths:
     # create jar_path if env found
     if "gw3099viz" in parts:
         index = parts.index("gw3099viz")
-        base_path = pl.Path(*parts[:index + 1])
+        base_path = pl.Path(*parts[: index + 1])
         jar_path = base_path / rel_path
 
 if jar_path:
-    cmd = f"java -Xms512m -Xmx4g -cp {jar_path} gov.nasa.giss.panoply.Panoply \"$@\""
+    cmd = f'java -Xms512m -Xmx4g -cp {jar_path} gov.nasa.giss.panoply.Panoply "$@"'
     process = Popen(cmd, start_new_session=True)
     print(process)
 else:
     sys.stderr.write("error: unable to identify panoply jar path\n")
     sys.exit(1)
-
