@@ -1,6 +1,5 @@
 import os
 import pathlib as pl
-from pprint import pformat
 
 import flopy
 import flopy.plot.styles as styles
@@ -8,13 +7,11 @@ import matplotlib.gridspec as gridspec
 import matplotlib.pyplot as plt
 import matplotlib.ticker as mticker
 import numpy as np
-import pooch
 import shapely
 from flopy.discretization import VertexGrid
 from flopy.utils.triangle import Triangle
 from flopy.utils.voronoi import VoronoiGrid
 from matplotlib import colors
-from modflow_devtools.misc import get_env, timed
 from shapely.geometry import LineString, Polygon
 
 geometries = {
