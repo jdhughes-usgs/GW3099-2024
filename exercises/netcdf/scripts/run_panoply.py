@@ -1,12 +1,10 @@
-#! /usr/bin/env python
-
 import pathlib as pl
 import sys
 from subprocess import Popen, run
 
-# run this script in anaconda shell with "gw3099viz" environment activated
-# this script runs the following command:
-#   java -Xms512m -Xmx4g -cp {panoply_jar_path} gov.nasa.giss.panoply.Panoply "$@"
+# Run this script in the anaconda shell with "gw3099viz" environment activated
+# This script runs the following command:
+#   java -Xms512m -Xmx4g -cp {jar_path} gov.nasa.giss.panoply.Panoply "$@"
 
 # jar_path
 jar_path = None
@@ -15,6 +13,9 @@ rel_path = "Lib\\java\\PanoplyJ\\jars\\Panoply.jar"
 # locate java paths
 cmd = "where java"
 result = run(cmd, capture_output=True, shell=True)
+if result.returncode != 0:
+    sys.stderr.write("error: unable to locate java\n")
+    sys.exit(1)
 output = result.stdout.decode("utf-8")
 
 paths = output.splitlines()
@@ -27,11 +28,12 @@ for p in paths:
         index = parts.index("gw3099viz")
         base_path = pl.Path(*parts[: index + 1])
         jar_path = base_path / rel_path
+        break
 
 if jar_path:
+    sys.stdout.write(f"using jar file: {jar_path}\n")
     cmd = f'java -Xms512m -Xmx4g -cp {jar_path} gov.nasa.giss.panoply.Panoply "$@"'
     process = Popen(cmd, start_new_session=True)
-    print(process)
 else:
     sys.stderr.write("error: unable to identify panoply jar path\n")
     sys.exit(1)
