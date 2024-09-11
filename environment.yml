@@ -31,7 +31,7 @@ dependencies:
   - modflow-devtools
   - netcdf4
   - numpy
-  - pandas
+  - pandas>=2.2.0
   - pooch
   - openpyxl
   - pyshp
