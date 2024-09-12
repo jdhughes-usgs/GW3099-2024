@@ -192,59 +192,58 @@ import numpy as np
 
 
 def get_data(convert_to_mks=True):
-  if convert_to_mks:
-    convert_factor = 1. / 3.2808 ** 3
-  else:
-     convert_factor = 1.
-  s = [line for line in hec_hms_results.split("\n")]
-  s = [line.split("	") for line in s]
-  s = [(date, time, float(inflow), float(outflow), float(obs)) for date, time, inflow, outflow, obs in s]
+    if convert_to_mks:
+        convert_factor = 1.0 / 3.2808**3
+    else:
+        convert_factor = 1.0
+    s = [line for line in hec_hms_results.split("\n")]
+    s = [line.split("	") for line in s]
+    s = [
+        (date, time, float(inflow), float(outflow), float(obs))
+        for date, time, inflow, outflow, obs in s
+    ]
 
-  date, time, inflow, outflow, obs = zip(*s)
-  punx_inflow_hydrograph = np.array(inflow) * convert_factor
-  punx_hec_hms_outflow = np.array(outflow) * convert_factor
-  punx_obs_outflow = np.array(obs) * convert_factor
-  dt = 15 * 60 # 15 mins converted to seconds
-  total_time = punx_inflow_hydrograph.shape[0] * dt
-  sample_times = np.arange(0, total_time, dt)
-  data = {
-    "inflow_hydrograph": punx_inflow_hydrograph,
-    "hec_hms_outflow": punx_hec_hms_outflow,
-    "obs_outflow": punx_obs_outflow,
-    "sample_times": sample_times,
-  }
-  return data
+    date, time, inflow, outflow, obs = zip(*s)
+    punx_inflow_hydrograph = np.array(inflow) * convert_factor
+    punx_hec_hms_outflow = np.array(outflow) * convert_factor
+    punx_obs_outflow = np.array(obs) * convert_factor
+    dt = 15 * 60  # 15 mins converted to seconds
+    total_time = punx_inflow_hydrograph.shape[0] * dt
+    sample_times = np.arange(0, total_time, dt)
+    data = {
+        "inflow_hydrograph": punx_inflow_hydrograph,
+        "hec_hms_outflow": punx_hec_hms_outflow,
+        "obs_outflow": punx_obs_outflow,
+        "sample_times": sample_times,
+    }
+    return data
 
-def get_cross_section_data(
-  section_name="full", 
-  channel_n=0.035, 
-  bank_n=0.15
-  ):
 
-  assert section_name in ["full", "8point"]
+def get_cross_section_data(section_name="full", channel_n=0.035, bank_n=0.15):
+    assert section_name in ["full", "8point"]
 
-  # Punxsutawney
-  txt = "Punxsutawney"
-  # data from here: https://www.hec.usace.army.mil/confluence/hmsdocs/hmsguides/applying-reach-routing-methods-within-hec-hms/applying-the-muskingum-cunge-routing-method
-  if section_name == "full":
-      data = punxsutawney_full_cross
-      rfull = np.array(8 * [bank_n] + 11 * [channel_n] + 8 * [bank_n] + [0])
-      r = rfull
-  elif section_name == "8point":
-      data = punxsutawney8point
-      r8point = np.array(2 * [bank_n] + 3 * [channel_n] + 2 * [bank_n] + [0])
-      r = r8point
+    # Punxsutawney
+    txt = "Punxsutawney"
+    # data from here: https://www.hec.usace.army.mil/confluence/hmsdocs/hmsguides/applying-reach-routing-methods-within-hec-hms/applying-the-muskingum-cunge-routing-method
+    if section_name == "full":
+        data = punxsutawney_full_cross
+        rfull = np.array(8 * [bank_n] + 11 * [channel_n] + 8 * [bank_n] + [0])
+        r = rfull
+    elif section_name == "8point":
+        data = punxsutawney8point
+        r8point = np.array(2 * [bank_n] + 3 * [channel_n] + 2 * [bank_n] + [0])
+        r = r8point
 
-  s = [line for line in data.split("\n")]
-  s = [line.split("	") for line in s]
-  s = [(float(x), float(y)) for x, y in s]
-  x, h = zip(*s)
-  x = np.array(x)
-  h = np.array(h)
+    s = [line for line in data.split("\n")]
+    s = [line.split("	") for line in s]
+    s = [(float(x), float(y)) for x, y in s]
+    x, h = zip(*s)
+    x = np.array(x)
+    h = np.array(h)
 
-  cross_section_data = {
-      "x": x / 3.2808,  # convert to meters
-      "h": h / 3.2808,  # convert to meters
-      "r": r
-  }
-  return cross_section_data
+    cross_section_data = {
+        "x": x / 3.2808,  # convert to meters
+        "h": h / 3.2808,  # convert to meters
+        "r": r,
+    }
+    return cross_section_data
