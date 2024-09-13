@@ -6,7 +6,7 @@ dependencies:
   - python
   - jupyter
   - jupyterlab
-  - panoply
+  - panoply>=5.5.1
   - paraview
   - qgis
   - ipywidgets
@@ -15,5 +15,3 @@ dependencies:
   - trame-client
   - trame-server
   - trame-vuetify
-
-   
