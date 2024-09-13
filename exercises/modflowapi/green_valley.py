@@ -68,7 +68,7 @@ ext_depth = 15.0  # Evapotranspiration extinction depth ($ft$)
 tdis_ds = (
     (0.0, 1, 1.0),
     (1.577880e9, 50, 1.1),
-#     (1.577880e9, 50, 1.1),
+    #     (1.577880e9, 50, 1.1),
 )
 
 # Define dimensions
@@ -823,7 +823,9 @@ def build_models(ws=None, name=None):
         name = sim_name
     sim_ws = os.path.join(ws, name)
     sim = flopy.mf6.MFSimulation(sim_name=name, sim_ws=sim_ws, exe_name="mf6")
-    flopy.mf6.ModflowTdis(sim, nper=nper, perioddata=tdis_ds, time_units=time_units)
+    flopy.mf6.ModflowTdis(
+        sim, nper=nper, perioddata=tdis_ds, time_units=time_units
+    )
     flopy.mf6.ModflowIms(
         sim,
         print_option="summary",
@@ -867,7 +869,9 @@ def build_models(ws=None, name=None):
     flopy.mf6.ModflowGwfghb(gwf, stress_period_data=ghb_spd)
     flopy.mf6.ModflowGwfwel(gwf, stress_period_data=wel_spd)
     flopy.mf6.ModflowGwfrcha(gwf, recharge=recharge)
-    flopy.mf6.ModflowGwfevta(gwf, surface=surf, rate=evap_rate, depth=ext_depth)
+    flopy.mf6.ModflowGwfevta(
+        gwf, surface=surf, rate=evap_rate, depth=ext_depth
+    )
     sfr = flopy.mf6.ModflowGwfsfr(
         gwf,
         length_conversion=3.28081,
@@ -904,7 +908,7 @@ def build_models(ws=None, name=None):
         saverecord={
             0: [("HEAD", "LAST"), ("BUDGET", "LAST")],
             1: [("HEAD", "LAST"), ("BUDGET", "ALL")],
-        }
+        },
     )
     return sim
 
@@ -1217,7 +1221,9 @@ def plot_head_results(gwf, silent=True):
             mec="0.75",
             label="Normalized specific discharge",
         )
-        ax.plot(-10000, -10000, lw=0.5, color="black", label=r"Head contour, $ft$")
+        ax.plot(
+            -10000, -10000, lw=0.5, color="black", label=r"Head contour, $ft$"
+        )
         styles.graph_legend(ax, loc="upper center", ncol=2)
 
         if plot_show:
@@ -1232,7 +1238,7 @@ def plot_sfr_results(gwf, silent=True):
         3: "Upper Green Creek",
         14: "Little Creek",
         26: "Lower Green Creek",
-        35: "Blue River"
+        35: "Blue River",
     }
     with styles.USGSPlot():
         # load the observations
@@ -1287,7 +1293,7 @@ def plot_sfr_results(gwf, silent=True):
                     color=color,
                     zorder=10,
                 )
-               #  ax.axvline(50, lw=0.5, ls="--", color="black", zorder=10)
+                #  ax.axvline(50, lw=0.5, ls="--", color="black", zorder=10)
                 if ax.get_ylim()[0] < 0.0:
                     ax.axhline(0, lw=0.5, color="0.5", zorder=9)
                 styles.add_text(
