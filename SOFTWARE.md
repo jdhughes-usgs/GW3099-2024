@@ -71,9 +71,41 @@ We will use an environment file to create a containerized version of Python and 
 
 For most users, the setup is complete at this point. For those working on a MacOS or Linux laptop, please proceed to Part 4.
 
-## Part 4. Create the `gw3099viz` environment (OPTIONAL)
+## Part 4. Create the `gw3099pws` environment
 
-On Friday there will be an Advanced Visualization session that will cover use of Paraview, QGIS, Panolopy, and PyVista. Paraview, QGIS, and Panaolopy are not included in the `gw3099` class environment. If you would like to run these programs on your laptop you will have to install a second environment.
+On Thursday morning the pywatershed package will be covered. Currently, pywatershed requires a separate environment because it is not yet caught up with numpy 2.0.0+. Here we install the environment to run the pywatershed examples.
+
+1. Using a text editor, such as Notepad or Notepad++, create a file called `environment-pywatershed.yml`. It should contain the information in [this environment file](./environment-pywatershed.yml). Save this file to your hard drive, preferably in your user home folder so that it can be easily accessed in the next step. (Caution!  Notepad will automatically append a .txt suffix to your file name; you don't want this to happen.)
+
+2. Start the miniforge prompt from the Windows start menu (or equivalent on MacOS or Linux) to bring up a terminal or if you already have a miniforge prompt running make sure you are in the base environment.
+   ```
+   (base) C:\Users\JaneDoe>
+   ```
+
+   If you are not in the base environment you can switch using the command
+
+   ```
+   mamba deactivate
+   ```
+
+3. At the terminal prompt enter the following command, where `<path to file>` is the location of the `environment-pywatershed.yml` file that you created in Part 2. You will need to be connected to the internet for this to work properly. The installation process may take a couple of minutes.
+    ```
+    mamba env create --file <path to file>/environment-pywatershed.yml
+    ```
+
+4. After the environment has been installed, you may activate this new class environment with the following command
+    ```
+    mamba activate gw3099pws
+    ```
+
+5. The windows terminal prompt should reflect the current environment:
+    ```
+    (gw3099pws) C:\Users\JaneDoe>
+    ```
+
+## Part 5. Create the `gw3099viz` environment (OPTIONAL)
+
+On Friday there will be an Advanced Visualization session that will cover use of Paraview, QGIS, Panolopy, and PyVista. Paraview, QGIS, and Panaolopy are not included in the `gw3099` class environment. If you would like to run these programs on your laptop you will have to install an additional environment.
 
 1. Using a text editor, such as Notepad or Notepad++, create a file called `environment-viz.yml`. It should contain the information in [this environment file](./environment-viz.yml). Save this file to your hard drive, preferably in your user home folder so that it can be easily accessed in the next step. (Caution!  Notepad will automatically append a .txt suffix to your file name; you don't want this to happen.)
 
@@ -103,8 +135,7 @@ On Friday there will be an Advanced Visualization session that will cover use of
     (gw3099viz) C:\Users\JaneDoe>
     ```
 
-
-## Part 5. Obtaining MODFLOW 6
+## Part 6. Obtaining MODFLOW 6
 
 We will be using the parallel version of MODFLOW 6 in this class. If you are working on Windows, we will be using the latest nightly-build of the extended version of [MODFLOW 6](https://github.com/MODFLOW-USGS/modflow6-nightly-build/releases) in the class. We will also walk through this step during the class. The distribution file for Windows that includes the extended version is called `win64par.zip`.
 
