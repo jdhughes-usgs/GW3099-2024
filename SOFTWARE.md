@@ -1,20 +1,28 @@
 # Software Installation
 
 <!-- START doctoc generated TOC please keep comment here to allow auto update -->
-<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 
-- [Installation](#installation)
-  - [1. Install Miniforge](#1-install-miniforge)
-  - [2. Create an Environment File](#2-create-an-environment-file)
-  - [3. Create the `gw3099` Environment](#3-create-the-gw3099-environment)
-  - [4. Create the `gw3099viz` environment (OPTIONAL)](#4-create-the-gw3099viz-environment-optional)
-  - [5. Install MODFLOW 6](#5-install-modflow-6)
-- [Preparation for the Class](#preparation-for-the-class)
-- [Troubleshooting](#troubleshooting)
-  - [Codesigning](#codesigning)
-  - [Other issues](#other-issues)
+**Table of Contents**  *generated with [DocToc](https://github.com/ktechhub/doctoc)*
+
+<!---toc start-->
+
+* [Software Installation](#software-installation)
+  * [Installation](#installation)
+    * [1. Install Miniforge](#1-install-miniforge)
+    * [2. Create an Environment File](#2-create-an-environment-file)
+    * [3. Create the `gw3099` Environment](#3-create-the-gw3099-environment)
+    * [4. Create the `gw3099pws` environment](#4-create-the-gw3099pws-environment)
+  * [Part 5. Create the `gw3099viz` environment (OPTIONAL)](#part-5-create-the-gw3099viz-environment-optional)
+    * [6. Obtaining MODFLOW 6](#6-obtaining-modflow-6)
+  * [Preparation for the Class](#preparation-for-the-class)
+  * [Troubleshooting](#troubleshooting)
+    * [Codesigning](#codesigning)
+    * [Other issues](#other-issues)
+
+<!---toc end-->
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
 
 To get the most out of this class, you will need to come prepared with a laptop computer that has Python installed. **If you have the conda- or mamba-based python distribution installed (conda, mini), are familiar with conda environments, and know how to create a new conda environment using an environment.yml file, then skip ahead to Part 2.** For all others, we recommend using the Miniforge python distribution. **You should be able to install Miniforge without elevated privileges but if you have your IT staff install the software make sure they <ins>do not install for all users</ins>.** 
 
