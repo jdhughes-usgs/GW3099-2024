@@ -5,9 +5,14 @@ import sys
 import pytest
 
 # "Official" notebooks are numbered
-notebooks = sorted(
-    pl.Path("../exercises-completed/pywatershed").glob("[0-9]*.ipynb")
+ex_notebooks = sorted(
+    pl.Path("../exercises/pywatershed").glob("step[0-9]*.ipynb")
 )
+ex_comp_notebooks = sorted(
+    pl.Path("../exercises-completed/pywatershed").glob("step[0-9]*.ipynb")
+)
+
+notebooks = ex_notebooks + ex_comp_notebooks
 
 notebook_ids = [nb.name for nb in notebooks]
 
