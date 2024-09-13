@@ -262,9 +262,9 @@ jobs:
       - name: Version info
         run: |
           echo -------
-          conda info -a
+          mamba info -a
           echo -------
-          conda list
+          mamba list
           echo -------
           pip -V
           echo -------
