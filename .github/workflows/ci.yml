@@ -259,17 +259,6 @@ jobs:
           git checkout feat_gw3099
           pip install -e .
 
-      - name: Version info
-        run: |
-          echo -------
-          mamba info -a
-          echo -------
-          mamba list
-          echo -------
-          pip -V
-          echo -------
-          pip list
-
       - name: Import pywatershed
         run: |
           python -c "import pywatershed"
