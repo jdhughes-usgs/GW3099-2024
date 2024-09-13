@@ -5,7 +5,9 @@ import sys
 import pytest
 
 # "Official" notebooks are numbered
-notebooks = sorted(pl.Path("../exercises-completed/pywatershed").glob("[0-9]*.ipynb"))
+notebooks = sorted(
+    pl.Path("../exercises-completed/pywatershed").glob("[0-9]*.ipynb")
+)
 
 notebook_ids = [nb.name for nb in notebooks]
 
@@ -22,7 +24,9 @@ def test_notebooks(notebook):
         str(notebook),
     ]
     proc = subprocess.run(cmd)
-    assert proc.returncode == 0, f"Failed to convert notebook to script: {notebook}"
+    assert (
+        proc.returncode == 0
+    ), f"Failed to convert notebook to script: {notebook}"
     nb_py = notebook.with_suffix(".py")
     assert nb_py.exists(), f"Expected script does not exists: {nb_py}"
 
