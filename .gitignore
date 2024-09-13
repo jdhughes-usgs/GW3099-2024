@@ -177,3 +177,8 @@ exercises-completed/parallel/base/
 exercises-completed/parallel/parallel/
 exercises/parallel/base/
 exercises/parallel/parallel/
+exercises/pywatershed/pywatershed/
+exercises/pywatershed/step1_processes/
+exercises/pywatershed/step2_multi-process_models/
+exercises-completed/pywatershed/step1_processes/
+exercises-completed/pywatershed/step2_multi-process_models/
