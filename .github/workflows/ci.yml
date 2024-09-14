@@ -272,6 +272,8 @@ jobs:
       #     python pywatershed/utils/addtl_domain_files.py
 
       - name: Test notebooks
-        working-directory: .autotest_pws
+        working-directory: .scripts
         run: |
-          pytest -s -vv --durations=0
+          python test_notebooks.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

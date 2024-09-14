@@ -4,6 +4,8 @@ import pathlib as pl
 import subprocess
 import sys
 
+conda_env_name = os.getenv("CONDA_DEFAULT_ENV")
+
 ROOT_DIR = pl.Path(os.getcwd()).resolve()
 DIRS = (
     pl.Path("../exercises-completed/flopy/").resolve(),
@@ -13,8 +15,10 @@ DIRS = (
     pl.Path("../exercises-completed/csub/").resolve(),
     pl.Path("../exercises-completed/modflowapi/").resolve(),
     pl.Path("../exercises-completed/parallel/").resolve(),
+    pl.Path("../exercises-completed/pywatershed/").resolve(),
     pl.Path("../exercises/netcdf/").resolve(),
     pl.Path("../exercises/PEST/notebooks").resolve(),
+    pl.Path("../exercises/pywatershed").resolve(),
 )
 SKIP_NOTEBOOKS = {
     "step0_netcdf_output": ("win32",),
@@ -28,7 +32,26 @@ GIT_RESET_DIRS = (
 )
 
 
+def pws_filter(dir_path) -> bool:
+    """Filter in/out pywatershed notebooks and the repo, if present
+
+    Returns:
+        bool where True means return an empty list and False means continue..
+    """
+    pws_env = conda_env_name == "gw3099pws"
+    pws_dir = "pywatershed" in str(dir_path)
+    if pws_env and not pws_dir:
+        return True
+    if not pws_env and pws_dir:
+        return True
+
+    return False
+
+
 def get_notebook_paths(dir_path):
+    if pws_filter(dir_path):
+        return []
+
     names = sorted(f"{f.name}" for f in dir_path.glob("*.ipynb"))
     select_names = []
     os_name = sys.platform.lower()
@@ -114,6 +137,7 @@ if __name__ == "__main__":
                 continue
 
         nb_paths = get_notebook_paths(dir_path)
+
         os.chdir(dir_path)
         for p in nb_paths:
             if args.script:
