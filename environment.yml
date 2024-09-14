@@ -20,7 +20,8 @@ dependencies:
   - descartes
   - filelock
   - fiona
-  - flopy>=3.8
+  - pip:
+      - https://github.com/wpbonelli/flopy/archive/fix-reverse.zip
   - geojson
   - geopandas
   - geos
