@@ -2,7 +2,7 @@ name: GW3099 continuous integration
 on:
   # run at 6 AM UTC every day
   schedule:
-    - cron: '0 6 * * *' 
+    - cron: '0 6 * * *'
   push:
     branches:
       - main
@@ -30,14 +30,14 @@ jobs:
       - name: Setup python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10' 
-      
+          python-version: '3.10'
+
       - name: Install ruff
         run: pip install ruff
 
       - name: Lint
         run: ruff check .
-  
+
       - name: Check format
         run: ruff format . --check
 
@@ -60,7 +60,7 @@ jobs:
         run: |
           sudo apt install build-essential
           sudo apt-get install -y petsc-dev netcdf-bin libnetcdf-dev libnetcdff-dev openmpi-bin libopenmpi-dev
-  
+
       - name: Update package config files
         working-directory: .scripts
         run: |
@@ -77,7 +77,7 @@ jobs:
         run: |
           python update_env_file.py
           cat ../environment.yml
-  
+
       - name: Install miniconda
         uses: conda-incubator/setup-miniconda@v3
         with:
@@ -91,10 +91,10 @@ jobs:
           python -m flopy.mf6.utils.generate_classes --ref 'develop'
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+
       - name: Clone MODFLOW repo
         run: |
-          git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git 
+          git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git
 
       - name: Build extended version of MODFLOW
         if: runner.os != 'Windows'
@@ -103,7 +103,7 @@ jobs:
           FC=mpifort CC=mpicc meson setup builddir -Ddebug=false -Dextended=true --prefix=$CONDA_PREFIX --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
-        
+
       - name: Test notebooks
         working-directory: .scripts
         run: |
@@ -141,7 +141,7 @@ jobs:
           environment-file: "environment.yml"
           activate-environment: "gw3099"
           auto-activate-base: false
-   
+
       - name: Update flopy mf6 classes
         run: |
           python -m flopy.mf6.utils.generate_classes --ref 'develop'
@@ -160,10 +160,10 @@ jobs:
         working-directory: .scripts
         run: |
           python update_pc_files.py
-  
+
       - name: Clone MODFLOW repo
         run: |
-          git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git 
+          git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git
 
       - name: Build extended version of MODFLOW
         if: runner.os != 'Windows'
@@ -172,7 +172,7 @@ jobs:
           meson setup builddir -Ddebug=false -Dextended=true --prefix=$CONDA_PREFIX --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
-  
+
       - name: Get and test parallel MODFLOW on Windows
         if: runner.os == 'Windows'
         working-directory: modflow6/.mf6minsim
@@ -180,14 +180,14 @@ jobs:
           get-modflow --repo modflow6-nightly-build --ostag win64par :python
           mpiexec -n 1 mf6 -p
           mpiexec -n 2 mf6 -p
-        
+
       - name: Test notebooks
         working-directory: .scripts
         run: |
           python test_notebooks.py
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-  
+
 
   install_vizenv:
     name: Install viz environment
@@ -213,3 +213,67 @@ jobs:
           activate-environment: 'gw3099viz'
           auto-activate-base: false
 
+
+  pywatershed:
+    name: test pywatershed notebooks
+    needs: lint
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: ["macos-latest", "windows-latest", "ubuntu-latest"]
+        python-version: ["3.10", "3.11"]
+    defaults:
+      run:
+        shell: bash -el {0}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      # - name: Setup gfortran
+      #   uses: fortran-lang/setup-fortran@v1
+      #   with:
+      #     compiler: gcc
+      #     version: 11
+
+      - name: Setup micromamba
+        uses: mamba-org/setup-micromamba@v1
+        with:
+          environment-file: environment-pywatershed.yml
+          cache-environment: true
+          cache-downloads: true
+
+     # - name: Install miniconda
+     #    uses: conda-incubator/setup-miniconda@v3
+     #    with:
+     #      python-version: ${{ matrix.python-version }}
+     #      environment-file: "environment-pywatershed.yml"
+     #      activate-environment: "gw3099pws"
+     #      auto-activate-base: false
+
+      - name: Install pywatershed
+        working-directory: exercises/pywatershed
+        run: |
+          git clone https://github.com/EC-USGS/pywatershed.git
+          cd pywatershed
+          git checkout feat_gw3099
+          pip install -e .
+
+      - name: Import pywatershed
+        run: |
+          python -c "import pywatershed"
+
+      # - name: Get GIS files for tests
+      #   run: |
+      #     python pywatershed/utils/gis_files.py
+
+      # - name: Get additional domain files for notebooks
+      #   run: |
+      #     python pywatershed/utils/addtl_domain_files.py
+
+      - name: Test notebooks
+        working-directory: .scripts
+        run: |
+          python test_notebooks.py
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
