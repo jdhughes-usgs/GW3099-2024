@@ -23,7 +23,6 @@ dependencies:
   - jupyter
   - jupyterlab
   - jupytext
-  - nb_conda_kernels
   - nbconvert
   - netCDF4
   - networkx
