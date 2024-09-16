@@ -172,6 +172,8 @@ exercises/PEST/tmprun/
 exercises/PEST/pest_ies_setup/
 exercises/PEST/pest_background_files/
 exercises/PEST/notebooks/*.pdf
+exercises-completed/xt3d/xt3d-ex0-unstructured-grid/
+exercises-completed/xt3d/xt3d-prt/
 exercises-completed/gwt/ex1/
 exercises-completed/parallel/base/
 exercises-completed/parallel/parallel/
@@ -182,6 +184,7 @@ exercises/pywatershed/step1_processes/
 exercises/pywatershed/step2_multi-process_models/
 exercises-completed/pywatershed/step1_processes/
 exercises-completed/pywatershed/step2_multi-process_models/
+exercises-working/
 
 # presentations
 *.pptx
