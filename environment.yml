@@ -27,6 +27,7 @@ dependencies:
   - geos
   - hvplot
   - imageio
+  - ipywidgets
   - matplotlib
   - modflowapi
   - modflow-devtools
@@ -50,6 +51,11 @@ dependencies:
   - scipy
   - shapely
   - statsmodels
+  - trame
+  - trame-client
+  - trame-server
+  - trame-vtk
+  - trame-vuetify
   - uxarray
   - vtk
   - xlrd

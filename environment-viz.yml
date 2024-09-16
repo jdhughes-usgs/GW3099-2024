@@ -9,9 +9,3 @@ dependencies:
   - panoply>=5.5.1
   - paraview
   - qgis
-  - ipywidgets
-  - trame
-  - trame-vtk
-  - trame-client
-  - trame-server
-  - trame-vuetify
