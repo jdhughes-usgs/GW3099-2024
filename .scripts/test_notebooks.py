@@ -76,6 +76,8 @@ def run_notebook(nb_name):
     cmd = ("jupytext", "--execute", f"{nb_name}")
     run_cmd(cmd)
 
+
+def clean_notebook(nb_name):
     cmd = (
         "jupyter",
         "nbconvert",
@@ -111,6 +113,12 @@ if __name__ == "__main__":
         help="Convert notebooks to scripts",
     )
     parser.add_argument(
+        "-c",
+        "--clean-only",
+        action="store_true",
+        help="Clean notebooks",
+    )
+    parser.add_argument(
         "-d",
         "--dir",
         nargs="?",
@@ -139,11 +147,15 @@ if __name__ == "__main__":
         nb_paths = get_notebook_paths(dir_path)
 
         os.chdir(dir_path)
+
         for p in nb_paths:
-            if args.script:
-                run_script(p)
-            else:
-                run_notebook(p)
+            if not args.clean_only:
+                if args.script:
+                    run_script(p)
+                else:
+                    run_notebook(p)
+            clean_notebook(p)
+
         os.chdir(ROOT_DIR)
 
     for dir_path in GIT_RESET_DIRS:
