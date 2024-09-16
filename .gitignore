@@ -180,5 +180,9 @@ exercises/parallel/parallel/
 exercises/pywatershed/pywatershed/
 exercises/pywatershed/step1_processes/
 exercises/pywatershed/step2_multi-process_models/
+exercises/pywatershed/step3_mf6_api/
+exercises/pywatershed/step4_flow_graph/
 exercises-completed/pywatershed/step1_processes/
 exercises-completed/pywatershed/step2_multi-process_models/
+exercises-completed/pywatershed/step3_mf6_api/
+exercises-completed/pywatershed/step4_flow_graph/
