@@ -1,0 +1,18 @@
+#!/bin/bash
+
+#SBATCH --job-name=1803_1804
+#SBATCH --nodes=1
+#SBATCH --ntasks=1
+#SBATCH --account=impd
+#SBATCH --time=00:10:00
+#SBATCH --output=slurm-%j.out
+#SBATCH --mail-type=FAIL
+#SBATCH --mail-user=jdhughes@usgs.gov
+
+# load appropriate modules
+module load modflow/6.6.0.dev0
+
+# run model
+srun mf6 -p
+
+zip ../../archive/1803_1804_001p_$(date -Ihours) ngwm.ims mfsim.lst ims.inner.csv

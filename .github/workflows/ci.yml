@@ -8,11 +8,13 @@ on:
       - main
     paths-ignore:
       - '**.md'
+      - '.gitignore'
   pull_request:
     branches:
       - main
     paths-ignore:
       - '**.md'
+      - '.gitignore'
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
