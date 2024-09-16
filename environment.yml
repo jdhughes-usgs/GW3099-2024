@@ -20,9 +20,6 @@ dependencies:
   - descartes
   - filelock
   - fiona
-  - pip:
-      # develop version for some last-minute prt-related fixes
-      - https://github.com/modflowpy/flopy/archive/develop.zip
   - geojson
   - geopandas
   - geos
@@ -62,3 +59,7 @@ dependencies:
   - xlrd
   - xarray
   - xugrid
+
+  - pip:
+      # develop version for some last-minute prt-related fixes
+      - https://github.com/modflowpy/flopy/archive/develop.zip
