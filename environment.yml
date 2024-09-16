@@ -20,12 +20,15 @@ dependencies:
   - descartes
   - filelock
   - fiona
-  - flopy>=3.8
+  - pip:
+      # develop version for some last-minute prt-related fixes
+      - https://github.com/modflowpy/flopy/archive/develop.zip
   - geojson
   - geopandas
   - geos
   - hvplot
   - imageio
+  - ipywidgets
   - matplotlib
   - modflowapi
   - modflow-devtools
@@ -49,6 +52,11 @@ dependencies:
   - scipy
   - shapely
   - statsmodels
+  - trame
+  - trame-client
+  - trame-server
+  - trame-vtk
+  - trame-vuetify
   - uxarray
   - vtk
   - xlrd

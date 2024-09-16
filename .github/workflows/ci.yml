@@ -105,6 +105,16 @@ jobs:
           FC=mpifort CC=mpicc meson setup builddir -Ddebug=false -Dextended=true --prefix=$CONDA_PREFIX --libdir=bin
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
+        
+      - name: OpenGL workaround on Linux
+        if: runner.os == 'Linux'
+        run: |
+          # referenced from https://github.com/pyvista/pyvista/blob/main/.github/workflows/vtk-pre-test.yml#L53
+          conda uninstall -y vtk
+          pip install --extra-index-url https://wheels.vtk.org trame vtk-osmesa
+
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v2
 
       - name: Test notebooks
         working-directory: .scripts
@@ -182,6 +192,16 @@ jobs:
           get-modflow --repo modflow6-nightly-build --ostag win64par :python
           mpiexec -n 1 mf6 -p
           mpiexec -n 2 mf6 -p
+
+      - name: OpenGL workaround on Linux
+        if: runner.os == 'Linux'
+        run: |
+          # referenced from https://github.com/pyvista/pyvista/blob/main/.github/workflows/vtk-pre-test.yml#L53
+          conda uninstall -y vtk
+          pip install --extra-index-url https://wheels.vtk.org trame vtk-osmesa
+
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v2
 
       - name: Test notebooks
         working-directory: .scripts
