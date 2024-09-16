@@ -106,6 +106,16 @@ jobs:
           meson install -C builddir
           meson test --verbose --no-rebuild -C builddir
         
+      - name: OpenGL workaround on Linux
+        if: runner.os == 'Linux'
+        run: |
+          # referenced from https://github.com/pyvista/pyvista/blob/main/.github/workflows/vtk-pre-test.yml#L53
+          conda uninstall -y vtk
+          pip install --extra-index-url https://wheels.vtk.org trame vtk-osmesa
+
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v2
+
       - name: Test notebooks
         working-directory: .scripts
         run: |
@@ -189,6 +199,9 @@ jobs:
           # referenced from https://github.com/pyvista/pyvista/blob/main/.github/workflows/vtk-pre-test.yml#L53
           conda uninstall -y vtk
           pip install --extra-index-url https://wheels.vtk.org trame vtk-osmesa
+
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v2
 
       - name: Test notebooks
         working-directory: .scripts
