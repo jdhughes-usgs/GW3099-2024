@@ -53,7 +53,7 @@ def get_notebook_paths(dir_path):
     if pws_filter(dir_path):
         return []
 
-    names = sorted(f"{f.name}" for f in dir_path.glob("*.ipynb"))
+    names = sorted(f.name for f in dir_path.glob("*.ipynb"))
     select_names = []
     os_name = sys.platform.lower()
     for name in names:
@@ -152,8 +152,10 @@ if __name__ == "__main__":
         for p in nb_paths:
             if not args.clean_only:
                 if args.script:
+                    print(f"Testing notebook as script: {dir_path / p}")
                     run_script(p)
                 else:
+                    print(f"Testing notebook: {dir_path / p}")
                     run_notebook(p)
             clean_notebook(p)
 
