@@ -188,3 +188,6 @@ exercises-working/
 
 # presentations
 *.pptx
+
+# animations
+*.gif
