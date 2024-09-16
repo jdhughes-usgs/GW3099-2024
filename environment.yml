@@ -21,7 +21,8 @@ dependencies:
   - filelock
   - fiona
   - pip:
-      - https://github.com/wpbonelli/flopy/archive/fix-reverse.zip
+      # develop version for some last-minute prt-related fixes
+      - https://github.com/modflowpy/flopy/archive/develop.zip
   - geojson
   - geopandas
   - geos
