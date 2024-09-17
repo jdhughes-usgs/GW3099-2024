@@ -29,7 +29,7 @@ def get_mf6_nightly_build(nightly_build_dir: pl.Path, date: str = None):
     if platform.processor() == "arm":
         system += "arm"
     yesterday = datetime.date.today() - datetime.timedelta(days=1)
-    if date is None: 
+    if date is None:
         YYYYMMDD = yesterday.strftime("%Y%m%d")
     else:
         YYYYMMDD = date
