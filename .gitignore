@@ -172,7 +172,10 @@ exercises/PEST/tmprun/
 exercises/PEST/pest_ies_setup/
 exercises/PEST/pest_background_files/
 exercises/PEST/notebooks/*.pdf
-exercises-completed/gwt/ex1/
+exercises-completed/xt3d/xt3d-ex0-unstructured-grid/
+exercises-completed/xt3d/xt3d-prt/
+exercises-completed/gwt/ex*/
+exercises-completed/gwe/gwe-ex0-stallman/
 exercises-completed/parallel/base/
 exercises-completed/parallel/parallel/
 exercises/parallel/base/
@@ -186,6 +189,10 @@ exercises-completed/pywatershed/step1_processes/
 exercises-completed/pywatershed/step2_multi-process_models/
 exercises-completed/pywatershed/step3_mf6_api/
 exercises-completed/pywatershed/step4_flow_graph/
+exercises-working/
 
 # presentations
 *.pptx
+
+# animations
+*.gif

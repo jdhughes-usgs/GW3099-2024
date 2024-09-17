@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - main
+      - ci 
     paths-ignore:
       - '**.md'
       - '.gitignore'
@@ -42,77 +43,6 @@ jobs:
 
       - name: Check format
         run: ruff format . --check
-
-  install_env_linux:
-    name: Install gw3099 environment on linux
-    needs: lint
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.9", "3.10", "3.11"]
-    defaults:
-      run:
-        shell: bash -el {0}
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v4
-
-      - name: apt install
-        run: |
-          sudo apt install build-essential
-          sudo apt-get install -y petsc-dev netcdf-bin libnetcdf-dev libnetcdff-dev openmpi-bin libopenmpi-dev
-
-      - name: Update package config files
-        working-directory: .scripts
-        run: |
-          python update_pc_files.py
-
-      - name: netcdf-fortran settings
-        run: |
-          pkg-config --libs-only-L netcdf-fortran
-          pkg-config --cflags-only-I netcdf-fortran
-          nf-config --all
-
-      - name: Update environment file
-        working-directory: .scripts
-        run: |
-          python update_env_file.py
-          cat ../environment.yml
-
-      - name: Install miniconda
-        uses: conda-incubator/setup-miniconda@v3
-        with:
-          python-version: ${{ matrix.python-version }}
-          environment-file: "environment.yml"
-          activate-environment: "gw3099"
-          auto-activate-base: false
-
-      - name: Update flopy mf6 classes
-        run: |
-          python -m flopy.mf6.utils.generate_classes --ref 'develop'
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Clone MODFLOW repo
-        run: |
-          git clone --depth 1  --branch develop https://github.com/MODFLOW-USGS/modflow6.git
-
-      - name: Build extended version of MODFLOW
-        if: runner.os != 'Windows'
-        working-directory: modflow6
-        run: |
-          FC=mpifort CC=mpicc meson setup builddir -Ddebug=false -Dextended=true --prefix=$CONDA_PREFIX --libdir=bin
-          meson install -C builddir
-          meson test --verbose --no-rebuild -C builddir
-
-      - name: Test notebooks
-        working-directory: .scripts
-        run: |
-          python test_notebooks.py --script
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
 
   install_env:
     name: Install gw3099 environment
@@ -182,6 +112,9 @@ jobs:
           get-modflow --repo modflow6-nightly-build --ostag win64par :python
           mpiexec -n 1 mf6 -p
           mpiexec -n 2 mf6 -p
+
+      - name: Setup headless display
+        uses: pyvista/setup-headless-display-action@v2
 
       - name: Test notebooks
         working-directory: .scripts
