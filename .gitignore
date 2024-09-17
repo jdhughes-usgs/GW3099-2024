@@ -174,7 +174,8 @@ exercises/PEST/pest_background_files/
 exercises/PEST/notebooks/*.pdf
 exercises-completed/xt3d/xt3d-ex0-unstructured-grid/
 exercises-completed/xt3d/xt3d-prt/
-exercises-completed/gwt/ex1/
+exercises-completed/gwt/ex*/
+exercises-completed/gwe/gwe-ex0-stallman/
 exercises-completed/parallel/base/
 exercises-completed/parallel/parallel/
 exercises/parallel/base/

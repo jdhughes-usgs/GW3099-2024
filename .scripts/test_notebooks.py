@@ -13,6 +13,7 @@ DIRS = (
     pl.Path("../exercises-completed/xt3d/").resolve(),
     pl.Path("../exercises-completed/gwf_advanced/").resolve(),
     pl.Path("../exercises-completed/gwt/").resolve(),
+    pl.Path("../exercises-completed/gwe/").resolve(),
     pl.Path("../exercises-completed/prt/").resolve(),
     pl.Path("../exercises-completed/csub/").resolve(),
     pl.Path("../exercises-completed/modflowapi/").resolve(),
