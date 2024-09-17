@@ -137,7 +137,19 @@ if __name__ == "__main__":
     if args.dir is not None:
         selection = args.dir.split(",")
 
-    for idx, dir_path in enumerate(DIRS):
+    if args.clean_only:
+        search_dirs = []
+        for entry in ROOT_DIR.parent.iterdir():
+            if entry.is_dir():
+                for entry_child in entry.iterdir():
+                    if entry_child.is_dir():
+                        files = list(entry_child.glob("*.ipynb"))
+                        if len(files) > 0:
+                            search_dirs.append(entry_child.resolve())
+    else:
+        search_dirs = DIRS
+
+    for idx, dir_path in enumerate(search_dirs):
         if selection is not None:
             skip_dir = True
             for value in selection:
