@@ -165,6 +165,9 @@ cython_debug/
 # modflow6 repo
 modflow6/
 
+# solver data
+data/solver/
+
 # exclude model results
 temp/
 exercises/PEST/scratch/

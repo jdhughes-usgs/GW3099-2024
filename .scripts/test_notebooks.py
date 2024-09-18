@@ -141,6 +141,8 @@ if __name__ == "__main__":
         search_dirs = []
         for entry in ROOT_DIR.parent.iterdir():
             if entry.is_dir():
+                if "exercises-working" in str(entry):
+                    continue
                 for entry_child in entry.iterdir():
                     if entry_child.is_dir():
                         files = list(entry_child.glob("*.ipynb"))
