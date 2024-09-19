@@ -15,9 +15,10 @@ DIRS = (
     pl.Path("../exercises-completed/gwt/").resolve(),
     pl.Path("../exercises-completed/gwe/").resolve(),
     pl.Path("../exercises-completed/prt/").resolve(),
-    pl.Path("../exercises-completed/csub/").resolve(),
+    pl.Path("../exercises/csub/").resolve(),
+    pl.Path("../exercises/modflowapi/").resolve(),
     pl.Path("../exercises-completed/modflowapi/").resolve(),
-    pl.Path("../exercises-completed/parallel/").resolve(),
+    pl.Path("../exercises/parallel/").resolve(),
     pl.Path("../exercises/netcdf/").resolve(),
     pl.Path("../exercises/PEST/notebooks").resolve(),
     pl.Path("../exercises/pywatershed").resolve(),
@@ -133,7 +134,21 @@ if __name__ == "__main__":
     if args.dir is not None:
         selection = args.dir.split(",")
 
-    for idx, dir_path in enumerate(DIRS):
+    if args.clean_only:
+        search_dirs = []
+        for entry in ROOT_DIR.parent.iterdir():
+            if entry.is_dir():
+                if "exercises-working" in str(entry):
+                    continue
+                for entry_child in entry.iterdir():
+                    if entry_child.is_dir():
+                        files = list(entry_child.glob("*.ipynb"))
+                        if len(files) > 0:
+                            search_dirs.append(entry_child.resolve())
+    else:
+        search_dirs = DIRS
+
+    for idx, dir_path in enumerate(search_dirs):
         if selection is not None:
             skip_dir = True
             for value in selection:

@@ -163,7 +163,7 @@ def get_base_dir():
     dir: str
         the working directory
     """
-    dir = pl.Path.cwd().joinpath("base")
+    dir = pl.Path.cwd().joinpath("temp/base")
     return dir
 
 
@@ -176,7 +176,7 @@ def get_parallel_dir():
     dir: str
         the working directory
     """
-    dir = pl.Path.cwd().joinpath("parallel")
+    dir = pl.Path.cwd().joinpath("temp/parallel")
     return dir
 
 
