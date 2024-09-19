@@ -18,7 +18,6 @@ DIRS = (
     pl.Path("../exercises-completed/csub/").resolve(),
     pl.Path("../exercises-completed/modflowapi/").resolve(),
     pl.Path("../exercises-completed/parallel/").resolve(),
-    pl.Path("../exercises-completed/pywatershed/").resolve(),
     pl.Path("../exercises/netcdf/").resolve(),
     pl.Path("../exercises/PEST/notebooks").resolve(),
     pl.Path("../exercises/pywatershed").resolve(),
@@ -86,8 +85,7 @@ def clean_notebook(nb_name):
         "nbconvert",
         "--ClearOutputPreprocessor.enabled=True",
         "--ClearMetadataPreprocessor.enabled=True",
-        "--ClearMetadataPreprocessor."
-        + "preserve_nb_metadata_mask={('kernelspec')}",
+        "--ClearMetadataPreprocessor." + "preserve_nb_metadata_mask={('kernelspec')}",
         "--inplace",
         f"{nb_name}",
     )
@@ -106,9 +104,7 @@ def run_script(nb_name):
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(
-        description="Test gw3099 completed notebooks."
-    )
+    parser = argparse.ArgumentParser(description="Test gw3099 completed notebooks.")
     parser.add_argument(
         "-s",
         "--script",
