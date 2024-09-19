@@ -46,7 +46,7 @@ def set_connectiondata(
             delr / 2
         )  # half the cell width along a horizontal connection
         hwva.append(
-            delr
+            delc
         )  # for horizontal connection, value of hwva is width along a row
         angldeg.append(
             180.0
@@ -59,7 +59,7 @@ def set_connectiondata(
             delr / 2
         )  # half the cell width along a horizontal connection
         hwva.append(
-            delr
+            delc
         )  # for horizontal connection, value of hwva is width along a row
         angldeg.append(
             0.0

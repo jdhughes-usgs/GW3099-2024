@@ -178,19 +178,11 @@ jobs:
           cache-environment: true
           cache-downloads: true
 
-     # - name: Install miniconda
-     #    uses: conda-incubator/setup-miniconda@v3
-     #    with:
-     #      python-version: ${{ matrix.python-version }}
-     #      environment-file: "environment-pywatershed.yml"
-     #      activate-environment: "gw3099pws"
-     #      auto-activate-base: false
-
       - name: Install pywatershed
         working-directory: exercises/pywatershed
         run: |
-          git clone https://github.com/EC-USGS/pywatershed.git
-          cd pywatershed
+          git clone https://github.com/EC-USGS/pywatershed.git pywatershed_repo
+          cd pywatershed_repo
           git checkout feat_gw3099
           pip install -e .
 
