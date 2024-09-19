@@ -27,6 +27,7 @@ SKIP_NOTEBOOKS = {
     "step0_netcdf_output": ("win32",),
     "step1_netcdf_input": ("win32",),
     "step2_netcdf_ncf": ("win32",),
+    "step3_mf6_api.ipynb": ("win32"),
 }
 
 GIT_RESET_DIRS = (
