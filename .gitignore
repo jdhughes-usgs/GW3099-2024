@@ -181,15 +181,11 @@ exercises-completed/gwt/ex*/
 exercises-completed/gwe/gwe-ex0-stallman/
 exercises-completed/parallel/base/
 exercises-completed/parallel/parallel/
-exercises/pywatershed/pywatershed/
+exercises/pywatershed/pywatershed_repo
 exercises/pywatershed/step1_processes/
 exercises/pywatershed/step2_multi-process_models/
 exercises/pywatershed/step3_mf6_api/
 exercises/pywatershed/step4_flow_graph/
-exercises-completed/pywatershed/step1_processes/
-exercises-completed/pywatershed/step2_multi-process_models/
-exercises-completed/pywatershed/step3_mf6_api/
-exercises-completed/pywatershed/step4_flow_graph/
 exercises-working/
 
 # presentations
