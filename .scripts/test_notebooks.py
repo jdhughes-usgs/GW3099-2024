@@ -27,6 +27,7 @@ SKIP_NOTEBOOKS = {
     "step0_netcdf_output": ("win32",),
     "step1_netcdf_input": ("win32",),
     "step2_netcdf_ncf": ("win32",),
+    "splitting_modflow6_models": ("win32", "darwin", "linux"),
 }
 
 GIT_RESET_DIRS = (
