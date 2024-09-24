@@ -4,7 +4,7 @@
 The definitive guide (online, so often updated) for PEST++ is [here](https://github.com/usgs/pestpp/blob/master/documentation/pestpp_users_manual.md).
 
 ### Curriculum for more study
-The Groundwater Modelling Decision Support Initiative ([GMDSI](gmdsi.org)) has multiple resources including tutorial videos on specific topics and has hosted the hybrid online/self-study course referenced during this class. The notebooks for the online curriculum are [here](https://github.com/gmdsi/GMDSI_notebooks).
+The Groundwater Modelling Decision Support Initiative ([GMDSI](https://gmdsi.org)) has multiple resources including tutorial videos on specific topics and has hosted the hybrid online/self-study course referenced during this class. The notebooks for the online curriculum are [here](https://github.com/gmdsi/GMDSI_notebooks).
 
 
 ### Executables
