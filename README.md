@@ -1,4 +1,23 @@
-# U.S. Geological Survey Class GW3099
+<!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+**Table of Contents**  *generated with [DocToc](https://github.com/thlorenz/doctoc)*
+
+- [U.S. Geological Survey Class GW3099](#us-geological-survey-class-gw3099)
+  - [Location](#location)
+  - [Course Description](#course-description)
+  - [Overview](#overview)
+  - [Instructors](#instructors)
+  - [Software](#software)
+  - [Agenda](#agenda)
+    - [Monday](#monday)
+    - [Tuesday](#tuesday)
+    - [Wednesday](#wednesday)
+    - [Thursday](#thursday)
+    - [Friday](#friday)
+
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+# U.S. Geological Survey Class GW3099 
 Advanced Modeling of Groundwater Flow (GW3099)\
 Boise, Idaho\
 September 16 - 20, 2024
