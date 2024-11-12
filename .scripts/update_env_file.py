@@ -31,7 +31,7 @@ else:
         print(f"Updating...{file_path}")
         with open(file_path, "a") as f:
             f.write("\n  # MODFLOW build dependencies\n")
-            f.write("  - meson>=1.1.0\n")
+            f.write("  - meson==1.3.0\n")
             f.write("  - ninja\n")
             if args.conda:
                 f.write("  - pkg-config\n")
