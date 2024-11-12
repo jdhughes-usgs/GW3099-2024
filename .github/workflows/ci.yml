@@ -108,6 +108,8 @@ jobs:
       - name: Get and test parallel MODFLOW on Windows
         if: runner.os == 'Windows'
         working-directory: modflow6/.mf6minsim
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           get-modflow --repo modflow6-nightly-build --ostag win64ext :python
           mpiexec -n 1 mf6 -p
