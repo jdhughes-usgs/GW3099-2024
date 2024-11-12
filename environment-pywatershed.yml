@@ -1,4 +1,4 @@
-name: pws
+name: gw3099pws
 channels:
   - conda-forge
   - nodefaults
