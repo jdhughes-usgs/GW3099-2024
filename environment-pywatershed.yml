@@ -22,7 +22,7 @@ dependencies:
   - modflowapi
   - jupyter
   - jupyterlab
-  - nb_conda_kernels
+  - jupytext
   - nbconvert
   - netCDF4
   - networkx
