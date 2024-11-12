@@ -109,7 +109,7 @@ jobs:
         if: runner.os == 'Windows'
         working-directory: modflow6/.mf6minsim
         run: |
-          get-modflow --repo modflow6-nightly-build --ostag win64par :python
+          get-modflow --repo modflow6-nightly-build --ostag win64ext :python
           mpiexec -n 1 mf6 -p
           mpiexec -n 2 mf6 -p
 
