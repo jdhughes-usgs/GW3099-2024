@@ -169,7 +169,7 @@ On Friday there will be an Advanced Visualization session that will cover use of
 ### 6. Obtaining MODFLOW 6
 =======
 
-We will be using the parallel version of MODFLOW 6 in this class. If you are working on Windows, we will be using the latest nightly-build of the extended version of [MODFLOW 6](https://github.com/MODFLOW-USGS/modflow6-nightly-build/releases) in the class. We will also walk through this step during the class. The distribution file for Windows that includes the extended version is called `win64par.zip`.
+We will be using the parallel version of MODFLOW 6 in this class. If you are working on Windows, we will be using the latest nightly-build of the extended version of [MODFLOW 6](https://github.com/MODFLOW-USGS/modflow6-nightly-build/releases) in the class. We will also walk through this step during the class. The distribution file for Windows that includes the extended version is called `win64ext.zip`.
 
 If you are using a MacOS or Linux laptop for the class, then you will need to build the extended version of MODFLOW. We have simplified the build process, which can be completed in just a few minutes. Instructions for building the extended version of MODFLOW 6 are located [here](./build_extended_mf6.md).
 
