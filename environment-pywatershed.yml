@@ -5,7 +5,6 @@ channels:
   - pyviz
   - bioconda
 dependencies:
-  - bash_kernel
   - cartopy
   - dataretrieval
   - contextily
